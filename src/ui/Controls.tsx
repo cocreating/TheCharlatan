@@ -29,8 +29,13 @@ export function Controls() {
          </div>
 
          <div className="controls-content">
-            <button onClick={togglePlay}>{isPlaying ? 'PAUSE' : 'PLAY'}</button>
-            <button onClick={reset}>RESET</button>
+            <button
+                className={`btn-play ${isPlaying ? 'active' : ''}`}
+                onClick={togglePlay}
+            >
+                {isPlaying ? 'PAUSE' : 'PLAY'}
+            </button>
+            <button className="btn-reset" onClick={reset}>RESET</button>
 
             <div className="speed-control">
 

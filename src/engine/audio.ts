@@ -52,8 +52,10 @@ export function speak(node: Node, voiceName: string | null = null, speedFactor: 
              // Fallback
              const english = getEnglishVoices();
              if (english.length > 0) {
-                // Try to find a google voice if possible for better quality, else first
-                const preferred = english.find(v => v.name.includes('Google')) || english[0];
+                // Try to find "Google UK English Female" specifically, then any Google voice, else first
+                const preferred = english.find(v => v.name === 'Google UK English Female') ||
+                                  english.find(v => v.name.includes('Google')) ||
+                                  english[0];
                 utterance.voice = preferred;
              }
         }

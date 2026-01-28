@@ -23,10 +23,20 @@ export default function App() {
 
    // Load voices
    useEffect(() => {
-       const loadVoices = () => {
-           const voices = getEnglishVoices().map(v => v.name);
-           setAvailableVoices(voices);
-       };
+        const loadVoices = () => {
+            const voices = getEnglishVoices();
+            const voiceNames = voices.map(v => v.name);
+            setAvailableVoices(voiceNames);
+
+            // Set default voice if not set
+            const currentVoice = useStore.getState().voiceName;
+            if (!currentVoice && voiceNames.length > 0) {
+                const preferred = voiceNames.find(name => name === 'Google UK English Female') ||
+                                  voiceNames.find(name => name.includes('Google')) ||
+                                  voiceNames[0];
+                useStore.getState().setVoiceName(preferred);
+            }
+        };
        loadVoices();
        window.speechSynthesis.onvoiceschanged = loadVoices;
    }, [setAvailableVoices]);

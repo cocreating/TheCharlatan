@@ -42,6 +42,21 @@ button:hover {
   border-color: #555;
 }
 
+/* Specific Button Styles */
+.btn-play.active {
+    background: #1dd1a1; /* Using --c-state color */
+    color: #000;
+    border-color: #fff;
+    box-shadow: 0 0 10px rgba(29, 209, 161, 0.4);
+}
+
+.btn-reset:active {
+    background: #ff6b6b; /* Using --c-action color */
+    transform: translateY(2px) scale(0.95);
+    border-color: #fff;
+    color: #000;
+}
+
 .app-container {
   display: flex;
   height: 100vh;
@@ -214,7 +229,7 @@ button:hover {
 /* TIME/SPACE: Slow drift, deep blur */
 @keyframes slow-drift {
   0% { transform: scale(0.9) translateX(-10px); opacity: 0; filter: blur(4px); }
-  30% { transform: scale(1) translateX(0); opacity: 0.8; filter: blur(0px); }
+  30% { transform: scale(1) translateX(0); opacity: 0.8; filter: blur(0); }
   90% { transform: scale(1.1) translateX(10px); opacity: 0; filter: blur(2px); }
 }
 .animate-time, .animate-space {
@@ -227,7 +242,7 @@ button:hover {
 /* STATE/ABSTRACT: Jitter or Blur pulsing */
 @keyframes blur-pulse {
   0% { opacity: 0; filter: blur(10px); }
-  30% { opacity: 1; filter: blur(0px); }
+  30% { opacity: 1; filter: blur(0); }
   60% { opacity: 0.8; filter: blur(2px); }
   100% { opacity: 0; filter: blur(10px); transform: scale(1.2); }
 }
