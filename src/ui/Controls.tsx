@@ -29,13 +29,17 @@ export function Controls() {
          </div>
 
          <div className="controls-content">
+            <div id="controls-buttons" className="controls-wrapper">
             <button
                 className={`btn-play ${isPlaying ? 'active' : ''}`}
                 onClick={togglePlay}
             >
-                {isPlaying ? 'PAUSE' : 'PLAY'}
+                {isPlaying ? 'PLAY' : 'PAUSE'}
             </button>
             <button className="btn-reset" onClick={reset}>RESET</button>
+            </div>
+
+              <div id="controls-options" className="controls-wrapper">
 
             <div className="speed-control">
 
@@ -68,7 +72,9 @@ export function Controls() {
                />
                GLITCH
             </label>
-
+            </div>
+            </div>
+ <div id="controls-sliders" className="controls-wrapper">
             <div style={{ display: 'flex', gap: '1rem' }}>
                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                    <label>Flow Speed {speed.toFixed(1)}x</label>
