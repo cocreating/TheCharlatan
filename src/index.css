@@ -349,13 +349,15 @@ button:hover {
     height: 600px;
     display: flex;
     flex-direction: column;
-    transition: opacity 0.3s, transform 0.3s;
+    transition: background 0.3s, border 0.3s, height 0.3s;
 }
 
 .story-wrapper.hidden {
-    opacity: 0;
-    transform: translateX(20px);
-    pointer-events: none;
+    background: transparent;
+    border-color: transparent;
+    backdrop-filter: none;
+    height: 0;
+    padding: 0 1rem;
 }
 
 .story-toggle {
@@ -367,21 +369,9 @@ button:hover {
     padding: 5px 10px;
     font-size: 0.7rem;
     cursor: pointer;
-    transition: opacity 0.2s;
-}
-
-.story-close {
-    align-self: flex-end;
-    background: transparent;
-    border: none;
-    color: #666;
-    font-size: 0.8rem;
-    cursor: pointer;
-    padding: 5px;
-    margin-bottom: 5px;
     transition: color 0.2s;
 }
 
-.story-close:hover {
+.story-toggle:hover {
     color: #fff;
 }

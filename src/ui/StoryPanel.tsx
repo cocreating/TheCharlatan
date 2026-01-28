@@ -15,16 +15,10 @@ export function StoryPanel() {
 
   return (
     <div className={`story-wrapper ${show ? 'visible' : 'hidden'}`}>
-        {!show && (
-            <div className="story-toggle" onClick={() => setShow(true)}>
-                SHOW TEXT
-            </div>
-        )}
+        <div className="story-toggle" onClick={() => setShow(!show)}>
+            {show ? 'HIDE TEXT' : 'SHOW TEXT'}
+        </div>
         {show && (
-            <>
-            <button className="story-close" onClick={() => setShow(false)}>
-                [ HIDE ]
-            </button>
             <div className="story-panel" ref={ref}>
                {story.map((item, i) => (
                   <span key={i + item.id} className={`fragment type-${item.type}`}>
@@ -33,7 +27,6 @@ export function StoryPanel() {
                ))}
                <span className="cursor">_</span>
             </div>
-            </>
         )}
     </div>
   );
