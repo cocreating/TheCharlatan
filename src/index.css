@@ -362,7 +362,7 @@ button:hover {
 
 .story-toggle {
     position: absolute;
-    top: -30px;
+    top: 0;
     right: 0;
     background: rgba(0,0,0,0.8);
     color: #aaa;
