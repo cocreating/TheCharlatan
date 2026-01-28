@@ -341,12 +341,12 @@ button:hover {
 
 .story-wrapper {
     pointer-events: auto;
-    background: rgba(0, 0, 0, 0.6); /* Semitransparent */
+    background: rgb(0 0 0 / 30%);
     backdrop-filter: blur(5px);
     border: 1px solid #333;
     padding: 1rem;
     max-width: 350px;
-    height: 500px;
+    height: 600px;
     display: flex;
     flex-direction: column;
     transition: opacity 0.3s, transform 0.3s;
@@ -367,4 +367,21 @@ button:hover {
     padding: 5px 10px;
     font-size: 0.7rem;
     cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.story-close {
+    align-self: flex-end;
+    background: transparent;
+    border: none;
+    color: #666;
+    font-size: 0.8rem;
+    cursor: pointer;
+    padding: 5px;
+    margin-bottom: 5px;
+    transition: color 0.2s;
+}
+
+.story-close:hover {
+    color: #fff;
 }
