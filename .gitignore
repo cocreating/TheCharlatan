@@ -8,6 +8,7 @@ node_modules
 # SvelteKit / build output
 .svelte-kit
 build
+.vercel
 dist
 
 # Secrets (ANTHROPIC_API_KEY, etc.) — only .env.example is committed

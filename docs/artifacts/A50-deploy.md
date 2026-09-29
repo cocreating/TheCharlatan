@@ -52,6 +52,12 @@ location /about/charlatans {
 }
 ```
 
+## Vercel previews
+
+The repo is also connected to a Vercel project, which builds a preview for every PR.
+When `VERCEL` is set, `svelte.config.js` switches to `@sveltejs/adapter-vercel` and
+serves from the domain root. Production stays on the VPS (`adapter-node`).
+
 ## CI
 
 `.github/workflows/ci.yml` runs `check`, `lint`, `test` and `build` on every push and PR.
