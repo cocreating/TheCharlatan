@@ -1,6 +1,6 @@
 # P01 — Migración a Svelte + CSS nativo y evolución a AI
 
-> Estado: **migración hecha (fases 0–4)**; AI pendiente · Fecha: 2026-09-29 · Rama: `claude/sharp-carson-f01lj0`
+> Estado: **migración hecha (fases 0–4)** · **A1 (vocabulario por tema) implementada** · Fecha: 2026-09-29 · Rama: `claude/sharp-carson-f01lj0`
 
 ## 0. Decisiones tomadas
 
@@ -205,8 +205,11 @@ src/
 
 ## 6. Decisiones pendientes
 
-1. **Rate limit**: la página es pública aunque la clave sea privada, así que
-   cualquiera puede llamar a `/about/charlatans/api/*` y gastar créditos.
-   Propuesta: límite por IP en memoria (p. ej. 20 generaciones/hora) + tope
-   de gasto mensual configurado en la consola de Anthropic.
-2. **Primera feature de AI**: se propone A1 (vocabulario por tema).
+Resueltas:
+
+1. **Rate limit**: límite por IP en memoria (`RATE_LIMIT_PER_HOUR`, 20 por
+   defecto) + tope de gasto mensual en la consola de Anthropic.
+2. **Primera feature de AI**: A1 (vocabulario por tema) — `POST /api/vocabulary`.
+3. **Despliegue**: GitHub Actions → SSH → `scripts/deploy.sh` + pm2 (A50).
+
+Siguientes: A2 (narrador en streaming) y A3 (oráculo).

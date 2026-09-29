@@ -40,3 +40,22 @@ describe('CharlatanState', () => {
     expect(s.story.at(-1)?.text).toBe(target.text);
   });
 });
+
+describe('loadGraph', () => {
+  it('swaps the graph, stops playback and clears the story', () => {
+    const s = new CharlatanState();
+    const seed = s.graph;
+    s.step();
+    s.isPlaying = true;
+    const graph = { meta: { version: 1, seed: 'x' }, nodes: [seed.nodes[0]], links: [] };
+    s.loadGraph(graph, 'x');
+    expect(s.graph).toBe(graph);
+    expect(s.theme).toBe('x');
+    expect(s.isPlaying).toBe(false);
+    expect(s.story).toEqual([]);
+    expect(s.activeNode).toBeNull();
+    s.restoreSeed();
+    expect(s.graph).toBe(seed);
+    expect(s.theme).toBeNull();
+  });
+});

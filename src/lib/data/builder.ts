@@ -1,10 +1,10 @@
 
+// Regenerates graph.seed.json from the built-in vocabulary.
 import fs from 'fs';
 import path from 'path';
-import type { GraphData, Node, Link, NodeType } from '../engine/types';
-import { CONNECTION_RULES, NODE_COUNTS } from '../engine/rules';
+import { buildGraph, type Vocabulary } from './buildGraph';
 
-const VOCABULARY: Record<NodeType, string[]> = {
+const VOCABULARY: Vocabulary = {
   subject: [
     "a faceless witness", "the geometric shadow", "an echo of silence", "the machine",
     "a wandering thought", "the observer", "a fragment of light", "the structure",
@@ -53,114 +53,9 @@ const VOCABULARY: Record<NodeType, string[]> = {
   ]
 };
 
-function getRandomElement<T>(arr: T[]): T {
-  return arr[Math.floor(Math.random() * arr.length)];
-}
+const graphData = buildGraph(VOCABULARY);
+console.log(`Generated ${graphData.nodes.length} nodes and ${graphData.links.length} links.`);
 
-function generateGraph() {
-  const nodes: Node[] = [];
-  const links: Link[] = [];
-
-  // 1. Generate Nodes
-  let idCounter = 1;
-  const categories = Object.keys(NODE_COUNTS) as NodeType[];
-
-  categories.forEach(type => {
-    const count = NODE_COUNTS[type];
-    const words = VOCABULARY[type];
-
-    // Ensure we have enough words or reuse them randomly if needed,
-    // but try to be unique first.
-    // For this seed, we have enough words for counts provided (mostly).
-    // If not, we cycle.
-
-    for (let i = 0; i < count; i++) {
-        // If we run out of unique words, we might need to duplicate or combine
-        // (MVP: simple modulo or random if insufficient)
-        const text = words[i % words.length];
-
-        // Add a bit of variation if reusing? No, user wants controlled corpus.
-        // Let's assume unique IDs make them unique nodes even if text is same,
-        // but visualization might be confusing.
-        // Let's try to make text unique if possible or accept reuse.
-        // With 35 actions and ~35 words, it fits.
-        // With 25 spaces and 20 words, some repeat.
-
-        nodes.push({
-            id: `n${String(idCounter).padStart(3, '0')}`,
-            type,
-            text
-        });
-        idCounter++;
-    }
-  });
-
-  console.log(`Generated ${nodes.length} nodes.`);
-
-  // 2. Generate Links
-  // "Each node must have at least three outgoing links."
-  // "Immediate short loops (A → B → A) should be avoided."
-
-  nodes.forEach(source => {
-      const allowedTargets = CONNECTION_RULES[source.type];
-      const potentialTargets = nodes.filter(n => allowedTargets.includes(n.type) && n.id !== source.id);
-
-      if (potentialTargets.length === 0) {
-          console.warn(`Node ${source.id} (${source.type}) has no valid targets!`);
-          return;
-      }
-
-      // Select 3 distinct targets
-      const targets = new Set<string>();
-      while (targets.size < 3) {
-          const target = getRandomElement(potentialTargets);
-          // Simple loop avoidance A->B->A check could be done here if we tracked incoming,
-          // but for random generation, just strictly avoiding self is start.
-          // Deep cycle detection is harder.
-          // User: "Immediate short loops (A -> B -> A) should be avoided."
-          // This implies we should check if target has a link to source.
-
-          let isShortLoop = false;
-          // Check if target -> source exists already
-          // Since we are iterating sequentially, target might not have links yet.
-          // But strict pre-check: if (link existing target->source) -> skip.
-          const reverseLink = links.find(l =>
-             (typeof l.source === 'string' ? l.source : l.source.id) === target.id &&
-             (typeof l.target === 'string' ? l.target : l.target.id) === source.id
-          );
-
-          if (reverseLink) isShortLoop = true;
-
-          if (!targets.has(target.id) && !isShortLoop) {
-              targets.add(target.id);
-              links.push({
-                  source: source.id,
-                  target: target.id,
-                  weight: 1, // Default weight
-                  rel: `${source.type}->${target.type}`
-              });
-          } else {
-             // Break if impossible to find non-loop?
-             // With 150 nodes, probability of forced loop is low, but we can relax if stuck.
-             if (targets.size >= potentialTargets.length) break; // formatting
-          }
-      }
-  });
-
-  console.log(`Generated ${links.length} links.`);
-
-  const graphData: GraphData = {
-      meta: {
-          version: 1,
-          seed: Date.now()
-      },
-      nodes,
-      links
-  };
-
-  const outputPath = path.resolve(process.cwd(), 'src/data/graph.seed.json');
-  fs.writeFileSync(outputPath, JSON.stringify(graphData, null, 2));
-  console.log(`Graph written to ${outputPath}`);
-}
-
-generateGraph();
+const outputPath = path.resolve(process.cwd(), 'src/lib/data/graph.seed.json');
+fs.writeFileSync(outputPath, JSON.stringify(graphData, null, 2));
+console.log(`Graph written to ${outputPath}`);
