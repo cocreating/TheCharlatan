@@ -42,7 +42,7 @@ The `selectNextNode` function implements:
 | **Traversal "personality"** | `src/lib/engine/walker.ts` (weights and penalties) |
 | **Visual style** | `src/lib/viz/render.ts` (colors, glitch, particles) |
 | **UI/Controls** | `src/lib/ui/Controls.svelte` |
-| **AI theme → vocabulary** | `src/lib/server/vocabulary.ts` (prompt, schema), `src/routes/api/vocabulary/+server.ts` |
+| **AI theme → vocabulary** | `src/lib/server/ai/` (prompt, providers), `src/lib/server/vocabulary.ts`, `src/routes/api/vocabulary/+server.ts` |
 | **Main Loop / Sync** | `src/lib/engine/loop.ts`, `src/lib/engine/store.svelte.ts` |
 
 ## Technical Quirks

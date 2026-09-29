@@ -19,7 +19,7 @@ Requirements: Node ≥ 22.9, git, pm2 (`npm install -g pm2`).
 # As the user that will run the app
 git clone https://github.com/cocreating/TheCharlatan.git ~/apps/TheCharlatan
 cd ~/apps/TheCharlatan
-cp .env.example .env        # then fill in ANTHROPIC_API_KEY
+cp .env.example .env        # then fill in GEMINI_API_KEY (or another provider)
 chmod 600 .env
 bash scripts/deploy.sh ~/apps/TheCharlatan   # install, build, pm2 start
 pm2 startup                 # follow its instructions so pm2 survives reboots
@@ -37,10 +37,15 @@ See `.env.example`:
 | `PORT` | Port the Node server listens on (e.g. `3000`) |
 | `ORIGIN` | `https://themostimportant.page` — needed behind a proxy |
 | `ADDRESS_HEADER` / `XFF_DEPTH` | `X-Forwarded-For` / `1`: real client IPs for the rate limit. Without them every visitor shares one quota |
-| `ANTHROPIC_API_KEY` | Claude API key for theme generation. Read only on the server (`$env/dynamic/private`) |
+| `GEMINI_API_KEY` | Free Google AI Studio key for theme generation (default provider). `GEMINI_MODEL` optional |
+| `OPENAI_BASE_URL` / `OPENAI_API_KEY` / `OPENAI_MODEL` | Alternative: any OpenAI-compatible API (Groq, OpenRouter, Ollama...) |
+| `ANTHROPIC_API_KEY` | Alternative: Claude (paid). `ANTHROPIC_MODEL` optional |
+| `AI_PROVIDER` | Optional: force `gemini`, `openai` or `anthropic` when several keys are set |
 | `RATE_LIMIT_PER_HOUR` | Theme generations per IP per hour (default 20) |
 
-Also set a **monthly spend limit** for the key in the Anthropic Console as a hard cap.
+Keys are read only on the server (`$env/dynamic/private`) and never reach the browser.
+Free tiers have their own daily quotas; when one runs out the app answers "The oracle is busy".
+For a paid provider, also set a monthly spend limit in its console.
 
 ## 3. Reverse proxy (nginx)
 
@@ -92,4 +97,4 @@ To deploy by hand instead: `bash scripts/deploy.sh <app-dir>` on the server.
 The repo is also connected to a Vercel project, which builds a preview for every PR.
 When `VERCEL` is set, `svelte.config.js` switches to `@sveltejs/adapter-vercel` and
 serves from the domain root. Production stays on the VPS (`adapter-node`). Previews
-have no `ANTHROPIC_API_KEY`, so SUMMON answers "AI is not configured" there.
+have no AI key, so SUMMON answers "AI is not configured" there.

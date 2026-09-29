@@ -30,7 +30,7 @@ npm start          # run the build (reads .env if present, see .env.example)
 - **D3-force** for physics simulation
 - **HTML5 Canvas** for high-performance rendering
 - **Web Audio API** & **SpeechSynthesis** for multisensory feedback
-- **Claude API** (server-side) to write a new vocabulary from any theme
+- **AI, server-side** (Gemini free tier by default; OpenAI-compatible APIs or Claude also supported) to write a new vocabulary from any theme
 
 ---
 

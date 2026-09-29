@@ -29,7 +29,7 @@ The engine is the heart of the application, responsible for the narrative logic 
 `Controls.svelte`, `StoryPanel.svelte` and `CinematicOverlay.svelte` bind directly to the store (`bind:checked={charlatan.ttsEnabled}` etc.).
 
 ### 4. AI: themed vocabulary (`src/routes/api/vocabulary/`, `src/lib/server/`)
-`ThemePrompt.svelte` posts a theme to `POST /api/vocabulary`. The endpoint rate-limits per client IP (`rateLimit.ts`), asks Claude (`vocabulary.ts`, structured JSON output with one string array per node type), sanitizes the fragments, builds a graph with `buildGraph` and checks it with `validateGraph`. The client swaps it in with `charlatan.loadGraph()`; ORIGINAL restores the seed. The API key lives only in the server's `.env`.
+`ThemePrompt.svelte` posts a theme to `POST /api/vocabulary`. The endpoint rate-limits per client IP (`rateLimit.ts`), asks the configured AI provider (`src/lib/server/ai/`: Gemini by default, any OpenAI-compatible API, or Claude; shared prompt in `prompt.ts`, JSON output with one string array per node type), sanitizes the fragments (`vocabulary.ts`), builds a graph with `buildGraph` and checks it with `validateGraph`. The client swaps it in with `charlatan.loadGraph()`; ORIGINAL restores the seed. API keys live only in the server's `.env`.
 
 ### 5. Data Schema (`src/lib/data/`)
 Nodes are categorized by type: `subject`, `action`, `space`, `time`, `state`, `object`, `connector`. Links contain optional `weight` parameters that influence the walker's path. `buildGraph.ts` turns a vocabulary into a graph that respects `CONNECTION_RULES`; `builder.ts` uses it to regenerate `graph.seed.json`.

@@ -8,7 +8,7 @@
 |---|---|
 | Hosting | VPS propio con Node.js, en **https://themostimportant.page/about/charlatans** → SvelteKit con `adapter-node` y `paths.base = '/about/charlatans'` (ver `docs/artifacts/A50-deploy.md`) |
 | Idioma | Solo inglés por ahora |
-| API de AI | Privada: `ANTHROPIC_API_KEY` en el `.env` del servidor, leída solo desde endpoints de servidor |
+| API de AI | Privada, en el `.env` del servidor. De momento **Gemini (plan gratuito)**; el código admite también APIs compatibles con OpenAI (Groq, OpenRouter...) y Claude, elegidos por variables de entorno (`src/lib/server/ai/`) |
 | GitHub Pages | Se retira el workflow de deploy; queda un workflow de CI (check, lint, test, build) |
 
 ## 1. Veredicto
@@ -133,9 +133,9 @@ Navegador (SvelteKit)
    │  fetch /api/*  (streaming SSE)
    ▼
 Endpoint servidor  ── SvelteKit +server.ts (adapter-node en el VPS)
-   │  @anthropic-ai/sdk  (ANTHROPIC_API_KEY en variables de entorno)
+   │  src/lib/server/ai/  (clave en el .env del servidor)
    ▼
-Claude API
+Gemini (gratis, por defecto) · API compatible con OpenAI · Claude
 ```
 
 Con SvelteKit esto son archivos `src/routes/api/*/+server.ts` en el mismo

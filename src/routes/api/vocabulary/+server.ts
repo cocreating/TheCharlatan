@@ -1,8 +1,8 @@
-import Anthropic from '@anthropic-ai/sdk';
 import { error, json } from '@sveltejs/kit';
 import { env } from '$env/dynamic/private';
 import { buildGraph } from '$lib/data/buildGraph';
 import { validateGraph } from '$lib/engine/validateGraph';
+import { AIProviderError, resolveProvider } from '$lib/server/ai';
 import { createRateLimiter } from '$lib/server/rateLimit';
 import { cleanTheme, generateVocabulary, VocabularyError, MAX_THEME_LENGTH } from '$lib/server/vocabulary';
 import type { RequestHandler } from './$types';
@@ -15,10 +15,10 @@ const checkRateLimit = createRateLimiter({
   windowMs: HOUR_MS,
 });
 
-/** POST { theme } → { theme, graph }: a new graph built from a Claude-written vocabulary. */
+/** POST { theme } → { theme, graph }: a new graph built from an AI-written vocabulary. */
 export const POST: RequestHandler = async ({ request, getClientAddress }) => {
-  const apiKey = env.ANTHROPIC_API_KEY;
-  if (!apiKey) error(503, 'AI is not configured on this server');
+  const provider = resolveProvider(env);
+  if (!provider) error(503, 'AI is not configured on this server');
 
   const body = await request.json().catch(() => null);
   const theme = cleanTheme(body?.theme);
@@ -33,7 +33,7 @@ export const POST: RequestHandler = async ({ request, getClientAddress }) => {
   }
 
   try {
-    const vocabulary = await generateVocabulary(theme, apiKey);
+    const vocabulary = await generateVocabulary(theme, provider);
 
     // Link generation is random; retry the rare layout that leaves a node short of links
     for (let attempt = 0; attempt < BUILD_ATTEMPTS; attempt++) {
@@ -43,10 +43,10 @@ export const POST: RequestHandler = async ({ request, getClientAddress }) => {
     error(502, 'Could not weave a valid graph from this theme. Try another one.');
   } catch (e) {
     if (e instanceof VocabularyError) error(502, e.message);
-    if (e instanceof Anthropic.RateLimitError) error(503, 'The oracle is busy. Try again shortly.');
-    if (e instanceof Anthropic.APIError) {
-      console.error('[vocabulary] Claude API error', e.status, e.message);
-      error(502, 'The oracle is unreachable right now');
+    if (e instanceof AIProviderError) {
+      console.error('[vocabulary]', e.message);
+      if (e.busy) error(503, 'The oracle is busy. Try again shortly.');
+      error(502, e.publicMessage ?? 'The oracle is unreachable right now');
     }
     throw e;
   }
