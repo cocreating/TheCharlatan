@@ -53,5 +53,5 @@ The traversal strategy can be adjusted in `src/lib/engine/walker.ts` by tweaking
 npm install
 npm run dev     # http://localhost:5173/about/charlatans
 npm run check && npm run lint && npm test
-npm run build   # see docs/artifacts/A50-deploy.md
+npm run build   # see .agents/docs/artifacts/A50-deploy.md
 ```

@@ -6,7 +6,7 @@
   - **engine**: Narrative logic and state (Zustand)
   - **viz**: D3 Force graph visualization (Canvas)
   - **ui**: React components
-- **/docs/artifacts**: Documentation and Specs
+- **/.agents/docs/artifacts**: Documentation and Specs
 
 ## Tech Stack
 - Vite

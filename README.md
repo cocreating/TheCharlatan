@@ -6,11 +6,11 @@ Live at **https://themostimportant.page/about/charlatans**.
 
 ## 📖 Documentation
 
-- [**Project Overview**](./docs/project_overview.md): High-level description of features and purpose.
-- [**Technical Documentation**](./docs/technical_deep_dive.md): Architecture overview, tech stack, and development process.
-- [**AI Agent Context**](./docs/ai_context.md): **(Important for Developers/AI)** Deep dive into the project's mental model, state flow, and traversal logic.
-- [**Deployment**](./docs/artifacts/A50-deploy.md): Building and running on the VPS.
-- [**Roadmap: Svelte + AI**](./docs/proposals/P01-svelte-migration-and-ai.md)
+- [**Project Overview**](./.agents/docs/project_overview.md): High-level description of features and purpose.
+- [**Technical Documentation**](./.agents/docs/technical_deep_dive.md): Architecture overview, tech stack, and development process.
+- [**AI Agent Context**](./.agents/docs/ai_context.md): **(Important for Developers/AI)** Deep dive into the project's mental model, state flow, and traversal logic.
+- [**Deployment**](./.agents/docs/artifacts/A50-deploy.md): Building and running on the VPS.
+- [**Roadmap: Svelte + AI**](./.agents/docs/proposals/P01-svelte-migration-and-ai.md)
 
 ## 🚀 Quick Start
 
