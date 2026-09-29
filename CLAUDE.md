@@ -5,6 +5,14 @@ shown, animated and spoken (TTS). Live at https://themostimportant.page/about/ch
 
 The owner writes in Spanish: answer in Spanish. Code, comments, commits and docs in English.
 
+## Agent files: `.agents/`
+
+The owner's convention for every project: agent-generated material lives in `.agents/` at the repo root.
+
+- `.agents/docs/` — all project docs and generated update/report/plan Markdown. Create new docs here, never in a top-level `docs/`.
+- `.agents/context/` — working memory: record decisions in `.agents/context/decisions.md` (date, decision, reason) and read it at the start of a session.
+- See `.agents/README.md`. No secrets in `.agents/`.
+
 ## Commands
 
 ```bash
@@ -44,10 +52,10 @@ Run check, lint and test before every commit.
 - Server-side only; keys live in the server `.env` (see `.env.example`), read via `$env/dynamic/private`.
 - Provider picked from env: `GEMINI_API_KEY` (default, free tier), OpenAI-compatible (`OPENAI_BASE_URL`/`OPENAI_API_KEY`/`OPENAI_MODEL`), or `ANTHROPIC_API_KEY`. `AI_PROVIDER` forces one.
 - Per-IP rate limit `RATE_LIMIT_PER_HOUR` (default 20).
-- Roadmap: `docs/proposals/P01-svelte-migration-and-ai.md` (next: A2 streamed narrator, A3 oracle).
+- Roadmap: `.agents/docs/proposals/P01-svelte-migration-and-ai.md` (next: A2 streamed narrator, A3 oracle).
 
 ## Deploy
 
-- Production: VPS, Node + pm2 behind nginx. Push to `master` → CI `deploy` job runs `scripts/deploy.sh` over SSH (needs `DEPLOY_*` repo secrets). Details: `docs/artifacts/A50-deploy.md`.
+- Production: VPS, Node + pm2 behind nginx. Push to `master` → CI `deploy` job runs `scripts/deploy.sh` over SSH (needs `DEPLOY_*` repo secrets). Details: `.agents/docs/artifacts/A50-deploy.md`.
 - Every PR also gets a Vercel preview (no AI key there).
 - Never commit `.env` or any key.

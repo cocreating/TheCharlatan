@@ -6,7 +6,7 @@
 
 | Tema | Decisión |
 |---|---|
-| Hosting | VPS propio con Node.js, en **https://themostimportant.page/about/charlatans** → SvelteKit con `adapter-node` y `paths.base = '/about/charlatans'` (ver `docs/artifacts/A50-deploy.md`) |
+| Hosting | VPS propio con Node.js, en **https://themostimportant.page/about/charlatans** → SvelteKit con `adapter-node` y `paths.base = '/about/charlatans'` (ver `.agents/docs/artifacts/A50-deploy.md`) |
 | Idioma | Solo inglés por ahora |
 | API de AI | Privada, en el `.env` del servidor. De momento **Gemini (plan gratuito)**; el código admite también APIs compatibles con OpenAI (Groq, OpenRouter...) y Claude, elegidos por variables de entorno (`src/lib/server/ai/`) |
 | GitHub Pages | Se retira el workflow de deploy; queda un workflow de CI (check, lint, test, build) |

@@ -29,7 +29,7 @@ jobs:
 
   # Deploys master to the VPS over SSH once `check` passes.
   # Skipped (with a notice) until the DEPLOY_* repository secrets are set;
-  # see docs/artifacts/A50-deploy.md.
+  # see .agents/docs/artifacts/A50-deploy.md.
   deploy:
     needs: check
     if: github.event_name == 'push' && github.ref == 'refs/heads/master'
