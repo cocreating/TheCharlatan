@@ -1,0 +1,44 @@
+/* Global tokens and base elements. Component styles live in each .svelte file. */
+
+:root {
+  --bg: #050505;
+  --text: #e0e0e0;
+  --border: #222;
+
+  /* Type Colors (Desaturated/Pastel for Art vibe) */
+  --c-subject: #e0e0e0;
+  --c-action: #ff6b6b;
+  --c-space: #4d96ff;
+  --c-time: #feca57;
+  --c-state: #1dd1a1;
+  --c-object: #ff9ff3;
+  --c-connector: #888;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Courier New', Courier, monospace; /* Minimalist/Raw data vibe */
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+button {
+  font-family: inherit;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 0.6rem 1.2rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  min-width: 10em;
+}
+
+button:hover {
+  background: #222;
+  border-color: #555;
+}

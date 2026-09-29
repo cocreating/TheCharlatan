@@ -1,9 +1,9 @@
 # The Charlatan: Project Documentation
 
 ## Overview
-**The Charlatan** is an interactive, generative narrative experience built with React, TypeScript, and D3. It explores the relationship between structure and chaos through a digital "oracle" or "storyteller" that navigates a complex web of linguistic fragments.
+**The Charlatan** is an interactive, generative narrative experience built with SvelteKit, TypeScript, and D3. It explores the relationship between structure and chaos through a digital "oracle" or "storyteller" that navigates a complex web of linguistic fragments.
 
-The project visualizes a force-directed graph where each node represents a word or phrase (subject, predicate, object, etc.). A "walker" engine traverses this graph in real-time, building a continuous stream of consciousness that is both displayed visually and spoken via Text-to-Speech (TTS).
+The project visualizes a force-directed graph where each node represents a word or phrase (subject, action, object, etc.). A "walker" engine traverses this graph in real-time, building a continuous stream of consciousness that is both displayed visually and spoken via Text-to-Speech (TTS).
 
 ## Key Features
 - **Dynamic Force-Directed Graph**: A live visualization of the narrative structure using D3-force, where nodes and links pulse and shift as the story unfolds.
@@ -17,8 +17,8 @@ The project visualizes a force-directed graph where each node represents a word 
 
 ## Project Structure
 - **Visualization**: A high-performance HTML5 Canvas renderer for the D3 graph, including a custom particle system for "scent" trails.
-- **Engine**: A robust state management system using Zustand that handles the walker's logic, audio synchronization, and UI state.
+- **Engine**: A single rune-based state class that handles the walker's logic, audio synchronization, and UI state.
 - **Data-Driven**: The entire narrative structure is defined in a JSON seed file, allowing for easy expansion and modification of the "Charlatan's" vocabulary and logic.
 
 ## Purpose
-"The Charlatan" serves as both a technical demonstration of complex state synchronization between React, D3, and Web APIs (Audio/TTS), and an artistic exploration of automated storytelling.
+"The Charlatan" serves as both a technical demonstration of complex state synchronization between Svelte, D3, and Web APIs (Audio/TTS), and an artistic exploration of automated storytelling.
