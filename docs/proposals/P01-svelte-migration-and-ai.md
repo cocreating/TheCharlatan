@@ -66,9 +66,9 @@ Se mantienen: `d3-force`, `d3-drag`, `d3-selection`, `vite`, `typescript`.
 
 ## 3. Bugs detectados en el código actual (se corrigen en la migración)
 
-1. `Controls.tsx:106` — `SEQ: {history.length}` usa **`window.history`** (no
+1. `Controls.tsx:104` — `SEQ: {history.length}` usa **`window.history`** (no
    está importado del store): muestra la longitud del historial del navegador.
-2. `Controls.tsx:34` — la etiqueta está invertida: muestra `PLAY` mientras
+2. `Controls.tsx:37` — la etiqueta está invertida: muestra `PLAY` mientras
    suena y `PAUSE` cuando está parado.
 3. `ForceGraph.tsx` — `particleEngine.update()` se llama **dos veces** por
    tick (partículas al doble de velocidad; puede ser intencional, revisar).
