@@ -15,6 +15,7 @@ export class CharlatanState {
   // Raw (non-proxied): d3-force mutates node positions every tick, which must not
   // trigger reactivity. Replace the whole object to load a different graph.
   graph = $state.raw<GraphData>(seedData);
+  theme = $state<string | null>(null); // Set when the graph was generated from a theme
   activeNodeId = $state<string | null>(null);
   history = $state.raw<string[]>([]); // List of Node IDs visited
   story = $state.raw<StoryItem[]>([]);
@@ -50,6 +51,18 @@ export class CharlatanState {
     this.isPlaying = false;
     this.start();
   };
+
+  /** Swap in a new graph (e.g. AI-generated) and start an empty story on it. */
+  loadGraph = (graph: GraphData, theme: string | null = null) => {
+    this.isPlaying = false;
+    this.graph = graph;
+    this.theme = theme;
+    this.activeNodeId = null;
+    this.history = [];
+    this.story = [];
+  };
+
+  restoreSeed = () => this.loadGraph(seedData);
 
   manualJump = (nodeId: string) => {
     const node = this.nodesById.get(nodeId);

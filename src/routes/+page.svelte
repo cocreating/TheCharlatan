@@ -8,6 +8,7 @@
   import StoryPanel from '$lib/ui/StoryPanel.svelte';
   import Controls from '$lib/ui/Controls.svelte';
   import CinematicOverlay from '$lib/ui/CinematicOverlay.svelte';
+  import ThemePrompt from '$lib/ui/ThemePrompt.svelte';
 
   const PREFERRED_VOICE = 'Google UK English Female';
 
@@ -51,6 +52,7 @@
   <CinematicOverlay />
   <div class="viz-area">
     <ForceGraph />
+    <ThemePrompt />
   </div>
   <aside class="sidebar">
     <StoryPanel />

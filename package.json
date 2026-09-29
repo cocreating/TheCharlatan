@@ -13,9 +13,10 @@
     "test": "vitest run"
   },
   "engines": {
-    "node": ">=22"
+    "node": ">=22.9"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.129.0",
     "d3-force": "^3.0.0"
   },
   "devDependencies": {

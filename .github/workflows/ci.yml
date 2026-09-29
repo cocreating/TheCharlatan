@@ -26,3 +26,45 @@ jobs:
       - run: npm run lint
       - run: npm test
       - run: npm run build
+
+  # Deploys master to the VPS over SSH once `check` passes.
+  # Skipped (with a notice) until the DEPLOY_* repository secrets are set;
+  # see docs/artifacts/A50-deploy.md.
+  deploy:
+    needs: check
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    concurrency:
+      group: deploy-vps
+      cancel-in-progress: false
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Deploy over SSH
+        env:
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_PORT: ${{ secrets.DEPLOY_PORT }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+          DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
+          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+          DEPLOY_KNOWN_HOSTS: ${{ secrets.DEPLOY_KNOWN_HOSTS }}
+        run: |
+          if [ -z "$DEPLOY_HOST" ] || [ -z "$DEPLOY_USER" ] || [ -z "$DEPLOY_PATH" ] || [ -z "$DEPLOY_SSH_KEY" ]; then
+            echo "::notice::Deploy skipped: DEPLOY_HOST, DEPLOY_USER, DEPLOY_PATH and DEPLOY_SSH_KEY secrets are not all set."
+            exit 0
+          fi
+          port="${DEPLOY_PORT:-22}"
+
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$DEPLOY_SSH_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          if [ -n "$DEPLOY_KNOWN_HOSTS" ]; then
+            printf '%s\n' "$DEPLOY_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          else
+            echo "::warning::DEPLOY_KNOWN_HOSTS is not set; trusting the host key found by ssh-keyscan."
+            ssh-keyscan -p "$port" "$DEPLOY_HOST" > ~/.ssh/known_hosts
+          fi
+
+          ssh -i ~/.ssh/deploy_key -p "$port" -o StrictHostKeyChecking=yes "$DEPLOY_USER@$DEPLOY_HOST" \
+            "bash -s -- '$DEPLOY_PATH' '$GITHUB_SHA'" < scripts/deploy.sh

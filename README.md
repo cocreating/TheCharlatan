@@ -21,7 +21,7 @@ npm run check      # svelte-check (types)
 npm run lint
 npm test           # vitest
 npm run build      # Node server in build/
-npm start          # run the build (reads .env if present)
+npm start          # run the build (reads .env if present, see .env.example)
 ```
 
 ## 🛠️ Tech Stack
@@ -30,6 +30,7 @@ npm start          # run the build (reads .env if present)
 - **D3-force** for physics simulation
 - **HTML5 Canvas** for high-performance rendering
 - **Web Audio API** & **SpeechSynthesis** for multisensory feedback
+- **AI, server-side** (Gemini free tier by default; OpenAI-compatible APIs or Claude also supported) to write a new vocabulary from any theme
 
 ---
 
