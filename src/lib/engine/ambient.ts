@@ -14,7 +14,9 @@ export class AmbientEngine {
 
     init() {
         if (this.ctx) return;
-        const AudioContext = window.AudioContext || (window as any).webkitAudioContext;
+        const AudioContext =
+            window.AudioContext ||
+            (window as unknown as { webkitAudioContext: typeof window.AudioContext }).webkitAudioContext;
         this.ctx = new AudioContext();
 
         // Master Gain

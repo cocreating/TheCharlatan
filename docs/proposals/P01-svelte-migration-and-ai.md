@@ -1,6 +1,15 @@
 # P01 — Migración a Svelte + CSS nativo y evolución a AI
 
-> Estado: **propuesta** · Fecha: 2026-09-29 · Rama: `claude/sharp-carson-f01lj0`
+> Estado: **migración hecha (fases 0–4)**; AI pendiente · Fecha: 2026-09-29 · Rama: `claude/sharp-carson-f01lj0`
+
+## 0. Decisiones tomadas
+
+| Tema | Decisión |
+|---|---|
+| Hosting | VPS propio con Node.js, en **https://themostimportant.page/about/charlatans** → SvelteKit con `adapter-node` y `paths.base = '/about/charlatans'` (ver `docs/artifacts/A50-deploy.md`) |
+| Idioma | Solo inglés por ahora |
+| API de AI | Privada: `ANTHROPIC_API_KEY` en el `.env` del servidor, leída solo desde endpoints de servidor |
+| GitHub Pages | Se retira el workflow de deploy; queda un workflow de CI (check, lint, test, build) |
 
 ## 1. Veredicto
 
@@ -10,9 +19,7 @@ usa como "pegamento" en 6 archivos. La migración se estima en **1–2 días de
 trabajo** y se puede hacer en paralelo sin romper el deploy actual.
 
 Recomendación: **SvelteKit (Svelte 5 con runes) + CSS nativo con scope por
-componente**, empezando con `adapter-static` (sigue en GitHub Pages) y
-cambiando a un adapter con servidor (Vercel/Cloudflare) cuando entre la API de
-AI.
+componente**, con `adapter-node` en el VPS propio (ver §0).
 
 ## 2. Inventario: qué se conserva y qué se reescribe
 
@@ -68,10 +75,12 @@ Se mantienen: `d3-force`, `d3-drag`, `d3-selection`, `vite`, `typescript`.
 
 1. `Controls.tsx:104` — `SEQ: {history.length}` usa **`window.history`** (no
    está importado del store): muestra la longitud del historial del navegador.
-2. `Controls.tsx:37` — la etiqueta está invertida: muestra `PLAY` mientras
-   suena y `PAUSE` cuando está parado.
+2. ~~`Controls.tsx:37` — etiqueta PLAY/PAUSE invertida~~ → **no es un bug**:
+   es intencional (commit `76d7ba5`), el botón muestra el estado. Se mantiene.
 3. `ForceGraph.tsx` — `particleEngine.update()` se llama **dos veces** por
-   tick (partículas al doble de velocidad; puede ser intencional, revisar).
+   tick. Se conserva como `PARTICLE_STEPS_PER_FRAME = 2` para no cambiar el look.
+3b. **El primer PLAY no reproducía**: `step()` llamaba a `reset()`, que ponía
+   `isPlaying = false`; había que pulsar PLAY dos veces. Corregido.
 4. `ForceGraph.tsx` — la simulación se destruye y recrea en cada resize
    (`size` en dependencias del efecto), reiniciando el layout.
 5. `App.tsx` — `window.speechSynthesis.onvoiceschanged` nunca se limpia.
@@ -123,16 +132,17 @@ cualquier clave en el bundle queda pública). Se necesita un proxy servidor:
 Navegador (SvelteKit)
    │  fetch /api/*  (streaming SSE)
    ▼
-Endpoint servidor  ── SvelteKit +server.ts en Vercel / Cloudflare
+Endpoint servidor  ── SvelteKit +server.ts (adapter-node en el VPS)
    │  @anthropic-ai/sdk  (ANTHROPIC_API_KEY en variables de entorno)
    ▼
 Claude API
 ```
 
 Con SvelteKit esto son archivos `src/routes/api/*/+server.ts` en el mismo
-repo: basta con cambiar `adapter-static` por `adapter-vercel` (o
-`adapter-cloudflare`). Añadir un límite de uso por IP y un tope de
-`max_tokens` por petición para controlar coste.
+repo, servidos por el mismo proceso Node. La clave se lee con
+`$env/dynamic/private` (desde el `.env` del servidor) y nunca llega al
+navegador. Añadir un límite de uso por IP y un tope de `max_tokens` por
+petición para controlar coste.
 
 ### 5.2 Features propuestas (de menor a mayor esfuerzo)
 
@@ -163,6 +173,9 @@ Orden sugerido: **A1 → A2 → A3**, dejando A4/A5 para cuando haya uso real.
 - **Prompt caching**: el system prompt (voz del "charlatán", reglas de estilo,
   ejemplos) es estable → `cache_control: { type: "ephemeral" }`. Nada
   variable (fechas, IDs) antes del punto de caché.
+- **Fallback de modelo**: activar `fallbacks: "default"` (beta
+  `server-side-fallback-2026-07-01`) para que un rechazo del clasificador se
+  reintente automáticamente en otro modelo.
 - **Manejo de errores**: comprobar `stop_reason` (`refusal`, `max_tokens`)
   antes de usar el contenido; errores tipados del SDK (`RateLimitError`, …).
 - **Fallback**: si la API falla, el sistema sigue funcionando con el
@@ -192,10 +205,8 @@ src/
 
 ## 6. Decisiones pendientes
 
-1. **Hosting cuando entre la AI**: Vercel (integración directa con SvelteKit)
-   vs Cloudflare Pages/Workers. Hasta entonces, GitHub Pages sin cambios.
-2. **Idioma de la narración**: hoy el vocabulario y las voces TTS son en
-   inglés (`getEnglishVoices`). ¿Se añade español/multilenguaje? Con A1 es
-   casi gratis (el idioma pasa a ser un parámetro del prompt).
-3. **¿Acceso público o privado?** Si la app con AI es pública, hace falta
-   rate-limit y quizá login para no quemar créditos de API.
+1. **Rate limit**: la página es pública aunque la clave sea privada, así que
+   cualquiera puede llamar a `/about/charlatans/api/*` y gastar créditos.
+   Propuesta: límite por IP en memoria (p. ej. 20 generaciones/hora) + tope
+   de gasto mensual configurado en la consola de Anthropic.
+2. **Primera feature de AI**: se propone A1 (vocabulario por tema).
