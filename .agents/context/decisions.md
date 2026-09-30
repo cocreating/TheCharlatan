@@ -4,6 +4,12 @@ Newest first. One entry per decision: what was decided and why.
 
 ## 2026-09-30
 
+- **P02 implemented (oracle + Supabase memory), PR to `master`.** Closing the WIP: `Oracle.respond` no longer
+  compares `phase` after the replay; a run counter (bumped by close) and a `skipped` flag decide instead, so
+  a STOP during the replay never gets overwritten by "revealed". The suggestion `<li>`s keep only a click
+  handler (keyboard is on the combobox input via `aria-activedescendant`), with a justified `svelte-ignore`.
+  `dist/` added to the ESLint ignores. Tested in headless Chromium without Supabase: full flow, SKIP, STOP;
+  TTS not testable headless.
 - **Live at https://themostimportant.page/about/charlatans.** Runs as the Plesk subscription user of
   themostimportant.page (not root), Node 22 via nvm, pm2 with a systemd startup unit, nginx block in
   Plesk's "Additional nginx directives". Details in A50 → "Production setup".

@@ -46,16 +46,25 @@ Run check, lint and test before every commit.
 | UI | `src/lib/ui/*.svelte`, page in `src/routes/+page.svelte` |
 | Graph from vocabulary | `src/lib/data/buildGraph.ts` (seed: `graph.seed.json`) |
 | AI theme → vocabulary | `src/routes/api/vocabulary/+server.ts`, `src/lib/server/vocabulary.ts`, providers in `src/lib/server/ai/` |
+| Oracle (ask → dice → number) | `src/lib/oracle/` (`oracle.svelte.ts` phases, `answer.ts` rules), `src/lib/ui/OraclePanel.svelte`; seeded PRNG in `src/lib/engine/random.ts` |
+| Memory (Supabase) | `src/lib/server/db.ts`, `vocabularyCache.ts`, `sessions.ts`; routes `api/themes/suggest`, `api/sessions`; `normalizeTheme` in `src/lib/themes.ts` |
 
 ## AI
 
 - Server-side only; keys live in the server `.env` (see `.env.example`), read via `$env/dynamic/private`.
 - Provider picked from env: `GEMINI_API_KEY` (default, free tier), OpenAI-compatible (`OPENAI_BASE_URL`/`OPENAI_API_KEY`/`OPENAI_MODEL`), or `ANTHROPIC_API_KEY`. `AI_PROVIDER` forces one.
 - Per-IP rate limit `RATE_LIMIT_PER_HOUR` (default 20).
-- Roadmap: `.agents/docs/proposals/P01-svelte-migration-and-ai.md` (next: A2 streamed narrator, A3 oracle).
-- **Next up: `.agents/docs/proposals/P02-oracle-and-memory.md`** — "Ask the oracle" + "Show the dice", with
-  sessions and cached AI vocabularies (plus theme autocomplete) in Supabase project TMI. The database is
-  already created (`supabase/migrations/20260930_charlatan_oracle.sql`); the app code is pending.
+- AI vocabularies are cached per theme in Supabase (up to 3 variants); bump `PROMPT_VERSION` in
+  `src/lib/server/ai/prompt.ts` when the prompt changes.
+- Roadmap: `.agents/docs/proposals/P01-svelte-migration-and-ai.md` (next: A2 streamed narrator).
+
+## Memory (Supabase)
+
+- P02 (`.agents/docs/proposals/P02-oracle-and-memory.md`) is implemented: "Ask the oracle" + "Show the dice",
+  sessions, cached AI vocabularies and theme autocomplete in Supabase project TMI (`charlatan_*` tables,
+  schema in `supabase/migrations/20260930_charlatan_oracle.sql`).
+- Server only, with `SUPABASE_URL` + `SUPABASE_SECRET_KEY`. Without them everything works and nothing is stored.
+- No IP or identifying data in sessions; the visitor can opt out of storing the question text.
 
 ## Deploy
 

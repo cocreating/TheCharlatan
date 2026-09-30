@@ -1,6 +1,6 @@
 # P02 — El oráculo que se desenmascara + memoria en Supabase
 
-> Estado: **propuesta aprobada · base de datos creada** (Supabase TMI) · código pendiente · Fecha: 2026-09-30
+> Estado: **implementada** en la rama `p02-oracle` (PR a `master`, pendiente de merge) · check, lint y test en verde · Supabase TMI listo y variables puestas en el VPS · Fecha: 2026-09-30
 
 ## 0. Decisiones tomadas
 
@@ -107,3 +107,54 @@ el futuro se muestran preguntas de otros, hará falta moderación previa.
   grafo compartido; el charlatán aprende a decir lo que la gente quiere oír.
 - **Máscaras**: gurú, político, CEO, astrólogo diciendo exactamente lo mismo.
 - **Enlace a una sesión** (`/s/[id]`) para volver a ver una respuesta.
+
+## 6. Estado de la implementación (relevo, 2026-09-30)
+
+Código escrito en local (Mac) y subido como WIP a la rama `p02-oracle`; cerrado en la nube el mismo día
+(ver «Pendiente», todo resuelto). El merge a `master` despliega (CI).
+
+### Hecho
+| Pieza | Archivos |
+|---|---|
+| PRNG con semilla (mulberry32) | `src/lib/engine/random.ts` |
+| Walker con dados: `weighNextNodes`, `rollAmong`, `selectNextStep` (firma de `selectNextNode` intacta) | `src/lib/engine/walker.ts`, tipos `DiceCandidate`/`DiceStep` en `types.ts` |
+| Store: `mode` (`free`/`answering`/`frozen`), `trace`, `answerDone`, `dice`, `vocabularyId`; `beginAnswer`, `freeze`, `showRoll`, `endOracle`. En modo oracle se ignoran reset, saltos y cambio de grafo | `src/lib/engine/store.svelte.ts` |
+| Reglas de la respuesta (8–16 fragmentos, termina en object/space/time/state), `answerText`, `revealLines` | `src/lib/oracle/answer.ts` |
+| Orquestación del oráculo (fases `idle → answering → asking → replaying → revealed`, replay cancelable) | `src/lib/oracle/oracle.svelte.ts`, cliente HTTP en `src/lib/oracle/api.ts` |
+| `normalizeTheme` compartido | `src/lib/themes.ts` |
+| Cliente Supabase (null sin variables) | `src/lib/server/db.ts` |
+| Caché de vocabularios (`findVariants`, `nextVariant`, `saveVariant`, `recordHit`, `suggestThemes`) | `src/lib/server/vocabularyCache.ts` |
+| `describeProvider` (provider/model a guardar); `PROMPT_VERSION = 'v1'` | `src/lib/server/ai/index.ts`, `prompt.ts` |
+| `POST /api/vocabulary`: caché primero, hasta 3 variantes (30 % de probabilidad de nueva), `cachedOnly`, fallback a caché si la IA falla o hay rate limit; devuelve `vocabularyId` | `src/routes/api/vocabulary/+server.ts` |
+| `GET /api/themes/suggest`, `POST /api/sessions`, `PATCH /api/sessions/[id]` + validación | `src/routes/api/...`, `src/lib/server/sessions.ts` |
+| UI: autocompletado (combobox) en `ThemePrompt`; `OraclePanel` (pregunta, aviso + casilla, Yes/No, dados con barra y lista, porcentaje); columna izquierda en la página; Controls desactivados según `mode` | `src/lib/ui/*.svelte`, `src/routes/+page.svelte`, `src/app.css` |
+| Dados en el canvas: ramas con grosor ∝ p, las no elegidas se desvanecen | `src/lib/viz/render.ts` (`drawDice`), `ForceGraph.svelte` |
+| Dependencia `@supabase/supabase-js` | `package.json` |
+
+### Pendiente (cerrado 2026-09-30)
+1. ✅ **Error de tipos** en `oracle.svelte.ts`: `respond` ya no compara `phase` tras el replay. `replay(run)` recibe el
+   turno; `close()` sube el contador `run` y `skip()` solo marca `skipped`. Si el turno sigue vigente al acabar,
+   pasa a `revealed`; si se cerró, no toca nada.
+2. ✅ **Aviso a11y** en `ThemePrompt`: `svelte-ignore a11y_click_events_have_key_events` con comentario (el teclado va en
+   el input, patrón `aria-activedescendant`).
+3. ✅ **Lint**: `dist` en `globalIgnores`.
+4. ✅ **Tests** (71 en total): `themes.test.ts`, walker (`weighNextNodes`, `rollAmong`, reproducibilidad con semilla),
+   `oracle/answer.test.ts`, `server/sessions.test.ts` (`parseSessionInput`), `server/vocabularyCache.test.ts`
+   (`nextVariant`), y `/api/vocabulary` con `$lib/server/db` y `vocabularyCache` mockeados (hit sin IA, sin clave,
+   variante nueva, tema lleno, `cachedOnly`, guardado y fallo al guardar, fallback con IA ocupada y con rate limit,
+   fallo de lectura).
+5. ✅ **Navegador** (Chromium headless, sin Supabase): flujo completo con SKIP, STOP a mitad de respuesta, replay
+   completo sin SKIP, autocompletado sin romper nada. `POST /api/sessions` responde 503 sin Supabase y el cliente
+   sigue (sin porcentaje). **TTS no se pudo probar en headless**: revisar con voz en un navegador real tras el deploy.
+6. ✅ **Docs**: `.env.example`, `CLAUDE.md`, `decisions.md` y esta propuesta.
+7. ✅ PR a `master` abierto con check, lint y test en verde. No se ha hecho merge.
+
+### Servidor
+`SUPABASE_URL` y `SUPABASE_SECRET_KEY` (clave `sb_secret_…` propia de Charlatans) ya están en el `.env` del VPS;
+verificado el 2026-09-30 que la clave lee `charlatan_meaning_stats` y `charlatan_vocabularies`. El proceso pm2 las
+cogerá en el `pm2 reload` del próximo deploy.
+
+### Nota de entorno
+En la shell de Desktop Commander del Mac, `NODE_ENV=production`: `npm install` quita las devDependencies.
+Usar `env -u NODE_ENV npm install`.
+

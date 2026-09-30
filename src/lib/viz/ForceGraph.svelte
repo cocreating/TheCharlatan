@@ -10,12 +10,13 @@
   } from 'd3-force';
   import { charlatan } from '$lib/engine/store.svelte';
   import type { Node, Link } from '$lib/engine/types';
-  import { drawGraph, COLORS } from './render';
+  import { drawGraph, COLORS, type DiceOverlay } from './render';
   import { ParticleEngine } from './particles';
 
   const CLICK_RADIUS = 20;
   const HOVER_RADIUS = 15;
   const PARTICLE_STEPS_PER_FRAME = 2;
+  const DICE_FADE_MS = 1800; // Unchosen branches fade over this long in the oracle replay
 
   let canvas: HTMLCanvasElement;
   let width = $state(800);
@@ -104,12 +105,32 @@
     }
 
     // drawGraph clears the frame, so particles are drawn on top (smoke overlays the graph).
-    drawGraph(ctx, width, height, charlatan.graph.nodes, simLinks, charlatan.activeNodeId, charlatan.history);
+    drawGraph(
+      ctx,
+      width,
+      height,
+      charlatan.graph.nodes,
+      simLinks,
+      charlatan.activeNodeId,
+      charlatan.history,
+      diceOverlay(),
+    );
 
     for (let i = 0; i < PARTICLE_STEPS_PER_FRAME; i++) particles.update();
     particles.draw(ctx);
 
     ctx.restore();
+  }
+
+  function diceOverlay(): DiceOverlay | null {
+    const dice = charlatan.dice;
+    if (!dice) return null;
+    return {
+      from: dice.from,
+      candidates: dice.step.candidates,
+      chosen: dice.step.node,
+      fade: Math.min(1, (performance.now() - dice.shownAt) / DICE_FADE_MS),
+    };
   }
 
   function nodeAt(e: MouseEvent, radius: number): Node | null {
