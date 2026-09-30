@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { untrack } from 'svelte';
+  import { tick, untrack } from 'svelte';
   import { charlatan } from '$lib/engine/store.svelte';
   import { oracle } from '$lib/oracle/oracle.svelte';
   import { revealLines } from '$lib/oracle/answer';
@@ -9,6 +9,14 @@
 
   let question = $state('');
   let forget = $state(false);
+  // Narrow screens only (CSS): the idle form starts folded so the graph stays visible
+  let folded = $state(true);
+  let textarea = $state<HTMLTextAreaElement>();
+
+  function toggleFold() {
+    folded = !folded;
+    if (!folded) tick().then(() => textarea?.focus());
+  }
 
   // The walk has spoken its last word: hand over to "Did it speak to you?"
   $effect(() => {
@@ -55,9 +63,13 @@
 
 <section class="oracle" aria-live="polite">
   {#if oracle.phase === 'idle'}
-    <form onsubmit={ask}>
+    <button type="button" class="fold" aria-expanded={!folded} aria-controls="oracle-form" onclick={toggleFold}>
+      ASK THE ORACLE <span class="chevron" aria-hidden="true">▾</span>
+    </button>
+    <form id="oracle-form" class:folded onsubmit={ask}>
       <label for="oracle-question">ASK THE ORACLE</label>
       <textarea
+        bind:this={textarea}
         id="oracle-question"
         rows="2"
         maxlength={MAX_QUESTION_LENGTH}
@@ -137,6 +149,47 @@
     font-size: 0.75rem;
     font-weight: 500;
     letter-spacing: 0.1em;
+  }
+
+  /* The fold toggle replaces the label on narrow screens only */
+  .fold {
+    display: none;
+  }
+
+  @media (max-width: 767px) {
+    .fold {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 0;
+      border: none;
+      color: var(--text);
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+    }
+
+    .fold:hover:not(:disabled) {
+      background: none;
+    }
+
+    .chevron {
+      font-size: 0.9rem;
+      color: var(--text-dim);
+      transition: transform 0.25s var(--ease-out);
+    }
+
+    .fold[aria-expanded='true'] .chevron {
+      transform: rotate(180deg);
+    }
+
+    form label[for] {
+      display: none;
+    }
+
+    form.folded {
+      display: none;
+    }
   }
 
   .oracle {

@@ -10,6 +10,7 @@
   import CinematicOverlay from '$lib/ui/CinematicOverlay.svelte';
   import ThemePrompt from '$lib/ui/ThemePrompt.svelte';
   import OraclePanel from '$lib/ui/OraclePanel.svelte';
+  import IntroScreen from '$lib/ui/IntroScreen.svelte';
 
   const PREFERRED_VOICE = 'Google UK English Female';
 
@@ -63,6 +64,7 @@
   </div>
   <Controls />
 </div>
+<IntroScreen />
 
 <style>
   /* The graph fills everything above the controls; panels float over it */

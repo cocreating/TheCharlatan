@@ -26,7 +26,8 @@ npm start          # run the build (reads .env if present, see .env.example)
 
 ## 🛠️ Tech Stack
 - **SvelteKit** (Svelte 5 runes) & **TypeScript**, `adapter-node`
-- **Native CSS**, scoped per component
+- **Native CSS**, scoped per component, with design tokens in `src/app.css`
+- **IBM Plex Mono** & **Fraunces**, self-hosted via Fontsource
 - **D3-force** for physics simulation
 - **HTML5 Canvas** for high-performance rendering
 - **Web Audio API** & **SpeechSynthesis** for multisensory feedback

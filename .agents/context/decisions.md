@@ -2,6 +2,18 @@
 
 Newest first. One entry per decision: what was decided and why.
 
+## 2026-09-30 — Oracle folds on mobile
+
+- **On screens under 768px the oracle's question form starts folded** behind an ASK THE ORACLE toggle, so the
+  graph stays visible. CSS-only on desktop (the toggle is hidden there). Only the idle form folds: once a question
+  is asked, the answer, dice and reveal always show.
+
+## 2026-09-30 — Intro screen
+
+- **The piece opens with an intro dialog** (`IntroScreen.svelte`, native `<dialog>` + `showModal()` so the page
+  behind is inert). "Begin with sound" / "Begin in silence" set AUDIO and start playback; the click is the user
+  gesture browsers require before speech and Web Audio. Escape begins in silence. Shown on every load (no storage).
+
 ## 2026-09-30 — Visual/UI pass
 
 - **One palette, as CSS tokens.** `src/app.css` holds every colour (surfaces, text levels, `--c-*` word types);
