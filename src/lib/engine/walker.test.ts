@@ -70,3 +70,33 @@ describe('dice', () => {
     expect(walk(1234)).not.toEqual(walk(4321));
   });
 });
+
+describe('walk rules', () => {
+  const fan: Link[] = [
+    { source: 'a', target: 'b', weight: 1 },
+    { source: 'a', target: 'c', weight: 1 },
+  ];
+
+  it('only offers links that fit, and any link when none does', () => {
+    expect(weighNextNodes('a', fan, [], { fits: id => id === 'c' })).toEqual([{ id: 'c', p: 1 }]);
+    expect(weighNextNodes('a', fan, [], { fits: () => false }).map(c => c.id)).toEqual(['b', 'c']);
+  });
+
+  it('adds echoes without a link and without the history penalty, merging a node offered twice', () => {
+    const candidates = weighNextNodes('a', fan, ['z'], {
+      echoes: [
+        { id: 'z', weight: 2 },
+        { id: 'b', weight: 1 },
+      ],
+    });
+    expect(candidates).toEqual([
+      { id: 'b', p: 0.4 },
+      { id: 'c', p: 0.2 },
+      { id: 'z', p: 0.4 },
+    ]);
+  });
+
+  it('an echo keeps the walk going from a node without links', () => {
+    expect(selectNextStep('c', links, [], () => 0.5, { echoes: [{ id: 'a', weight: 1 }] })?.node).toBe('a');
+  });
+});

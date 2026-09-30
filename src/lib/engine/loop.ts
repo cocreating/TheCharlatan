@@ -7,8 +7,11 @@ const GLITCH_DURATION_MS = 800;
 const STUTTER_GAP_MS = 100;
 const BASE_INTERVAL_MS = 2000; // Without TTS: 2000ms / speed factor (2.0x speed = 1000ms)
 const BREATH_AFTER_SPEECH_MS = 500; // With TTS: pause after each utterance / speed factor
+const BREATH_BEFORE_SENTENCE_MS = 600; // With TTS: extra pause before a new sentence / speed factor
 
 const wait = (ms: number) => new Promise<void>(r => setTimeout(r, ms));
+// The active fragment as the story says it ("the mirror" the second time round)
+const spokenWords = (state: CharlatanState) => state.activePhrase?.words ?? state.activeNode?.text ?? '';
 
 /**
  * The playback loop: Step -> (Glitch) -> Speak -> Wait -> Step.
@@ -25,6 +28,12 @@ export function startLoop(state: CharlatanState): () => void {
     state.step();
     if (!state.isPlaying) return; // The step ended playback (dead end, or the oracle's answer is complete)
 
+    // A new sentence: a longer breath before it is spoken
+    if (state.ttsEnabled && state.story.length > 1 && state.activePhrase?.opens) {
+      await wait(BREATH_BEFORE_SENTENCE_MS / state.transitionSpeed);
+      if (cancelled) return;
+    }
+
     // Glitch Chance!
     if (state.glitchEnabled && Math.random() < GLITCH_CHANCE) {
       state.isGlitching = true;
@@ -32,7 +41,7 @@ export function startLoop(state: CharlatanState): () => void {
       const node = state.activeNode;
       if (state.ttsEnabled && node) {
         // Stutter effect: speak the first word quickly, twice
-        const stutter = { ...node, text: node.text.split(' ')[0] };
+        const stutter = { ...node, text: spokenWords(state).split(' ')[0] };
         await speak(stutter, state.voiceName);
         await wait(STUTTER_GAP_MS);
         await speak(stutter, state.voiceName);
@@ -53,7 +62,7 @@ export function startLoop(state: CharlatanState): () => void {
       // Ambient Transition
       ambient.transition(node.type);
       // Apply global speed factor to semantic modulation
-      await speak(node, state.voiceName, state.voiceSpeed);
+      await speak({ ...node, text: spokenWords(state) }, state.voiceName, state.voiceSpeed);
       // Add a Breath Delay after speech: faster speed (higher factor) = shorter breath
       delay = BREATH_AFTER_SPEECH_MS / state.transitionSpeed;
     } else {

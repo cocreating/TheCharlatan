@@ -1,35 +1,26 @@
 import { describe, expect, it } from 'vitest';
 import type { NodeType } from '$lib/engine/types';
-import { ANSWER_MAX_FRAGMENTS, ANSWER_MIN_FRAGMENTS, answerText, isAnswerComplete, revealLines } from './answer';
+import { ANSWER_MAX_FRAGMENTS, ANSWER_MIN_FRAGMENTS, isAnswerComplete, revealLines } from './answer';
 
-const types = (n: number, last: NodeType): NodeType[] => [...Array<NodeType>(n - 1).fill('action'), last];
+const roles = (n: number, last: NodeType): NodeType[] => [...Array<NodeType>(n - 1).fill('action'), last];
 
 describe('isAnswerComplete', () => {
   it('waits for the minimum length', () => {
-    expect(isAnswerComplete(types(ANSWER_MIN_FRAGMENTS - 1, 'object'))).toBe(false);
-    expect(isAnswerComplete(types(ANSWER_MIN_FRAGMENTS, 'object'))).toBe(true);
+    expect(isAnswerComplete(roles(ANSWER_MIN_FRAGMENTS - 1, 'object'))).toBe(false);
+    expect(isAnswerComplete(roles(ANSWER_MIN_FRAGMENTS, 'object'))).toBe(true);
   });
 
-  it('only ends on a type that closes a sentence', () => {
-    expect(isAnswerComplete(types(ANSWER_MIN_FRAGMENTS, 'action'))).toBe(false);
+  it('only ends on a role that closes a sentence', () => {
+    expect(isAnswerComplete(roles(ANSWER_MIN_FRAGMENTS, 'action'))).toBe(false);
+    // An object come back as a subject opens a sentence; it can't end one
+    expect(isAnswerComplete(roles(ANSWER_MIN_FRAGMENTS, 'subject'))).toBe(false);
     for (const t of ['object', 'space', 'time', 'state'] as NodeType[]) {
-      expect(isAnswerComplete(types(ANSWER_MIN_FRAGMENTS, t))).toBe(true);
+      expect(isAnswerComplete(roles(ANSWER_MIN_FRAGMENTS, t))).toBe(true);
     }
   });
 
   it('always ends at the cap', () => {
-    expect(isAnswerComplete(types(ANSWER_MAX_FRAGMENTS, 'action'))).toBe(true);
-  });
-});
-
-describe('answerText', () => {
-  it('joins the fragments into one capitalized sentence', () => {
-    expect(answerText(['the machine', 'remembers', 'the rain'])).toBe('The machine remembers the rain.');
-  });
-
-  it('is empty without fragments', () => {
-    expect(answerText([])).toBe('');
-    expect(answerText(['  '])).toBe('');
+    expect(isAnswerComplete(roles(ANSWER_MAX_FRAGMENTS, 'action'))).toBe(true);
   });
 });
 

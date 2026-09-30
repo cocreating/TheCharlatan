@@ -1,4 +1,5 @@
 import type { DiceCandidate, DiceStep, Link, Node } from './types';
+import type { Echo } from './grammar';
 import type { Rng } from './random';
 
 // Configuration
@@ -9,25 +10,44 @@ const P_DECIMALS = 4; // Precision kept for probabilities and rolls (they get st
 const endId = (end: string | Node) => (typeof end === 'string' ? end : end.id);
 const round = (n: number) => Number(n.toFixed(P_DECIMALS));
 
+/** What the story allows on top of the graph's links. */
+export interface WalkRules {
+  /** Which link targets fit the sentence so far. When none does, any link will do. */
+  fits?: (targetId: string) => boolean;
+  /** Nodes offered without a link and without the history penalty (see echoesFor). */
+  echoes?: Echo[];
+}
+
 /**
  * The walker's options from `currentNodeId`, each with its final probability:
- * link weight, times PENALTY_FACTOR for every recent visit, normalized.
+ * link weight, times PENALTY_FACTOR for every recent visit, plus any echoes, normalized.
  */
-export function weighNextNodes(currentNodeId: string, links: Link[], history: string[]): DiceCandidate[] {
+export function weighNextNodes(
+  currentNodeId: string,
+  links: Link[],
+  history: string[],
+  rules: WalkRules = {},
+): DiceCandidate[] {
   const recent = history.slice(-RECENT_HISTORY_PENALTY_WINDOW);
+  const outgoing = links.filter(l => endId(l.source) === currentNodeId);
+  const { fits } = rules;
+  const fitting = fits ? outgoing.filter(l => fits(endId(l.target))) : outgoing;
 
-  const weighted = links
-    .filter(l => endId(l.source) === currentNodeId)
-    .map(link => {
-      const id = endId(link.target);
-      const recentVisits = recent.filter(v => v === id).length;
-      // weight = base_weight * (PENALTY_FACTOR ^ recentVisits)
-      return { id, w: (link.weight || 1) * Math.pow(PENALTY_FACTOR, recentVisits) };
-    });
+  // A node offered twice (a link and an echo) adds up its weights
+  const weights = new Map<string, number>();
+  const offer = (id: string, w: number) => weights.set(id, (weights.get(id) ?? 0) + w);
 
-  const total = weighted.reduce((sum, c) => sum + c.w, 0);
+  for (const link of fitting.length > 0 ? fitting : outgoing) {
+    const id = endId(link.target);
+    const recentVisits = recent.filter(v => v === id).length;
+    // weight = base_weight * (PENALTY_FACTOR ^ recentVisits)
+    offer(id, (link.weight || 1) * Math.pow(PENALTY_FACTOR, recentVisits));
+  }
+  for (const echo of rules.echoes ?? []) offer(echo.id, echo.weight);
+
+  const total = [...weights.values()].reduce((sum, w) => sum + w, 0);
   // All zero (floats underflowed): treat the options as equally likely
-  return weighted.map(c => ({ id: c.id, p: total > 0 ? c.w / total : 1 / weighted.length }));
+  return [...weights].map(([id, w]) => ({ id, p: total > 0 ? w / total : 1 / weights.size }));
 }
 
 /**
@@ -61,8 +81,9 @@ export function selectNextStep(
   links: Link[],
   history: string[],
   rng: Rng = Math.random,
+  rules: WalkRules = {},
 ): DiceStep | null {
-  return rollAmong(weighNextNodes(currentNodeId, links, history), rng);
+  return rollAmong(weighNextNodes(currentNodeId, links, history, rules), rng);
 }
 
 /** Weighted random choice of the next node id, or null at a dead end. */
@@ -71,6 +92,7 @@ export function selectNextNode(
   links: Link[],
   history: string[],
   rng: Rng = Math.random,
+  rules: WalkRules = {},
 ): string | null {
-  return selectNextStep(currentNodeId, links, history, rng)?.node ?? null;
+  return selectNextStep(currentNodeId, links, history, rng, rules)?.node ?? null;
 }

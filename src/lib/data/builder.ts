@@ -25,20 +25,20 @@ const VOCABULARY: Vocabulary = {
     "in a room without doors", "across the horizon", "within the network", "under the neon sky",
     "through the labyrinth", "in the empty plaza", "beyond the screen", "inside the loop",
     "along the infinite corridor", "in a suspended reality", "between the layers", "at the vanishing point",
-    "nowhere", "in the digital ether", "across the grid", "beneath the surface",
+    "in the middle of nowhere", "in the digital ether", "across the grid", "beneath the surface",
     "in a collapsing star", "within the reflection", "near the edge", "in the static"
   ],
   time: [
     "before the dawn", "in a microsecond", "forever", "suddenly", "after the crash",
-    "slowly", "in rapid succession", "continuously", "at the final moment", "never",
-    "once again", "in the meantime", "historically", "in the future", "simultaneously"
+    "slowly", "again and again", "at midnight", "at the final moment", "at last",
+    "once again", "every night", "long ago", "in the future", "all at once"
   ],
   state: [
-    "luminous", "broken", "silent", "trembling", "stationary",
-    "volatile", "perfect", "corrupted", "hollow", "dense",
-    "fluid", "frozen", "abstract", "transparent", "heavy",
-    "chaotic", "organized", "fading", "vibrant", "obscure",
-    "resonant", "infinite", "temporary", "absolute", "uncertain"
+    "grows luminous", "breaks apart", "falls silent", "keeps trembling", "stands still",
+    "turns volatile", "looks perfect", "becomes corrupted", "sounds hollow", "grows dense",
+    "turns fluid", "freezes", "flickers", "becomes transparent", "grows heavy",
+    "descends into chaos", "falls into order", "fades away", "burns bright", "grows obscure",
+    "resonates", "never ends", "holds its breath", "hesitates", "wavers"
   ],
   object: [
     "a mirror", "the key", "a mechanism", "the data", "a barrier",
@@ -48,8 +48,8 @@ const VOCABULARY: Vocabulary = {
     "a trace", "the map", "a token", "the vessel", "a duplicate"
   ],
   connector: [
-    "and yet", "however", "meanwhile", "although", "consequently",
-    "furthermore", "nevertheless", "thus", "instead", "otherwise"
+    "and yet", "however", "meanwhile", "then", "consequently",
+    "later", "nevertheless", "so", "instead", "elsewhere"
   ]
 };
 

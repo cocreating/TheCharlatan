@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": 1,
-    "seed": 1769536609092
+    "seed": 1790805290467
   },
   "nodes": [
     {
@@ -342,7 +342,7 @@
     {
       "id": "n068",
       "type": "space",
-      "text": "nowhere"
+      "text": "in the middle of nowhere"
     },
     {
       "id": "n069",
@@ -381,685 +381,660 @@
     },
     {
       "id": "n076",
-      "type": "space",
-      "text": "in a room without doors"
-    },
-    {
-      "id": "n077",
-      "type": "space",
-      "text": "across the horizon"
-    },
-    {
-      "id": "n078",
-      "type": "space",
-      "text": "within the network"
-    },
-    {
-      "id": "n079",
-      "type": "space",
-      "text": "under the neon sky"
-    },
-    {
-      "id": "n080",
-      "type": "space",
-      "text": "through the labyrinth"
-    },
-    {
-      "id": "n081",
       "type": "time",
       "text": "before the dawn"
     },
     {
-      "id": "n082",
+      "id": "n077",
       "type": "time",
       "text": "in a microsecond"
     },
     {
-      "id": "n083",
+      "id": "n078",
       "type": "time",
       "text": "forever"
     },
     {
-      "id": "n084",
+      "id": "n079",
       "type": "time",
       "text": "suddenly"
     },
     {
-      "id": "n085",
+      "id": "n080",
       "type": "time",
       "text": "after the crash"
     },
     {
-      "id": "n086",
+      "id": "n081",
       "type": "time",
       "text": "slowly"
     },
     {
-      "id": "n087",
+      "id": "n082",
       "type": "time",
-      "text": "in rapid succession"
+      "text": "again and again"
     },
     {
-      "id": "n088",
+      "id": "n083",
       "type": "time",
-      "text": "continuously"
+      "text": "at midnight"
     },
     {
-      "id": "n089",
+      "id": "n084",
       "type": "time",
       "text": "at the final moment"
     },
     {
-      "id": "n090",
+      "id": "n085",
       "type": "time",
-      "text": "never"
+      "text": "at last"
     },
     {
-      "id": "n091",
+      "id": "n086",
       "type": "time",
       "text": "once again"
     },
     {
-      "id": "n092",
+      "id": "n087",
       "type": "time",
-      "text": "in the meantime"
+      "text": "every night"
     },
     {
-      "id": "n093",
+      "id": "n088",
       "type": "time",
-      "text": "historically"
+      "text": "long ago"
     },
     {
-      "id": "n094",
+      "id": "n089",
       "type": "time",
       "text": "in the future"
     },
     {
-      "id": "n095",
+      "id": "n090",
       "type": "time",
-      "text": "simultaneously"
+      "text": "all at once"
+    },
+    {
+      "id": "n091",
+      "type": "state",
+      "text": "grows luminous"
+    },
+    {
+      "id": "n092",
+      "type": "state",
+      "text": "breaks apart"
+    },
+    {
+      "id": "n093",
+      "type": "state",
+      "text": "falls silent"
+    },
+    {
+      "id": "n094",
+      "type": "state",
+      "text": "keeps trembling"
+    },
+    {
+      "id": "n095",
+      "type": "state",
+      "text": "stands still"
     },
     {
       "id": "n096",
       "type": "state",
-      "text": "luminous"
+      "text": "turns volatile"
     },
     {
       "id": "n097",
       "type": "state",
-      "text": "broken"
+      "text": "looks perfect"
     },
     {
       "id": "n098",
       "type": "state",
-      "text": "silent"
+      "text": "becomes corrupted"
     },
     {
       "id": "n099",
       "type": "state",
-      "text": "trembling"
+      "text": "sounds hollow"
     },
     {
       "id": "n100",
       "type": "state",
-      "text": "stationary"
+      "text": "grows dense"
     },
     {
       "id": "n101",
       "type": "state",
-      "text": "volatile"
+      "text": "turns fluid"
     },
     {
       "id": "n102",
       "type": "state",
-      "text": "perfect"
+      "text": "freezes"
     },
     {
       "id": "n103",
       "type": "state",
-      "text": "corrupted"
+      "text": "flickers"
     },
     {
       "id": "n104",
       "type": "state",
-      "text": "hollow"
+      "text": "becomes transparent"
     },
     {
       "id": "n105",
       "type": "state",
-      "text": "dense"
+      "text": "grows heavy"
     },
     {
       "id": "n106",
       "type": "state",
-      "text": "fluid"
+      "text": "descends into chaos"
     },
     {
       "id": "n107",
       "type": "state",
-      "text": "frozen"
+      "text": "falls into order"
     },
     {
       "id": "n108",
       "type": "state",
-      "text": "abstract"
+      "text": "fades away"
     },
     {
       "id": "n109",
       "type": "state",
-      "text": "transparent"
+      "text": "burns bright"
     },
     {
       "id": "n110",
       "type": "state",
-      "text": "heavy"
+      "text": "grows obscure"
     },
     {
       "id": "n111",
       "type": "state",
-      "text": "chaotic"
+      "text": "resonates"
     },
     {
       "id": "n112",
       "type": "state",
-      "text": "organized"
+      "text": "never ends"
     },
     {
       "id": "n113",
       "type": "state",
-      "text": "fading"
+      "text": "holds its breath"
     },
     {
       "id": "n114",
       "type": "state",
-      "text": "vibrant"
+      "text": "hesitates"
     },
     {
       "id": "n115",
       "type": "state",
-      "text": "obscure"
+      "text": "wavers"
     },
     {
       "id": "n116",
-      "type": "state",
-      "text": "resonant"
-    },
-    {
-      "id": "n117",
-      "type": "state",
-      "text": "infinite"
-    },
-    {
-      "id": "n118",
-      "type": "state",
-      "text": "temporary"
-    },
-    {
-      "id": "n119",
-      "type": "state",
-      "text": "absolute"
-    },
-    {
-      "id": "n120",
-      "type": "state",
-      "text": "uncertain"
-    },
-    {
-      "id": "n121",
       "type": "object",
       "text": "a mirror"
     },
     {
-      "id": "n122",
+      "id": "n117",
       "type": "object",
       "text": "the key"
     },
     {
-      "id": "n123",
+      "id": "n118",
       "type": "object",
       "text": "a mechanism"
     },
     {
-      "id": "n124",
+      "id": "n119",
       "type": "object",
       "text": "the data"
     },
     {
-      "id": "n125",
+      "id": "n120",
       "type": "object",
       "text": "a barrier"
     },
     {
-      "id": "n126",
+      "id": "n121",
       "type": "object",
       "text": "the artifact"
     },
     {
-      "id": "n127",
+      "id": "n122",
       "type": "object",
       "text": "a signal"
     },
     {
-      "id": "n128",
+      "id": "n123",
       "type": "object",
       "text": "the glitch"
     },
     {
-      "id": "n129",
+      "id": "n124",
       "type": "object",
       "text": "a prism"
     },
     {
-      "id": "n130",
+      "id": "n125",
       "type": "object",
       "text": "the relic"
     },
     {
-      "id": "n131",
+      "id": "n126",
       "type": "object",
       "text": "a diagram"
     },
     {
-      "id": "n132",
+      "id": "n127",
       "type": "object",
       "text": "the interface"
     },
     {
-      "id": "n133",
+      "id": "n128",
       "type": "object",
       "text": "a window"
     },
     {
-      "id": "n134",
+      "id": "n129",
       "type": "object",
       "text": "the anchor"
     },
     {
-      "id": "n135",
+      "id": "n130",
       "type": "object",
       "text": "a thread"
     },
     {
-      "id": "n136",
+      "id": "n131",
       "type": "object",
       "text": "the equation"
     },
     {
-      "id": "n137",
+      "id": "n132",
       "type": "object",
       "text": "a black box"
     },
     {
-      "id": "n138",
+      "id": "n133",
       "type": "object",
       "text": "the lens"
     },
     {
-      "id": "n139",
+      "id": "n134",
       "type": "object",
       "text": "a catalyst"
     },
     {
-      "id": "n140",
+      "id": "n135",
       "type": "object",
       "text": "the archive"
     },
     {
-      "id": "n141",
+      "id": "n136",
       "type": "object",
       "text": "a trace"
     },
     {
-      "id": "n142",
+      "id": "n137",
       "type": "object",
       "text": "the map"
     },
     {
-      "id": "n143",
+      "id": "n138",
       "type": "object",
       "text": "a token"
     },
     {
-      "id": "n144",
+      "id": "n139",
       "type": "object",
       "text": "the vessel"
     },
     {
-      "id": "n145",
+      "id": "n140",
       "type": "object",
       "text": "a duplicate"
     },
     {
-      "id": "n146",
+      "id": "n141",
       "type": "connector",
       "text": "and yet"
     },
     {
-      "id": "n147",
+      "id": "n142",
       "type": "connector",
       "text": "however"
     },
     {
-      "id": "n148",
+      "id": "n143",
       "type": "connector",
       "text": "meanwhile"
     },
     {
-      "id": "n149",
+      "id": "n144",
       "type": "connector",
-      "text": "although"
+      "text": "then"
     },
     {
-      "id": "n150",
+      "id": "n145",
       "type": "connector",
       "text": "consequently"
     },
     {
-      "id": "n151",
+      "id": "n146",
       "type": "connector",
-      "text": "furthermore"
+      "text": "later"
     },
     {
-      "id": "n152",
+      "id": "n147",
       "type": "connector",
       "text": "nevertheless"
     },
     {
-      "id": "n153",
+      "id": "n148",
       "type": "connector",
-      "text": "thus"
+      "text": "so"
     },
     {
-      "id": "n154",
+      "id": "n149",
       "type": "connector",
       "text": "instead"
     },
     {
-      "id": "n155",
+      "id": "n150",
       "type": "connector",
-      "text": "otherwise"
+      "text": "elsewhere"
     }
   ],
   "links": [
     {
       "source": "n001",
-      "target": "n114",
+      "target": "n049",
+      "weight": 1,
+      "rel": "subject->action"
+    },
+    {
+      "source": "n001",
+      "target": "n108",
       "weight": 1,
       "rel": "subject->state"
     },
     {
       "source": "n001",
-      "target": "n102",
-      "weight": 1,
-      "rel": "subject->state"
-    },
-    {
-      "source": "n001",
-      "target": "n045",
-      "weight": 1,
-      "rel": "subject->action"
-    },
-    {
-      "source": "n002",
-      "target": "n022",
-      "weight": 1,
-      "rel": "subject->action"
-    },
-    {
-      "source": "n002",
-      "target": "n097",
+      "target": "n094",
       "weight": 1,
       "rel": "subject->state"
     },
     {
       "source": "n002",
-      "target": "n032",
+      "target": "n111",
+      "weight": 1,
+      "rel": "subject->state"
+    },
+    {
+      "source": "n002",
+      "target": "n054",
       "weight": 1,
       "rel": "subject->action"
     },
     {
-      "source": "n003",
+      "source": "n002",
       "target": "n106",
       "weight": 1,
       "rel": "subject->state"
     },
     {
       "source": "n003",
-      "target": "n054",
+      "target": "n049",
       "weight": 1,
       "rel": "subject->action"
     },
     {
       "source": "n003",
-      "target": "n111",
-      "weight": 1,
-      "rel": "subject->state"
-    },
-    {
-      "source": "n004",
-      "target": "n034",
-      "weight": 1,
-      "rel": "subject->action"
-    },
-    {
-      "source": "n004",
-      "target": "n097",
-      "weight": 1,
-      "rel": "subject->state"
-    },
-    {
-      "source": "n004",
-      "target": "n037",
-      "weight": 1,
-      "rel": "subject->action"
-    },
-    {
-      "source": "n005",
-      "target": "n037",
-      "weight": 1,
-      "rel": "subject->action"
-    },
-    {
-      "source": "n005",
-      "target": "n023",
-      "weight": 1,
-      "rel": "subject->action"
-    },
-    {
-      "source": "n005",
-      "target": "n051",
-      "weight": 1,
-      "rel": "subject->action"
-    },
-    {
-      "source": "n006",
-      "target": "n055",
-      "weight": 1,
-      "rel": "subject->action"
-    },
-    {
-      "source": "n006",
-      "target": "n050",
-      "weight": 1,
-      "rel": "subject->action"
-    },
-    {
-      "source": "n006",
-      "target": "n051",
-      "weight": 1,
-      "rel": "subject->action"
-    },
-    {
-      "source": "n007",
       "target": "n096",
       "weight": 1,
       "rel": "subject->state"
     },
     {
-      "source": "n007",
-      "target": "n033",
+      "source": "n003",
+      "target": "n039",
       "weight": 1,
       "rel": "subject->action"
     },
     {
-      "source": "n007",
-      "target": "n116",
+      "source": "n004",
+      "target": "n101",
       "weight": 1,
       "rel": "subject->state"
     },
     {
-      "source": "n008",
-      "target": "n096",
-      "weight": 1,
-      "rel": "subject->state"
-    },
-    {
-      "source": "n008",
-      "target": "n055",
-      "weight": 1,
-      "rel": "subject->action"
-    },
-    {
-      "source": "n008",
-      "target": "n117",
-      "weight": 1,
-      "rel": "subject->state"
-    },
-    {
-      "source": "n009",
-      "target": "n023",
-      "weight": 1,
-      "rel": "subject->action"
-    },
-    {
-      "source": "n009",
-      "target": "n051",
-      "weight": 1,
-      "rel": "subject->action"
-    },
-    {
-      "source": "n009",
-      "target": "n026",
-      "weight": 1,
-      "rel": "subject->action"
-    },
-    {
-      "source": "n010",
-      "target": "n096",
-      "weight": 1,
-      "rel": "subject->state"
-    },
-    {
-      "source": "n010",
-      "target": "n097",
-      "weight": 1,
-      "rel": "subject->state"
-    },
-    {
-      "source": "n010",
-      "target": "n115",
-      "weight": 1,
-      "rel": "subject->state"
-    },
-    {
-      "source": "n011",
-      "target": "n098",
-      "weight": 1,
-      "rel": "subject->state"
-    },
-    {
-      "source": "n011",
-      "target": "n042",
-      "weight": 1,
-      "rel": "subject->action"
-    },
-    {
-      "source": "n011",
-      "target": "n033",
-      "weight": 1,
-      "rel": "subject->action"
-    },
-    {
-      "source": "n012",
-      "target": "n028",
-      "weight": 1,
-      "rel": "subject->action"
-    },
-    {
-      "source": "n012",
-      "target": "n114",
-      "weight": 1,
-      "rel": "subject->state"
-    },
-    {
-      "source": "n012",
-      "target": "n104",
-      "weight": 1,
-      "rel": "subject->state"
-    },
-    {
-      "source": "n013",
-      "target": "n030",
-      "weight": 1,
-      "rel": "subject->action"
-    },
-    {
-      "source": "n013",
-      "target": "n097",
-      "weight": 1,
-      "rel": "subject->state"
-    },
-    {
-      "source": "n013",
-      "target": "n033",
-      "weight": 1,
-      "rel": "subject->action"
-    },
-    {
-      "source": "n014",
-      "target": "n022",
-      "weight": 1,
-      "rel": "subject->action"
-    },
-    {
-      "source": "n014",
+      "source": "n004",
       "target": "n044",
       "weight": 1,
       "rel": "subject->action"
     },
     {
-      "source": "n014",
-      "target": "n036",
-      "weight": 1,
-      "rel": "subject->action"
-    },
-    {
-      "source": "n015",
-      "target": "n112",
-      "weight": 1,
-      "rel": "subject->state"
-    },
-    {
-      "source": "n015",
-      "target": "n022",
-      "weight": 1,
-      "rel": "subject->action"
-    },
-    {
-      "source": "n015",
-      "target": "n036",
-      "weight": 1,
-      "rel": "subject->action"
-    },
-    {
-      "source": "n016",
+      "source": "n004",
       "target": "n109",
       "weight": 1,
       "rel": "subject->state"
     },
     {
+      "source": "n005",
+      "target": "n044",
+      "weight": 1,
+      "rel": "subject->action"
+    },
+    {
+      "source": "n005",
+      "target": "n108",
+      "weight": 1,
+      "rel": "subject->state"
+    },
+    {
+      "source": "n005",
+      "target": "n042",
+      "weight": 1,
+      "rel": "subject->action"
+    },
+    {
+      "source": "n006",
+      "target": "n055",
+      "weight": 1,
+      "rel": "subject->action"
+    },
+    {
+      "source": "n006",
+      "target": "n107",
+      "weight": 1,
+      "rel": "subject->state"
+    },
+    {
+      "source": "n006",
+      "target": "n099",
+      "weight": 1,
+      "rel": "subject->state"
+    },
+    {
+      "source": "n007",
+      "target": "n107",
+      "weight": 1,
+      "rel": "subject->state"
+    },
+    {
+      "source": "n007",
+      "target": "n052",
+      "weight": 1,
+      "rel": "subject->action"
+    },
+    {
+      "source": "n007",
+      "target": "n097",
+      "weight": 1,
+      "rel": "subject->state"
+    },
+    {
+      "source": "n008",
+      "target": "n091",
+      "weight": 1,
+      "rel": "subject->state"
+    },
+    {
+      "source": "n008",
+      "target": "n052",
+      "weight": 1,
+      "rel": "subject->action"
+    },
+    {
+      "source": "n008",
+      "target": "n029",
+      "weight": 1,
+      "rel": "subject->action"
+    },
+    {
+      "source": "n009",
+      "target": "n107",
+      "weight": 1,
+      "rel": "subject->state"
+    },
+    {
+      "source": "n009",
+      "target": "n032",
+      "weight": 1,
+      "rel": "subject->action"
+    },
+    {
+      "source": "n009",
+      "target": "n106",
+      "weight": 1,
+      "rel": "subject->state"
+    },
+    {
+      "source": "n010",
+      "target": "n110",
+      "weight": 1,
+      "rel": "subject->state"
+    },
+    {
+      "source": "n010",
+      "target": "n034",
+      "weight": 1,
+      "rel": "subject->action"
+    },
+    {
+      "source": "n010",
+      "target": "n099",
+      "weight": 1,
+      "rel": "subject->state"
+    },
+    {
+      "source": "n011",
+      "target": "n100",
+      "weight": 1,
+      "rel": "subject->state"
+    },
+    {
+      "source": "n011",
+      "target": "n041",
+      "weight": 1,
+      "rel": "subject->action"
+    },
+    {
+      "source": "n011",
+      "target": "n108",
+      "weight": 1,
+      "rel": "subject->state"
+    },
+    {
+      "source": "n012",
+      "target": "n050",
+      "weight": 1,
+      "rel": "subject->action"
+    },
+    {
+      "source": "n012",
+      "target": "n091",
+      "weight": 1,
+      "rel": "subject->state"
+    },
+    {
+      "source": "n012",
+      "target": "n025",
+      "weight": 1,
+      "rel": "subject->action"
+    },
+    {
+      "source": "n013",
+      "target": "n092",
+      "weight": 1,
+      "rel": "subject->state"
+    },
+    {
+      "source": "n013",
+      "target": "n036",
+      "weight": 1,
+      "rel": "subject->action"
+    },
+    {
+      "source": "n013",
+      "target": "n103",
+      "weight": 1,
+      "rel": "subject->state"
+    },
+    {
+      "source": "n014",
+      "target": "n049",
+      "weight": 1,
+      "rel": "subject->action"
+    },
+    {
+      "source": "n014",
+      "target": "n107",
+      "weight": 1,
+      "rel": "subject->state"
+    },
+    {
+      "source": "n014",
+      "target": "n053",
+      "weight": 1,
+      "rel": "subject->action"
+    },
+    {
+      "source": "n015",
+      "target": "n039",
+      "weight": 1,
+      "rel": "subject->action"
+    },
+    {
+      "source": "n015",
+      "target": "n104",
+      "weight": 1,
+      "rel": "subject->state"
+    },
+    {
+      "source": "n015",
+      "target": "n024",
+      "weight": 1,
+      "rel": "subject->action"
+    },
+    {
       "source": "n016",
-      "target": "n101",
+      "target": "n052",
+      "weight": 1,
+      "rel": "subject->action"
+    },
+    {
+      "source": "n016",
+      "target": "n105",
       "weight": 1,
       "rel": "subject->state"
     },
@@ -1071,141 +1046,135 @@
     },
     {
       "source": "n017",
+      "target": "n037",
+      "weight": 1,
+      "rel": "subject->action"
+    },
+    {
+      "source": "n017",
+      "target": "n095",
+      "weight": 1,
+      "rel": "subject->state"
+    },
+    {
+      "source": "n017",
+      "target": "n050",
+      "weight": 1,
+      "rel": "subject->action"
+    },
+    {
+      "source": "n018",
+      "target": "n107",
+      "weight": 1,
+      "rel": "subject->state"
+    },
+    {
+      "source": "n018",
+      "target": "n026",
+      "weight": 1,
+      "rel": "subject->action"
+    },
+    {
+      "source": "n018",
       "target": "n106",
       "weight": 1,
       "rel": "subject->state"
     },
     {
-      "source": "n017",
-      "target": "n108",
-      "weight": 1,
-      "rel": "subject->state"
-    },
-    {
-      "source": "n017",
-      "target": "n028",
-      "weight": 1,
-      "rel": "subject->action"
-    },
-    {
-      "source": "n018",
+      "source": "n019",
       "target": "n105",
       "weight": 1,
       "rel": "subject->state"
     },
     {
-      "source": "n018",
-      "target": "n028",
+      "source": "n019",
+      "target": "n025",
       "weight": 1,
       "rel": "subject->action"
     },
     {
-      "source": "n018",
-      "target": "n103",
-      "weight": 1,
-      "rel": "subject->state"
-    },
-    {
       "source": "n019",
-      "target": "n113",
-      "weight": 1,
-      "rel": "subject->state"
-    },
-    {
-      "source": "n019",
-      "target": "n103",
-      "weight": 1,
-      "rel": "subject->state"
-    },
-    {
-      "source": "n019",
-      "target": "n041",
-      "weight": 1,
-      "rel": "subject->action"
-    },
-    {
-      "source": "n020",
-      "target": "n051",
-      "weight": 1,
-      "rel": "subject->action"
-    },
-    {
-      "source": "n020",
-      "target": "n115",
-      "weight": 1,
-      "rel": "subject->state"
-    },
-    {
-      "source": "n020",
-      "target": "n117",
-      "weight": 1,
-      "rel": "subject->state"
-    },
-    {
-      "source": "n021",
-      "target": "n084",
-      "weight": 1,
-      "rel": "action->time"
-    },
-    {
-      "source": "n021",
-      "target": "n062",
-      "weight": 1,
-      "rel": "action->space"
-    },
-    {
-      "source": "n021",
-      "target": "n087",
-      "weight": 1,
-      "rel": "action->time"
-    },
-    {
-      "source": "n022",
-      "target": "n128",
-      "weight": 1,
-      "rel": "action->object"
-    },
-    {
-      "source": "n022",
-      "target": "n057",
-      "weight": 1,
-      "rel": "action->space"
-    },
-    {
-      "source": "n022",
       "target": "n108",
       "weight": 1,
-      "rel": "action->state"
+      "rel": "subject->state"
     },
     {
-      "source": "n023",
-      "target": "n132",
+      "source": "n020",
+      "target": "n106",
+      "weight": 1,
+      "rel": "subject->state"
+    },
+    {
+      "source": "n020",
+      "target": "n023",
+      "weight": 1,
+      "rel": "subject->action"
+    },
+    {
+      "source": "n020",
+      "target": "n109",
+      "weight": 1,
+      "rel": "subject->state"
+    },
+    {
+      "source": "n021",
+      "target": "n119",
       "weight": 1,
       "rel": "action->object"
     },
     {
-      "source": "n023",
+      "source": "n021",
+      "target": "n138",
+      "weight": 1,
+      "rel": "action->object"
+    },
+    {
+      "source": "n021",
+      "target": "n133",
+      "weight": 1,
+      "rel": "action->object"
+    },
+    {
+      "source": "n022",
       "target": "n118",
       "weight": 1,
-      "rel": "action->state"
+      "rel": "action->object"
+    },
+    {
+      "source": "n022",
+      "target": "n116",
+      "weight": 1,
+      "rel": "action->object"
+    },
+    {
+      "source": "n022",
+      "target": "n126",
+      "weight": 1,
+      "rel": "action->object"
     },
     {
       "source": "n023",
-      "target": "n069",
+      "target": "n117",
       "weight": 1,
-      "rel": "action->space"
+      "rel": "action->object"
     },
     {
-      "source": "n024",
-      "target": "n137",
+      "source": "n023",
+      "target": "n120",
+      "weight": 1,
+      "rel": "action->object"
+    },
+    {
+      "source": "n023",
+      "target": "n133",
       "weight": 1,
       "rel": "action->object"
     },
     {
       "source": "n024",
-      "target": "n120",
+      "target": "n122",
       "weight": 1,
-      "rel": "action->state"
+      "rel": "action->object"
     },
     {
       "source": "n024",
@@ -1214,20 +1183,26 @@
       "rel": "action->object"
     },
     {
-      "source": "n025",
-      "target": "n100",
-      "weight": 1,
-      "rel": "action->state"
-    },
-    {
-      "source": "n025",
-      "target": "n128",
+      "source": "n024",
+      "target": "n136",
       "weight": 1,
       "rel": "action->object"
     },
     {
       "source": "n025",
-      "target": "n125",
+      "target": "n129",
+      "weight": 1,
+      "rel": "action->object"
+    },
+    {
+      "source": "n025",
+      "target": "n122",
+      "weight": 1,
+      "rel": "action->object"
+    },
+    {
+      "source": "n025",
+      "target": "n138",
       "weight": 1,
       "rel": "action->object"
     },
@@ -1239,135 +1214,135 @@
     },
     {
       "source": "n026",
-      "target": "n072",
+      "target": "n131",
       "weight": 1,
-      "rel": "action->space"
+      "rel": "action->object"
     },
     {
       "source": "n026",
-      "target": "n069",
-      "weight": 1,
-      "rel": "action->space"
-    },
-    {
-      "source": "n027",
-      "target": "n143",
+      "target": "n119",
       "weight": 1,
       "rel": "action->object"
     },
     {
       "source": "n027",
-      "target": "n125",
+      "target": "n136",
       "weight": 1,
       "rel": "action->object"
     },
     {
       "source": "n027",
+      "target": "n137",
+      "weight": 1,
+      "rel": "action->object"
+    },
+    {
+      "source": "n027",
+      "target": "n132",
+      "weight": 1,
+      "rel": "action->object"
+    },
+    {
+      "source": "n028",
+      "target": "n116",
+      "weight": 1,
+      "rel": "action->object"
+    },
+    {
+      "source": "n028",
+      "target": "n136",
+      "weight": 1,
+      "rel": "action->object"
+    },
+    {
+      "source": "n028",
       "target": "n135",
       "weight": 1,
       "rel": "action->object"
     },
     {
-      "source": "n028",
-      "target": "n096",
-      "weight": 1,
-      "rel": "action->state"
-    },
-    {
-      "source": "n028",
-      "target": "n138",
+      "source": "n029",
+      "target": "n124",
       "weight": 1,
       "rel": "action->object"
     },
     {
-      "source": "n028",
-      "target": "n060",
+      "source": "n029",
+      "target": "n132",
       "weight": 1,
-      "rel": "action->space"
+      "rel": "action->object"
     },
     {
       "source": "n029",
-      "target": "n112",
-      "weight": 1,
-      "rel": "action->state"
-    },
-    {
-      "source": "n029",
-      "target": "n072",
-      "weight": 1,
-      "rel": "action->space"
-    },
-    {
-      "source": "n029",
-      "target": "n117",
-      "weight": 1,
-      "rel": "action->state"
-    },
-    {
-      "source": "n030",
-      "target": "n133",
+      "target": "n120",
       "weight": 1,
       "rel": "action->object"
     },
     {
       "source": "n030",
-      "target": "n081",
+      "target": "n120",
       "weight": 1,
-      "rel": "action->time"
+      "rel": "action->object"
     },
     {
       "source": "n030",
-      "target": "n091",
+      "target": "n131",
       "weight": 1,
-      "rel": "action->time"
+      "rel": "action->object"
     },
     {
-      "source": "n031",
-      "target": "n094",
-      "weight": 1,
-      "rel": "action->time"
-    },
-    {
-      "source": "n031",
-      "target": "n139",
+      "source": "n030",
+      "target": "n125",
       "weight": 1,
       "rel": "action->object"
     },
     {
       "source": "n031",
-      "target": "n090",
+      "target": "n130",
       "weight": 1,
-      "rel": "action->time"
+      "rel": "action->object"
     },
     {
-      "source": "n032",
-      "target": "n123",
+      "source": "n031",
+      "target": "n125",
+      "weight": 1,
+      "rel": "action->object"
+    },
+    {
+      "source": "n031",
+      "target": "n131",
       "weight": 1,
       "rel": "action->object"
     },
     {
       "source": "n032",
-      "target": "n101",
+      "target": "n119",
       "weight": 1,
-      "rel": "action->state"
+      "rel": "action->object"
     },
     {
       "source": "n032",
-      "target": "n142",
+      "target": "n118",
+      "weight": 1,
+      "rel": "action->object"
+    },
+    {
+      "source": "n032",
+      "target": "n136",
       "weight": 1,
       "rel": "action->object"
     },
     {
       "source": "n033",
-      "target": "n096",
+      "target": "n136",
       "weight": 1,
-      "rel": "action->state"
+      "rel": "action->object"
     },
     {
       "source": "n033",
-      "target": "n083",
+      "target": "n119",
       "weight": 1,
-      "rel": "action->time"
+      "rel": "action->object"
     },
     {
       "source": "n033",
@@ -1377,243 +1352,249 @@
     },
     {
       "source": "n034",
-      "target": "n141",
+      "target": "n133",
       "weight": 1,
       "rel": "action->object"
     },
     {
       "source": "n034",
-      "target": "n131",
+      "target": "n116",
       "weight": 1,
       "rel": "action->object"
     },
     {
       "source": "n034",
-      "target": "n091",
-      "weight": 1,
-      "rel": "action->time"
-    },
-    {
-      "source": "n035",
-      "target": "n137",
+      "target": "n122",
       "weight": 1,
       "rel": "action->object"
     },
     {
       "source": "n035",
-      "target": "n099",
-      "weight": 1,
-      "rel": "action->state"
-    },
-    {
-      "source": "n035",
-      "target": "n141",
-      "weight": 1,
-      "rel": "action->object"
-    },
-    {
-      "source": "n036",
       "target": "n126",
       "weight": 1,
       "rel": "action->object"
     },
     {
-      "source": "n036",
-      "target": "n145",
-      "weight": 1,
-      "rel": "action->object"
-    },
-    {
-      "source": "n036",
-      "target": "n087",
-      "weight": 1,
-      "rel": "action->time"
-    },
-    {
-      "source": "n037",
-      "target": "n100",
-      "weight": 1,
-      "rel": "action->state"
-    },
-    {
-      "source": "n037",
-      "target": "n094",
-      "weight": 1,
-      "rel": "action->time"
-    },
-    {
-      "source": "n037",
-      "target": "n095",
-      "weight": 1,
-      "rel": "action->time"
-    },
-    {
-      "source": "n038",
-      "target": "n115",
-      "weight": 1,
-      "rel": "action->state"
-    },
-    {
-      "source": "n038",
-      "target": "n119",
-      "weight": 1,
-      "rel": "action->state"
-    },
-    {
-      "source": "n038",
-      "target": "n110",
-      "weight": 1,
-      "rel": "action->state"
-    },
-    {
-      "source": "n039",
-      "target": "n141",
-      "weight": 1,
-      "rel": "action->object"
-    },
-    {
-      "source": "n039",
-      "target": "n121",
-      "weight": 1,
-      "rel": "action->object"
-    },
-    {
-      "source": "n039",
-      "target": "n067",
-      "weight": 1,
-      "rel": "action->space"
-    },
-    {
-      "source": "n040",
-      "target": "n118",
-      "weight": 1,
-      "rel": "action->state"
-    },
-    {
-      "source": "n040",
-      "target": "n138",
-      "weight": 1,
-      "rel": "action->object"
-    },
-    {
-      "source": "n040",
-      "target": "n077",
-      "weight": 1,
-      "rel": "action->space"
-    },
-    {
-      "source": "n041",
-      "target": "n105",
-      "weight": 1,
-      "rel": "action->state"
-    },
-    {
-      "source": "n041",
-      "target": "n095",
-      "weight": 1,
-      "rel": "action->time"
-    },
-    {
-      "source": "n041",
-      "target": "n131",
-      "weight": 1,
-      "rel": "action->object"
-    },
-    {
-      "source": "n042",
-      "target": "n134",
-      "weight": 1,
-      "rel": "action->object"
-    },
-    {
-      "source": "n042",
-      "target": "n140",
-      "weight": 1,
-      "rel": "action->object"
-    },
-    {
-      "source": "n042",
-      "target": "n111",
-      "weight": 1,
-      "rel": "action->state"
-    },
-    {
-      "source": "n043",
-      "target": "n101",
-      "weight": 1,
-      "rel": "action->state"
-    },
-    {
-      "source": "n043",
-      "target": "n071",
-      "weight": 1,
-      "rel": "action->space"
-    },
-    {
-      "source": "n043",
-      "target": "n117",
-      "weight": 1,
-      "rel": "action->state"
-    },
-    {
-      "source": "n044",
-      "target": "n099",
-      "weight": 1,
-      "rel": "action->state"
-    },
-    {
-      "source": "n044",
-      "target": "n078",
-      "weight": 1,
-      "rel": "action->space"
-    },
-    {
-      "source": "n044",
-      "target": "n064",
-      "weight": 1,
-      "rel": "action->space"
-    },
-    {
-      "source": "n045",
-      "target": "n081",
-      "weight": 1,
-      "rel": "action->time"
-    },
-    {
-      "source": "n045",
-      "target": "n109",
-      "weight": 1,
-      "rel": "action->state"
-    },
-    {
-      "source": "n045",
+      "source": "n035",
       "target": "n116",
       "weight": 1,
-      "rel": "action->state"
-    },
-    {
-      "source": "n046",
-      "target": "n131",
-      "weight": 1,
       "rel": "action->object"
     },
     {
-      "source": "n046",
-      "target": "n085",
-      "weight": 1,
-      "rel": "action->time"
-    },
-    {
-      "source": "n046",
+      "source": "n035",
       "target": "n137",
       "weight": 1,
       "rel": "action->object"
     },
     {
-      "source": "n047",
-      "target": "n069",
+      "source": "n036",
+      "target": "n133",
       "weight": 1,
-      "rel": "action->space"
+      "rel": "action->object"
+    },
+    {
+      "source": "n036",
+      "target": "n132",
+      "weight": 1,
+      "rel": "action->object"
+    },
+    {
+      "source": "n036",
+      "target": "n120",
+      "weight": 1,
+      "rel": "action->object"
+    },
+    {
+      "source": "n037",
+      "target": "n119",
+      "weight": 1,
+      "rel": "action->object"
+    },
+    {
+      "source": "n037",
+      "target": "n128",
+      "weight": 1,
+      "rel": "action->object"
+    },
+    {
+      "source": "n037",
+      "target": "n133",
+      "weight": 1,
+      "rel": "action->object"
+    },
+    {
+      "source": "n038",
+      "target": "n122",
+      "weight": 1,
+      "rel": "action->object"
+    },
+    {
+      "source": "n038",
+      "target": "n125",
+      "weight": 1,
+      "rel": "action->object"
+    },
+    {
+      "source": "n038",
+      "target": "n116",
+      "weight": 1,
+      "rel": "action->object"
+    },
+    {
+      "source": "n039",
+      "target": "n123",
+      "weight": 1,
+      "rel": "action->object"
+    },
+    {
+      "source": "n039",
+      "target": "n119",
+      "weight": 1,
+      "rel": "action->object"
+    },
+    {
+      "source": "n039",
+      "target": "n116",
+      "weight": 1,
+      "rel": "action->object"
+    },
+    {
+      "source": "n040",
+      "target": "n127",
+      "weight": 1,
+      "rel": "action->object"
+    },
+    {
+      "source": "n040",
+      "target": "n126",
+      "weight": 1,
+      "rel": "action->object"
+    },
+    {
+      "source": "n040",
+      "target": "n140",
+      "weight": 1,
+      "rel": "action->object"
+    },
+    {
+      "source": "n041",
+      "target": "n130",
+      "weight": 1,
+      "rel": "action->object"
+    },
+    {
+      "source": "n041",
+      "target": "n127",
+      "weight": 1,
+      "rel": "action->object"
+    },
+    {
+      "source": "n041",
+      "target": "n124",
+      "weight": 1,
+      "rel": "action->object"
+    },
+    {
+      "source": "n042",
+      "target": "n130",
+      "weight": 1,
+      "rel": "action->object"
+    },
+    {
+      "source": "n042",
+      "target": "n127",
+      "weight": 1,
+      "rel": "action->object"
+    },
+    {
+      "source": "n042",
+      "target": "n137",
+      "weight": 1,
+      "rel": "action->object"
+    },
+    {
+      "source": "n043",
+      "target": "n128",
+      "weight": 1,
+      "rel": "action->object"
+    },
+    {
+      "source": "n043",
+      "target": "n139",
+      "weight": 1,
+      "rel": "action->object"
+    },
+    {
+      "source": "n043",
+      "target": "n120",
+      "weight": 1,
+      "rel": "action->object"
+    },
+    {
+      "source": "n044",
+      "target": "n126",
+      "weight": 1,
+      "rel": "action->object"
+    },
+    {
+      "source": "n044",
+      "target": "n135",
+      "weight": 1,
+      "rel": "action->object"
+    },
+    {
+      "source": "n044",
+      "target": "n123",
+      "weight": 1,
+      "rel": "action->object"
+    },
+    {
+      "source": "n045",
+      "target": "n139",
+      "weight": 1,
+      "rel": "action->object"
+    },
+    {
+      "source": "n045",
+      "target": "n123",
+      "weight": 1,
+      "rel": "action->object"
+    },
+    {
+      "source": "n045",
+      "target": "n136",
+      "weight": 1,
+      "rel": "action->object"
+    },
+    {
+      "source": "n046",
+      "target": "n120",
+      "weight": 1,
+      "rel": "action->object"
+    },
+    {
+      "source": "n046",
+      "target": "n125",
+      "weight": 1,
+      "rel": "action->object"
+    },
+    {
+      "source": "n046",
+      "target": "n133",
+      "weight": 1,
+      "rel": "action->object"
+    },
+    {
+      "source": "n047",
+      "target": "n123",
+      "weight": 1,
+      "rel": "action->object"
+    },
+    {
+      "source": "n047",
+      "target": "n126",
+      "weight": 1,
+      "rel": "action->object"
     },
     {
       "source": "n047",
@@ -1622,640 +1603,640 @@
       "rel": "action->object"
     },
     {
-      "source": "n047",
-      "target": "n088",
-      "weight": 1,
-      "rel": "action->time"
-    },
-    {
       "source": "n048",
-      "target": "n141",
+      "target": "n137",
       "weight": 1,
       "rel": "action->object"
     },
     {
       "source": "n048",
-      "target": "n111",
+      "target": "n120",
       "weight": 1,
-      "rel": "action->state"
+      "rel": "action->object"
     },
     {
       "source": "n048",
-      "target": "n140",
+      "target": "n125",
       "weight": 1,
       "rel": "action->object"
     },
     {
       "source": "n049",
-      "target": "n072",
+      "target": "n117",
       "weight": 1,
-      "rel": "action->space"
+      "rel": "action->object"
     },
     {
       "source": "n049",
-      "target": "n095",
+      "target": "n135",
       "weight": 1,
-      "rel": "action->time"
+      "rel": "action->object"
     },
     {
       "source": "n049",
-      "target": "n106",
+      "target": "n123",
       "weight": 1,
-      "rel": "action->state"
+      "rel": "action->object"
     },
     {
       "source": "n050",
-      "target": "n100",
+      "target": "n123",
       "weight": 1,
-      "rel": "action->state"
+      "rel": "action->object"
     },
     {
       "source": "n050",
-      "target": "n103",
+      "target": "n139",
       "weight": 1,
-      "rel": "action->state"
+      "rel": "action->object"
     },
     {
       "source": "n050",
-      "target": "n114",
-      "weight": 1,
-      "rel": "action->state"
-    },
-    {
-      "source": "n051",
-      "target": "n138",
+      "target": "n131",
       "weight": 1,
       "rel": "action->object"
     },
     {
       "source": "n051",
+      "target": "n134",
+      "weight": 1,
+      "rel": "action->object"
+    },
+    {
+      "source": "n051",
+      "target": "n129",
+      "weight": 1,
+      "rel": "action->object"
+    },
+    {
+      "source": "n051",
+      "target": "n119",
+      "weight": 1,
+      "rel": "action->object"
+    },
+    {
+      "source": "n052",
+      "target": "n127",
+      "weight": 1,
+      "rel": "action->object"
+    },
+    {
+      "source": "n052",
+      "target": "n129",
+      "weight": 1,
+      "rel": "action->object"
+    },
+    {
+      "source": "n052",
+      "target": "n128",
+      "weight": 1,
+      "rel": "action->object"
+    },
+    {
+      "source": "n053",
+      "target": "n116",
+      "weight": 1,
+      "rel": "action->object"
+    },
+    {
+      "source": "n053",
+      "target": "n129",
+      "weight": 1,
+      "rel": "action->object"
+    },
+    {
+      "source": "n053",
+      "target": "n130",
+      "weight": 1,
+      "rel": "action->object"
+    },
+    {
+      "source": "n054",
+      "target": "n123",
+      "weight": 1,
+      "rel": "action->object"
+    },
+    {
+      "source": "n054",
+      "target": "n124",
+      "weight": 1,
+      "rel": "action->object"
+    },
+    {
+      "source": "n054",
+      "target": "n127",
+      "weight": 1,
+      "rel": "action->object"
+    },
+    {
+      "source": "n055",
+      "target": "n125",
+      "weight": 1,
+      "rel": "action->object"
+    },
+    {
+      "source": "n055",
+      "target": "n136",
+      "weight": 1,
+      "rel": "action->object"
+    },
+    {
+      "source": "n055",
+      "target": "n130",
+      "weight": 1,
+      "rel": "action->object"
+    },
+    {
+      "source": "n056",
+      "target": "n083",
+      "weight": 1,
+      "rel": "space->time"
+    },
+    {
+      "source": "n056",
+      "target": "n145",
+      "weight": 1,
+      "rel": "space->connector"
+    },
+    {
+      "source": "n056",
+      "target": "n019",
+      "weight": 1,
+      "rel": "space->subject"
+    },
+    {
+      "source": "n057",
+      "target": "n147",
+      "weight": 1,
+      "rel": "space->connector"
+    },
+    {
+      "source": "n057",
+      "target": "n010",
+      "weight": 1,
+      "rel": "space->subject"
+    },
+    {
+      "source": "n057",
+      "target": "n082",
+      "weight": 1,
+      "rel": "space->time"
+    },
+    {
+      "source": "n058",
+      "target": "n149",
+      "weight": 1,
+      "rel": "space->connector"
+    },
+    {
+      "source": "n058",
+      "target": "n013",
+      "weight": 1,
+      "rel": "space->subject"
+    },
+    {
+      "source": "n058",
+      "target": "n076",
+      "weight": 1,
+      "rel": "space->time"
+    },
+    {
+      "source": "n059",
+      "target": "n148",
+      "weight": 1,
+      "rel": "space->connector"
+    },
+    {
+      "source": "n059",
+      "target": "n018",
+      "weight": 1,
+      "rel": "space->subject"
+    },
+    {
+      "source": "n059",
       "target": "n077",
       "weight": 1,
-      "rel": "action->space"
-    },
-    {
-      "source": "n051",
-      "target": "n119",
-      "weight": 1,
-      "rel": "action->state"
-    },
-    {
-      "source": "n052",
-      "target": "n088",
-      "weight": 1,
-      "rel": "action->time"
-    },
-    {
-      "source": "n052",
-      "target": "n082",
-      "weight": 1,
-      "rel": "action->time"
-    },
-    {
-      "source": "n052",
-      "target": "n099",
-      "weight": 1,
-      "rel": "action->state"
-    },
-    {
-      "source": "n053",
-      "target": "n143",
-      "weight": 1,
-      "rel": "action->object"
-    },
-    {
-      "source": "n053",
-      "target": "n065",
-      "weight": 1,
-      "rel": "action->space"
-    },
-    {
-      "source": "n053",
-      "target": "n107",
-      "weight": 1,
-      "rel": "action->state"
-    },
-    {
-      "source": "n054",
-      "target": "n062",
-      "weight": 1,
-      "rel": "action->space"
-    },
-    {
-      "source": "n054",
-      "target": "n069",
-      "weight": 1,
-      "rel": "action->space"
-    },
-    {
-      "source": "n054",
-      "target": "n144",
-      "weight": 1,
-      "rel": "action->object"
-    },
-    {
-      "source": "n055",
-      "target": "n062",
-      "weight": 1,
-      "rel": "action->space"
-    },
-    {
-      "source": "n055",
-      "target": "n102",
-      "weight": 1,
-      "rel": "action->state"
-    },
-    {
-      "source": "n055",
-      "target": "n143",
-      "weight": 1,
-      "rel": "action->object"
-    },
-    {
-      "source": "n056",
-      "target": "n037",
-      "weight": 1,
-      "rel": "space->action"
-    },
-    {
-      "source": "n056",
-      "target": "n045",
-      "weight": 1,
-      "rel": "space->action"
-    },
-    {
-      "source": "n056",
-      "target": "n028",
-      "weight": 1,
-      "rel": "space->action"
-    },
-    {
-      "source": "n057",
-      "target": "n047",
-      "weight": 1,
-      "rel": "space->action"
-    },
-    {
-      "source": "n057",
-      "target": "n117",
-      "weight": 1,
-      "rel": "space->state"
-    },
-    {
-      "source": "n057",
-      "target": "n040",
-      "weight": 1,
-      "rel": "space->action"
-    },
-    {
-      "source": "n058",
-      "target": "n105",
-      "weight": 1,
-      "rel": "space->state"
-    },
-    {
-      "source": "n058",
-      "target": "n045",
-      "weight": 1,
-      "rel": "space->action"
-    },
-    {
-      "source": "n058",
-      "target": "n042",
-      "weight": 1,
-      "rel": "space->action"
-    },
-    {
-      "source": "n059",
-      "target": "n119",
-      "weight": 1,
-      "rel": "space->state"
-    },
-    {
-      "source": "n059",
-      "target": "n029",
-      "weight": 1,
-      "rel": "space->action"
-    },
-    {
-      "source": "n059",
-      "target": "n120",
-      "weight": 1,
-      "rel": "space->state"
+      "rel": "space->time"
     },
     {
       "source": "n060",
-      "target": "n093",
+      "target": "n076",
       "weight": 1,
       "rel": "space->time"
     },
     {
       "source": "n060",
-      "target": "n086",
+      "target": "n142",
       "weight": 1,
-      "rel": "space->time"
+      "rel": "space->connector"
     },
     {
       "source": "n060",
-      "target": "n082",
+      "target": "n009",
       "weight": 1,
-      "rel": "space->time"
+      "rel": "space->subject"
     },
     {
       "source": "n061",
-      "target": "n118",
+      "target": "n010",
       "weight": 1,
-      "rel": "space->state"
+      "rel": "space->subject"
     },
     {
       "source": "n061",
-      "target": "n047",
-      "weight": 1,
-      "rel": "space->action"
-    },
-    {
-      "source": "n061",
-      "target": "n093",
-      "weight": 1,
-      "rel": "space->time"
-    },
-    {
-      "source": "n062",
-      "target": "n104",
-      "weight": 1,
-      "rel": "space->state"
-    },
-    {
-      "source": "n062",
-      "target": "n022",
-      "weight": 1,
-      "rel": "space->action"
-    },
-    {
-      "source": "n062",
-      "target": "n046",
-      "weight": 1,
-      "rel": "space->action"
-    },
-    {
-      "source": "n063",
-      "target": "n040",
-      "weight": 1,
-      "rel": "space->action"
-    },
-    {
-      "source": "n063",
-      "target": "n047",
-      "weight": 1,
-      "rel": "space->action"
-    },
-    {
-      "source": "n063",
-      "target": "n054",
-      "weight": 1,
-      "rel": "space->action"
-    },
-    {
-      "source": "n064",
-      "target": "n028",
-      "weight": 1,
-      "rel": "space->action"
-    },
-    {
-      "source": "n064",
-      "target": "n037",
-      "weight": 1,
-      "rel": "space->action"
-    },
-    {
-      "source": "n064",
-      "target": "n035",
-      "weight": 1,
-      "rel": "space->action"
-    },
-    {
-      "source": "n065",
-      "target": "n046",
-      "weight": 1,
-      "rel": "space->action"
-    },
-    {
-      "source": "n065",
-      "target": "n034",
-      "weight": 1,
-      "rel": "space->action"
-    },
-    {
-      "source": "n065",
-      "target": "n106",
-      "weight": 1,
-      "rel": "space->state"
-    },
-    {
-      "source": "n066",
-      "target": "n055",
-      "weight": 1,
-      "rel": "space->action"
-    },
-    {
-      "source": "n066",
-      "target": "n117",
-      "weight": 1,
-      "rel": "space->state"
-    },
-    {
-      "source": "n066",
-      "target": "n095",
-      "weight": 1,
-      "rel": "space->time"
-    },
-    {
-      "source": "n067",
-      "target": "n055",
-      "weight": 1,
-      "rel": "space->action"
-    },
-    {
-      "source": "n067",
-      "target": "n032",
-      "weight": 1,
-      "rel": "space->action"
-    },
-    {
-      "source": "n067",
-      "target": "n107",
-      "weight": 1,
-      "rel": "space->state"
-    },
-    {
-      "source": "n068",
-      "target": "n119",
-      "weight": 1,
-      "rel": "space->state"
-    },
-    {
-      "source": "n068",
-      "target": "n045",
-      "weight": 1,
-      "rel": "space->action"
-    },
-    {
-      "source": "n068",
-      "target": "n046",
-      "weight": 1,
-      "rel": "space->action"
-    },
-    {
-      "source": "n069",
-      "target": "n024",
-      "weight": 1,
-      "rel": "space->action"
-    },
-    {
-      "source": "n069",
-      "target": "n093",
-      "weight": 1,
-      "rel": "space->time"
-    },
-    {
-      "source": "n069",
-      "target": "n088",
-      "weight": 1,
-      "rel": "space->time"
-    },
-    {
-      "source": "n070",
-      "target": "n119",
-      "weight": 1,
-      "rel": "space->state"
-    },
-    {
-      "source": "n070",
-      "target": "n050",
-      "weight": 1,
-      "rel": "space->action"
-    },
-    {
-      "source": "n070",
-      "target": "n117",
-      "weight": 1,
-      "rel": "space->state"
-    },
-    {
-      "source": "n071",
-      "target": "n101",
-      "weight": 1,
-      "rel": "space->state"
-    },
-    {
-      "source": "n071",
-      "target": "n022",
-      "weight": 1,
-      "rel": "space->action"
-    },
-    {
-      "source": "n071",
-      "target": "n090",
-      "weight": 1,
-      "rel": "space->time"
-    },
-    {
-      "source": "n072",
-      "target": "n120",
-      "weight": 1,
-      "rel": "space->state"
-    },
-    {
-      "source": "n072",
-      "target": "n022",
-      "weight": 1,
-      "rel": "space->action"
-    },
-    {
-      "source": "n072",
-      "target": "n090",
-      "weight": 1,
-      "rel": "space->time"
-    },
-    {
-      "source": "n073",
-      "target": "n094",
-      "weight": 1,
-      "rel": "space->time"
-    },
-    {
-      "source": "n073",
-      "target": "n052",
-      "weight": 1,
-      "rel": "space->action"
-    },
-    {
-      "source": "n073",
-      "target": "n055",
-      "weight": 1,
-      "rel": "space->action"
-    },
-    {
-      "source": "n074",
-      "target": "n038",
-      "weight": 1,
-      "rel": "space->action"
-    },
-    {
-      "source": "n074",
-      "target": "n054",
-      "weight": 1,
-      "rel": "space->action"
-    },
-    {
-      "source": "n074",
-      "target": "n049",
-      "weight": 1,
-      "rel": "space->action"
-    },
-    {
-      "source": "n075",
-      "target": "n040",
-      "weight": 1,
-      "rel": "space->action"
-    },
-    {
-      "source": "n075",
-      "target": "n082",
-      "weight": 1,
-      "rel": "space->time"
-    },
-    {
-      "source": "n075",
-      "target": "n034",
-      "weight": 1,
-      "rel": "space->action"
-    },
-    {
-      "source": "n076",
-      "target": "n036",
-      "weight": 1,
-      "rel": "space->action"
-    },
-    {
-      "source": "n076",
-      "target": "n035",
-      "weight": 1,
-      "rel": "space->action"
-    },
-    {
-      "source": "n076",
-      "target": "n050",
-      "weight": 1,
-      "rel": "space->action"
-    },
-    {
-      "source": "n077",
-      "target": "n030",
-      "weight": 1,
-      "rel": "space->action"
-    },
-    {
-      "source": "n077",
-      "target": "n114",
-      "weight": 1,
-      "rel": "space->state"
-    },
-    {
-      "source": "n077",
-      "target": "n094",
-      "weight": 1,
-      "rel": "space->time"
-    },
-    {
-      "source": "n078",
-      "target": "n052",
-      "weight": 1,
-      "rel": "space->action"
-    },
-    {
-      "source": "n078",
-      "target": "n109",
-      "weight": 1,
-      "rel": "space->state"
-    },
-    {
-      "source": "n078",
-      "target": "n030",
-      "weight": 1,
-      "rel": "space->action"
-    },
-    {
-      "source": "n079",
-      "target": "n033",
-      "weight": 1,
-      "rel": "space->action"
-    },
-    {
-      "source": "n079",
-      "target": "n049",
-      "weight": 1,
-      "rel": "space->action"
-    },
-    {
-      "source": "n079",
-      "target": "n032",
-      "weight": 1,
-      "rel": "space->action"
-    },
-    {
-      "source": "n080",
       "target": "n084",
       "weight": 1,
       "rel": "space->time"
     },
     {
-      "source": "n080",
-      "target": "n029",
+      "source": "n061",
+      "target": "n141",
       "weight": 1,
-      "rel": "space->action"
+      "rel": "space->connector"
     },
     {
-      "source": "n080",
-      "target": "n103",
+      "source": "n062",
+      "target": "n147",
       "weight": 1,
-      "rel": "space->state"
+      "rel": "space->connector"
     },
     {
-      "source": "n081",
-      "target": "n026",
+      "source": "n062",
+      "target": "n011",
       "weight": 1,
-      "rel": "time->action"
+      "rel": "space->subject"
     },
     {
-      "source": "n081",
-      "target": "n043",
+      "source": "n062",
+      "target": "n086",
       "weight": 1,
-      "rel": "time->action"
+      "rel": "space->time"
     },
     {
-      "source": "n081",
-      "target": "n052",
+      "source": "n063",
+      "target": "n149",
       "weight": 1,
-      "rel": "time->action"
+      "rel": "space->connector"
     },
     {
-      "source": "n082",
+      "source": "n063",
+      "target": "n018",
+      "weight": 1,
+      "rel": "space->subject"
+    },
+    {
+      "source": "n063",
+      "target": "n087",
+      "weight": 1,
+      "rel": "space->time"
+    },
+    {
+      "source": "n064",
+      "target": "n011",
+      "weight": 1,
+      "rel": "space->subject"
+    },
+    {
+      "source": "n064",
+      "target": "n087",
+      "weight": 1,
+      "rel": "space->time"
+    },
+    {
+      "source": "n064",
+      "target": "n147",
+      "weight": 1,
+      "rel": "space->connector"
+    },
+    {
+      "source": "n065",
+      "target": "n003",
+      "weight": 1,
+      "rel": "space->subject"
+    },
+    {
+      "source": "n065",
+      "target": "n080",
+      "weight": 1,
+      "rel": "space->time"
+    },
+    {
+      "source": "n065",
+      "target": "n149",
+      "weight": 1,
+      "rel": "space->connector"
+    },
+    {
+      "source": "n066",
+      "target": "n003",
+      "weight": 1,
+      "rel": "space->subject"
+    },
+    {
+      "source": "n066",
+      "target": "n078",
+      "weight": 1,
+      "rel": "space->time"
+    },
+    {
+      "source": "n066",
+      "target": "n143",
+      "weight": 1,
+      "rel": "space->connector"
+    },
+    {
+      "source": "n067",
+      "target": "n142",
+      "weight": 1,
+      "rel": "space->connector"
+    },
+    {
+      "source": "n067",
+      "target": "n017",
+      "weight": 1,
+      "rel": "space->subject"
+    },
+    {
+      "source": "n067",
+      "target": "n086",
+      "weight": 1,
+      "rel": "space->time"
+    },
+    {
+      "source": "n068",
+      "target": "n081",
+      "weight": 1,
+      "rel": "space->time"
+    },
+    {
+      "source": "n068",
+      "target": "n148",
+      "weight": 1,
+      "rel": "space->connector"
+    },
+    {
+      "source": "n068",
+      "target": "n003",
+      "weight": 1,
+      "rel": "space->subject"
+    },
+    {
+      "source": "n069",
+      "target": "n009",
+      "weight": 1,
+      "rel": "space->subject"
+    },
+    {
+      "source": "n069",
+      "target": "n078",
+      "weight": 1,
+      "rel": "space->time"
+    },
+    {
+      "source": "n069",
+      "target": "n147",
+      "weight": 1,
+      "rel": "space->connector"
+    },
+    {
+      "source": "n070",
+      "target": "n020",
+      "weight": 1,
+      "rel": "space->subject"
+    },
+    {
+      "source": "n070",
+      "target": "n081",
+      "weight": 1,
+      "rel": "space->time"
+    },
+    {
+      "source": "n070",
+      "target": "n141",
+      "weight": 1,
+      "rel": "space->connector"
+    },
+    {
+      "source": "n071",
+      "target": "n150",
+      "weight": 1,
+      "rel": "space->connector"
+    },
+    {
+      "source": "n071",
+      "target": "n006",
+      "weight": 1,
+      "rel": "space->subject"
+    },
+    {
+      "source": "n071",
+      "target": "n090",
+      "weight": 1,
+      "rel": "space->time"
+    },
+    {
+      "source": "n072",
+      "target": "n076",
+      "weight": 1,
+      "rel": "space->time"
+    },
+    {
+      "source": "n072",
+      "target": "n149",
+      "weight": 1,
+      "rel": "space->connector"
+    },
+    {
+      "source": "n072",
+      "target": "n002",
+      "weight": 1,
+      "rel": "space->subject"
+    },
+    {
+      "source": "n073",
+      "target": "n015",
+      "weight": 1,
+      "rel": "space->subject"
+    },
+    {
+      "source": "n073",
+      "target": "n079",
+      "weight": 1,
+      "rel": "space->time"
+    },
+    {
+      "source": "n073",
+      "target": "n147",
+      "weight": 1,
+      "rel": "space->connector"
+    },
+    {
+      "source": "n074",
+      "target": "n002",
+      "weight": 1,
+      "rel": "space->subject"
+    },
+    {
+      "source": "n074",
+      "target": "n078",
+      "weight": 1,
+      "rel": "space->time"
+    },
+    {
+      "source": "n074",
+      "target": "n147",
+      "weight": 1,
+      "rel": "space->connector"
+    },
+    {
+      "source": "n075",
+      "target": "n144",
+      "weight": 1,
+      "rel": "space->connector"
+    },
+    {
+      "source": "n075",
+      "target": "n011",
+      "weight": 1,
+      "rel": "space->subject"
+    },
+    {
+      "source": "n075",
+      "target": "n080",
+      "weight": 1,
+      "rel": "space->time"
+    },
+    {
+      "source": "n076",
+      "target": "n142",
+      "weight": 1,
+      "rel": "time->connector"
+    },
+    {
+      "source": "n076",
+      "target": "n010",
+      "weight": 1,
+      "rel": "time->subject"
+    },
+    {
+      "source": "n076",
+      "target": "n014",
+      "weight": 1,
+      "rel": "time->subject"
+    },
+    {
+      "source": "n077",
+      "target": "n145",
+      "weight": 1,
+      "rel": "time->connector"
+    },
+    {
+      "source": "n077",
+      "target": "n004",
+      "weight": 1,
+      "rel": "time->subject"
+    },
+    {
+      "source": "n077",
+      "target": "n141",
+      "weight": 1,
+      "rel": "time->connector"
+    },
+    {
+      "source": "n078",
+      "target": "n144",
+      "weight": 1,
+      "rel": "time->connector"
+    },
+    {
+      "source": "n078",
+      "target": "n005",
+      "weight": 1,
+      "rel": "time->subject"
+    },
+    {
+      "source": "n078",
+      "target": "n145",
+      "weight": 1,
+      "rel": "time->connector"
+    },
+    {
+      "source": "n079",
+      "target": "n150",
+      "weight": 1,
+      "rel": "time->connector"
+    },
+    {
+      "source": "n079",
       "target": "n008",
       "weight": 1,
       "rel": "time->subject"
     },
     {
-      "source": "n082",
-      "target": "n031",
+      "source": "n079",
+      "target": "n147",
       "weight": 1,
-      "rel": "time->action"
+      "rel": "time->connector"
+    },
+    {
+      "source": "n080",
+      "target": "n141",
+      "weight": 1,
+      "rel": "time->connector"
+    },
+    {
+      "source": "n080",
+      "target": "n005",
+      "weight": 1,
+      "rel": "time->subject"
+    },
+    {
+      "source": "n080",
+      "target": "n149",
+      "weight": 1,
+      "rel": "time->connector"
+    },
+    {
+      "source": "n081",
+      "target": "n144",
+      "weight": 1,
+      "rel": "time->connector"
+    },
+    {
+      "source": "n081",
+      "target": "n013",
+      "weight": 1,
+      "rel": "time->subject"
+    },
+    {
+      "source": "n081",
+      "target": "n148",
+      "weight": 1,
+      "rel": "time->connector"
     },
     {
       "source": "n082",
-      "target": "n043",
+      "target": "n006",
       "weight": 1,
-      "rel": "time->action"
+      "rel": "time->subject"
+    },
+    {
+      "source": "n082",
+      "target": "n146",
+      "weight": 1,
+      "rel": "time->connector"
+    },
+    {
+      "source": "n082",
+      "target": "n012",
+      "weight": 1,
+      "rel": "time->subject"
+    },
+    {
+      "source": "n083",
+      "target": "n001",
+      "weight": 1,
+      "rel": "time->subject"
     },
     {
       "source": "n083",
@@ -2265,297 +2246,279 @@
     },
     {
       "source": "n083",
-      "target": "n152",
-      "weight": 1,
-      "rel": "time->connector"
-    },
-    {
-      "source": "n083",
-      "target": "n031",
-      "weight": 1,
-      "rel": "time->action"
-    },
-    {
-      "source": "n084",
       "target": "n014",
       "weight": 1,
       "rel": "time->subject"
     },
     {
       "source": "n084",
-      "target": "n053",
-      "weight": 1,
-      "rel": "time->action"
-    },
-    {
-      "source": "n084",
-      "target": "n031",
-      "weight": 1,
-      "rel": "time->action"
-    },
-    {
-      "source": "n085",
-      "target": "n033",
-      "weight": 1,
-      "rel": "time->action"
-    },
-    {
-      "source": "n085",
-      "target": "n038",
-      "weight": 1,
-      "rel": "time->action"
-    },
-    {
-      "source": "n085",
-      "target": "n030",
-      "weight": 1,
-      "rel": "time->action"
-    },
-    {
-      "source": "n086",
-      "target": "n154",
-      "weight": 1,
-      "rel": "time->connector"
-    },
-    {
-      "source": "n086",
-      "target": "n028",
-      "weight": 1,
-      "rel": "time->action"
-    },
-    {
-      "source": "n086",
-      "target": "n043",
-      "weight": 1,
-      "rel": "time->action"
-    },
-    {
-      "source": "n087",
-      "target": "n022",
-      "weight": 1,
-      "rel": "time->action"
-    },
-    {
-      "source": "n087",
-      "target": "n006",
-      "weight": 1,
-      "rel": "time->subject"
-    },
-    {
-      "source": "n087",
-      "target": "n044",
-      "weight": 1,
-      "rel": "time->action"
-    },
-    {
-      "source": "n088",
-      "target": "n007",
-      "weight": 1,
-      "rel": "time->subject"
-    },
-    {
-      "source": "n088",
-      "target": "n018",
-      "weight": 1,
-      "rel": "time->subject"
-    },
-    {
-      "source": "n088",
-      "target": "n020",
-      "weight": 1,
-      "rel": "time->subject"
-    },
-    {
-      "source": "n089",
-      "target": "n001",
-      "weight": 1,
-      "rel": "time->subject"
-    },
-    {
-      "source": "n089",
       "target": "n146",
       "weight": 1,
       "rel": "time->connector"
     },
     {
+      "source": "n084",
+      "target": "n016",
+      "weight": 1,
+      "rel": "time->subject"
+    },
+    {
+      "source": "n084",
+      "target": "n150",
+      "weight": 1,
+      "rel": "time->connector"
+    },
+    {
+      "source": "n085",
+      "target": "n016",
+      "weight": 1,
+      "rel": "time->subject"
+    },
+    {
+      "source": "n085",
+      "target": "n147",
+      "weight": 1,
+      "rel": "time->connector"
+    },
+    {
+      "source": "n085",
+      "target": "n019",
+      "weight": 1,
+      "rel": "time->subject"
+    },
+    {
+      "source": "n086",
+      "target": "n019",
+      "weight": 1,
+      "rel": "time->subject"
+    },
+    {
+      "source": "n086",
+      "target": "n145",
+      "weight": 1,
+      "rel": "time->connector"
+    },
+    {
+      "source": "n086",
+      "target": "n012",
+      "weight": 1,
+      "rel": "time->subject"
+    },
+    {
+      "source": "n087",
+      "target": "n144",
+      "weight": 1,
+      "rel": "time->connector"
+    },
+    {
+      "source": "n087",
+      "target": "n017",
+      "weight": 1,
+      "rel": "time->subject"
+    },
+    {
+      "source": "n087",
+      "target": "n150",
+      "weight": 1,
+      "rel": "time->connector"
+    },
+    {
+      "source": "n088",
+      "target": "n010",
+      "weight": 1,
+      "rel": "time->subject"
+    },
+    {
+      "source": "n088",
+      "target": "n145",
+      "weight": 1,
+      "rel": "time->connector"
+    },
+    {
+      "source": "n088",
+      "target": "n014",
+      "weight": 1,
+      "rel": "time->subject"
+    },
+    {
       "source": "n089",
+      "target": "n147",
+      "weight": 1,
+      "rel": "time->connector"
+    },
+    {
+      "source": "n089",
+      "target": "n010",
+      "weight": 1,
+      "rel": "time->subject"
+    },
+    {
+      "source": "n089",
+      "target": "n149",
+      "weight": 1,
+      "rel": "time->connector"
+    },
+    {
+      "source": "n090",
       "target": "n006",
       "weight": 1,
       "rel": "time->subject"
     },
     {
       "source": "n090",
-      "target": "n049",
+      "target": "n145",
       "weight": 1,
-      "rel": "time->action"
+      "rel": "time->connector"
     },
     {
       "source": "n090",
-      "target": "n015",
+      "target": "n009",
       "weight": 1,
       "rel": "time->subject"
-    },
-    {
-      "source": "n090",
-      "target": "n147",
-      "weight": 1,
-      "rel": "time->connector"
     },
     {
       "source": "n091",
-      "target": "n148",
+      "target": "n143",
       "weight": 1,
-      "rel": "time->connector"
+      "rel": "state->connector"
     },
     {
       "source": "n091",
-      "target": "n021",
+      "target": "n007",
       "weight": 1,
-      "rel": "time->action"
+      "rel": "state->subject"
     },
     {
       "source": "n091",
-      "target": "n155",
+      "target": "n068",
       "weight": 1,
-      "rel": "time->connector"
+      "rel": "state->space"
     },
     {
       "source": "n092",
-      "target": "n155",
-      "weight": 1,
-      "rel": "time->connector"
-    },
-    {
-      "source": "n092",
-      "target": "n025",
-      "weight": 1,
-      "rel": "time->action"
-    },
-    {
-      "source": "n092",
-      "target": "n029",
-      "weight": 1,
-      "rel": "time->action"
-    },
-    {
-      "source": "n093",
-      "target": "n055",
-      "weight": 1,
-      "rel": "time->action"
-    },
-    {
-      "source": "n093",
-      "target": "n025",
-      "weight": 1,
-      "rel": "time->action"
-    },
-    {
-      "source": "n093",
-      "target": "n011",
-      "weight": 1,
-      "rel": "time->subject"
-    },
-    {
-      "source": "n094",
-      "target": "n015",
-      "weight": 1,
-      "rel": "time->subject"
-    },
-    {
-      "source": "n094",
-      "target": "n151",
-      "weight": 1,
-      "rel": "time->connector"
-    },
-    {
-      "source": "n094",
-      "target": "n011",
-      "weight": 1,
-      "rel": "time->subject"
-    },
-    {
-      "source": "n095",
-      "target": "n048",
-      "weight": 1,
-      "rel": "time->action"
-    },
-    {
-      "source": "n095",
-      "target": "n018",
-      "weight": 1,
-      "rel": "time->subject"
-    },
-    {
-      "source": "n095",
-      "target": "n021",
-      "weight": 1,
-      "rel": "time->action"
-    },
-    {
-      "source": "n096",
       "target": "n075",
       "weight": 1,
       "rel": "state->space"
     },
     {
-      "source": "n096",
-      "target": "n038",
+      "source": "n092",
+      "target": "n089",
       "weight": 1,
-      "rel": "state->action"
+      "rel": "state->time"
     },
     {
-      "source": "n096",
-      "target": "n047",
+      "source": "n092",
+      "target": "n143",
       "weight": 1,
-      "rel": "state->action"
+      "rel": "state->connector"
     },
     {
-      "source": "n097",
-      "target": "n042",
+      "source": "n093",
+      "target": "n011",
       "weight": 1,
-      "rel": "state->action"
+      "rel": "state->subject"
     },
     {
-      "source": "n097",
+      "source": "n093",
+      "target": "n058",
+      "weight": 1,
+      "rel": "state->space"
+    },
+    {
+      "source": "n093",
+      "target": "n077",
+      "weight": 1,
+      "rel": "state->time"
+    },
+    {
+      "source": "n094",
       "target": "n065",
       "weight": 1,
       "rel": "state->space"
     },
     {
+      "source": "n094",
+      "target": "n079",
+      "weight": 1,
+      "rel": "state->time"
+    },
+    {
+      "source": "n094",
+      "target": "n147",
+      "weight": 1,
+      "rel": "state->connector"
+    },
+    {
+      "source": "n095",
+      "target": "n014",
+      "weight": 1,
+      "rel": "state->subject"
+    },
+    {
+      "source": "n095",
+      "target": "n060",
+      "weight": 1,
+      "rel": "state->space"
+    },
+    {
+      "source": "n095",
+      "target": "n082",
+      "weight": 1,
+      "rel": "state->time"
+    },
+    {
+      "source": "n096",
+      "target": "n062",
+      "weight": 1,
+      "rel": "state->space"
+    },
+    {
+      "source": "n096",
+      "target": "n078",
+      "weight": 1,
+      "rel": "state->time"
+    },
+    {
+      "source": "n096",
+      "target": "n150",
+      "weight": 1,
+      "rel": "state->connector"
+    },
+    {
       "source": "n097",
-      "target": "n028",
+      "target": "n009",
       "weight": 1,
-      "rel": "state->action"
+      "rel": "state->subject"
     },
     {
-      "source": "n098",
-      "target": "n044",
-      "weight": 1,
-      "rel": "state->action"
-    },
-    {
-      "source": "n098",
-      "target": "n033",
-      "weight": 1,
-      "rel": "state->action"
-    },
-    {
-      "source": "n098",
-      "target": "n059",
+      "source": "n097",
+      "target": "n063",
       "weight": 1,
       "rel": "state->space"
     },
     {
-      "source": "n099",
-      "target": "n074",
+      "source": "n097",
+      "target": "n077",
       "weight": 1,
-      "rel": "state->space"
+      "rel": "state->time"
     },
     {
-      "source": "n099",
-      "target": "n026",
+      "source": "n098",
+      "target": "n141",
       "weight": 1,
-      "rel": "state->action"
+      "rel": "state->connector"
+    },
+    {
+      "source": "n098",
+      "target": "n009",
+      "weight": 1,
+      "rel": "state->subject"
+    },
+    {
+      "source": "n098",
+      "target": "n072",
+      "weight": 1,
+      "rel": "state->space"
     },
     {
       "source": "n099",
@@ -2564,544 +2527,820 @@
       "rel": "state->space"
     },
     {
-      "source": "n100",
-      "target": "n042",
+      "source": "n099",
+      "target": "n076",
       "weight": 1,
-      "rel": "state->action"
+      "rel": "state->time"
+    },
+    {
+      "source": "n099",
+      "target": "n148",
+      "weight": 1,
+      "rel": "state->connector"
     },
     {
       "source": "n100",
-      "target": "n031",
+      "target": "n150",
       "weight": 1,
-      "rel": "state->action"
+      "rel": "state->connector"
     },
     {
       "source": "n100",
-      "target": "n048",
+      "target": "n014",
       "weight": 1,
-      "rel": "state->action"
+      "rel": "state->subject"
     },
     {
-      "source": "n101",
-      "target": "n045",
-      "weight": 1,
-      "rel": "state->action"
-    },
-    {
-      "source": "n101",
-      "target": "n065",
-      "weight": 1,
-      "rel": "state->space"
-    },
-    {
-      "source": "n101",
-      "target": "n067",
-      "weight": 1,
-      "rel": "state->space"
-    },
-    {
-      "source": "n102",
-      "target": "n072",
-      "weight": 1,
-      "rel": "state->space"
-    },
-    {
-      "source": "n102",
-      "target": "n061",
-      "weight": 1,
-      "rel": "state->space"
-    },
-    {
-      "source": "n102",
-      "target": "n056",
-      "weight": 1,
-      "rel": "state->space"
-    },
-    {
-      "source": "n103",
-      "target": "n052",
-      "weight": 1,
-      "rel": "state->action"
-    },
-    {
-      "source": "n103",
-      "target": "n047",
-      "weight": 1,
-      "rel": "state->action"
-    },
-    {
-      "source": "n103",
-      "target": "n053",
-      "weight": 1,
-      "rel": "state->action"
-    },
-    {
-      "source": "n104",
-      "target": "n064",
-      "weight": 1,
-      "rel": "state->space"
-    },
-    {
-      "source": "n104",
-      "target": "n075",
-      "weight": 1,
-      "rel": "state->space"
-    },
-    {
-      "source": "n104",
-      "target": "n038",
-      "weight": 1,
-      "rel": "state->action"
-    },
-    {
-      "source": "n105",
-      "target": "n048",
-      "weight": 1,
-      "rel": "state->action"
-    },
-    {
-      "source": "n105",
-      "target": "n042",
-      "weight": 1,
-      "rel": "state->action"
-    },
-    {
-      "source": "n105",
-      "target": "n044",
-      "weight": 1,
-      "rel": "state->action"
-    },
-    {
-      "source": "n106",
-      "target": "n064",
-      "weight": 1,
-      "rel": "state->space"
-    },
-    {
-      "source": "n106",
-      "target": "n027",
-      "weight": 1,
-      "rel": "state->action"
-    },
-    {
-      "source": "n106",
-      "target": "n079",
-      "weight": 1,
-      "rel": "state->space"
-    },
-    {
-      "source": "n107",
-      "target": "n057",
-      "weight": 1,
-      "rel": "state->space"
-    },
-    {
-      "source": "n107",
-      "target": "n024",
-      "weight": 1,
-      "rel": "state->action"
-    },
-    {
-      "source": "n107",
-      "target": "n075",
-      "weight": 1,
-      "rel": "state->space"
-    },
-    {
-      "source": "n108",
-      "target": "n079",
-      "weight": 1,
-      "rel": "state->space"
-    },
-    {
-      "source": "n108",
-      "target": "n067",
-      "weight": 1,
-      "rel": "state->space"
-    },
-    {
-      "source": "n108",
-      "target": "n031",
-      "weight": 1,
-      "rel": "state->action"
-    },
-    {
-      "source": "n109",
-      "target": "n037",
-      "weight": 1,
-      "rel": "state->action"
-    },
-    {
-      "source": "n109",
-      "target": "n054",
-      "weight": 1,
-      "rel": "state->action"
-    },
-    {
-      "source": "n109",
-      "target": "n026",
-      "weight": 1,
-      "rel": "state->action"
-    },
-    {
-      "source": "n110",
+      "source": "n100",
       "target": "n062",
       "weight": 1,
       "rel": "state->space"
     },
     {
-      "source": "n110",
-      "target": "n036",
-      "weight": 1,
-      "rel": "state->action"
-    },
-    {
-      "source": "n110",
-      "target": "n043",
-      "weight": 1,
-      "rel": "state->action"
-    },
-    {
-      "source": "n111",
-      "target": "n039",
-      "weight": 1,
-      "rel": "state->action"
-    },
-    {
-      "source": "n111",
-      "target": "n053",
-      "weight": 1,
-      "rel": "state->action"
-    },
-    {
-      "source": "n111",
-      "target": "n038",
-      "weight": 1,
-      "rel": "state->action"
-    },
-    {
-      "source": "n112",
-      "target": "n076",
-      "weight": 1,
-      "rel": "state->space"
-    },
-    {
-      "source": "n112",
+      "source": "n101",
       "target": "n059",
       "weight": 1,
       "rel": "state->space"
     },
     {
-      "source": "n112",
-      "target": "n044",
+      "source": "n101",
+      "target": "n083",
       "weight": 1,
-      "rel": "state->action"
+      "rel": "state->time"
     },
     {
-      "source": "n113",
-      "target": "n059",
+      "source": "n101",
+      "target": "n142",
+      "weight": 1,
+      "rel": "state->connector"
+    },
+    {
+      "source": "n102",
+      "target": "n141",
+      "weight": 1,
+      "rel": "state->connector"
+    },
+    {
+      "source": "n102",
+      "target": "n014",
+      "weight": 1,
+      "rel": "state->subject"
+    },
+    {
+      "source": "n102",
+      "target": "n062",
       "weight": 1,
       "rel": "state->space"
     },
     {
-      "source": "n113",
-      "target": "n040",
+      "source": "n103",
+      "target": "n149",
       "weight": 1,
-      "rel": "state->action"
+      "rel": "state->connector"
     },
     {
-      "source": "n113",
-      "target": "n036",
+      "source": "n103",
+      "target": "n015",
       "weight": 1,
-      "rel": "state->action"
+      "rel": "state->subject"
     },
     {
-      "source": "n114",
-      "target": "n066",
+      "source": "n103",
+      "target": "n071",
       "weight": 1,
       "rel": "state->space"
     },
     {
-      "source": "n114",
-      "target": "n048",
+      "source": "n104",
+      "target": "n062",
       "weight": 1,
-      "rel": "state->action"
+      "rel": "state->space"
     },
     {
-      "source": "n114",
-      "target": "n027",
+      "source": "n104",
+      "target": "n089",
       "weight": 1,
-      "rel": "state->action"
+      "rel": "state->time"
     },
     {
-      "source": "n115",
+      "source": "n104",
+      "target": "n147",
+      "weight": 1,
+      "rel": "state->connector"
+    },
+    {
+      "source": "n105",
       "target": "n080",
       "weight": 1,
-      "rel": "state->space"
+      "rel": "state->time"
     },
     {
-      "source": "n115",
-      "target": "n066",
+      "source": "n105",
+      "target": "n145",
+      "weight": 1,
+      "rel": "state->connector"
+    },
+    {
+      "source": "n105",
+      "target": "n005",
+      "weight": 1,
+      "rel": "state->subject"
+    },
+    {
+      "source": "n106",
+      "target": "n013",
+      "weight": 1,
+      "rel": "state->subject"
+    },
+    {
+      "source": "n106",
+      "target": "n074",
       "weight": 1,
       "rel": "state->space"
     },
     {
-      "source": "n115",
-      "target": "n031",
+      "source": "n106",
+      "target": "n085",
       "weight": 1,
-      "rel": "state->action"
+      "rel": "state->time"
     },
     {
-      "source": "n116",
-      "target": "n073",
+      "source": "n107",
+      "target": "n020",
       "weight": 1,
-      "rel": "state->space"
+      "rel": "state->subject"
     },
     {
-      "source": "n116",
-      "target": "n069",
-      "weight": 1,
-      "rel": "state->space"
-    },
-    {
-      "source": "n116",
-      "target": "n048",
-      "weight": 1,
-      "rel": "state->action"
-    },
-    {
-      "source": "n117",
-      "target": "n048",
-      "weight": 1,
-      "rel": "state->action"
-    },
-    {
-      "source": "n117",
-      "target": "n060",
+      "source": "n107",
+      "target": "n061",
       "weight": 1,
       "rel": "state->space"
     },
     {
-      "source": "n117",
-      "target": "n046",
+      "source": "n107",
+      "target": "n082",
       "weight": 1,
-      "rel": "state->action"
+      "rel": "state->time"
     },
     {
-      "source": "n118",
-      "target": "n069",
+      "source": "n108",
+      "target": "n010",
+      "weight": 1,
+      "rel": "state->subject"
+    },
+    {
+      "source": "n108",
+      "target": "n056",
       "weight": 1,
       "rel": "state->space"
     },
     {
-      "source": "n118",
-      "target": "n047",
+      "source": "n108",
+      "target": "n078",
       "weight": 1,
-      "rel": "state->action"
+      "rel": "state->time"
     },
     {
-      "source": "n118",
+      "source": "n109",
       "target": "n077",
       "weight": 1,
-      "rel": "state->space"
+      "rel": "state->time"
     },
     {
-      "source": "n119",
-      "target": "n043",
+      "source": "n109",
+      "target": "n149",
       "weight": 1,
-      "rel": "state->action"
+      "rel": "state->connector"
     },
     {
-      "source": "n119",
-      "target": "n034",
+      "source": "n109",
+      "target": "n006",
       "weight": 1,
-      "rel": "state->action"
+      "rel": "state->subject"
     },
     {
-      "source": "n119",
-      "target": "n066",
+      "source": "n110",
+      "target": "n148",
       "weight": 1,
-      "rel": "state->space"
+      "rel": "state->connector"
     },
     {
-      "source": "n120",
-      "target": "n070",
-      "weight": 1,
-      "rel": "state->space"
-    },
-    {
-      "source": "n120",
-      "target": "n021",
-      "weight": 1,
-      "rel": "state->action"
-    },
-    {
-      "source": "n120",
-      "target": "n033",
-      "weight": 1,
-      "rel": "state->action"
-    },
-    {
-      "source": "n121",
-      "target": "n150",
-      "weight": 1,
-      "rel": "object->connector"
-    },
-    {
-      "source": "n121",
-      "target": "n151",
-      "weight": 1,
-      "rel": "object->connector"
-    },
-    {
-      "source": "n121",
-      "target": "n007",
-      "weight": 1,
-      "rel": "object->subject"
-    },
-    {
-      "source": "n122",
-      "target": "n020",
-      "weight": 1,
-      "rel": "object->subject"
-    },
-    {
-      "source": "n122",
+      "source": "n110",
       "target": "n016",
       "weight": 1,
-      "rel": "object->subject"
+      "rel": "state->subject"
     },
     {
-      "source": "n122",
-      "target": "n154",
+      "source": "n110",
+      "target": "n072",
       "weight": 1,
-      "rel": "object->connector"
+      "rel": "state->space"
     },
     {
-      "source": "n123",
-      "target": "n150",
+      "source": "n111",
+      "target": "n014",
       "weight": 1,
-      "rel": "object->connector"
+      "rel": "state->subject"
     },
     {
-      "source": "n123",
-      "target": "n020",
+      "source": "n111",
+      "target": "n061",
       "weight": 1,
-      "rel": "object->subject"
+      "rel": "state->space"
     },
     {
-      "source": "n123",
+      "source": "n111",
+      "target": "n079",
+      "weight": 1,
+      "rel": "state->time"
+    },
+    {
+      "source": "n112",
+      "target": "n145",
+      "weight": 1,
+      "rel": "state->connector"
+    },
+    {
+      "source": "n112",
+      "target": "n005",
+      "weight": 1,
+      "rel": "state->subject"
+    },
+    {
+      "source": "n112",
+      "target": "n075",
+      "weight": 1,
+      "rel": "state->space"
+    },
+    {
+      "source": "n113",
+      "target": "n007",
+      "weight": 1,
+      "rel": "state->subject"
+    },
+    {
+      "source": "n113",
+      "target": "n059",
+      "weight": 1,
+      "rel": "state->space"
+    },
+    {
+      "source": "n113",
+      "target": "n081",
+      "weight": 1,
+      "rel": "state->time"
+    },
+    {
+      "source": "n114",
+      "target": "n077",
+      "weight": 1,
+      "rel": "state->time"
+    },
+    {
+      "source": "n114",
+      "target": "n141",
+      "weight": 1,
+      "rel": "state->connector"
+    },
+    {
+      "source": "n114",
+      "target": "n017",
+      "weight": 1,
+      "rel": "state->subject"
+    },
+    {
+      "source": "n115",
+      "target": "n145",
+      "weight": 1,
+      "rel": "state->connector"
+    },
+    {
+      "source": "n115",
+      "target": "n004",
+      "weight": 1,
+      "rel": "state->subject"
+    },
+    {
+      "source": "n115",
+      "target": "n062",
+      "weight": 1,
+      "rel": "state->space"
+    },
+    {
+      "source": "n116",
       "target": "n147",
       "weight": 1,
       "rel": "object->connector"
     },
     {
-      "source": "n124",
+      "source": "n116",
       "target": "n001",
       "weight": 1,
       "rel": "object->subject"
     },
     {
-      "source": "n124",
-      "target": "n003",
+      "source": "n116",
+      "target": "n061",
       "weight": 1,
-      "rel": "object->subject"
+      "rel": "object->space"
     },
     {
-      "source": "n124",
-      "target": "n012",
+      "source": "n116",
+      "target": "n041",
       "weight": 1,
-      "rel": "object->subject"
+      "rel": "object->action"
     },
     {
-      "source": "n125",
-      "target": "n151",
+      "source": "n116",
+      "target": "n114",
+      "weight": 1,
+      "rel": "object->state"
+    },
+    {
+      "source": "n116",
+      "target": "n042",
+      "weight": 1,
+      "rel": "object->action"
+    },
+    {
+      "source": "n117",
+      "target": "n084",
+      "weight": 1,
+      "rel": "object->time"
+    },
+    {
+      "source": "n117",
+      "target": "n145",
       "weight": 1,
       "rel": "object->connector"
     },
     {
-      "source": "n125",
-      "target": "n013",
-      "weight": 1,
-      "rel": "object->subject"
-    },
-    {
-      "source": "n125",
-      "target": "n011",
-      "weight": 1,
-      "rel": "object->subject"
-    },
-    {
-      "source": "n126",
-      "target": "n009",
-      "weight": 1,
-      "rel": "object->subject"
-    },
-    {
-      "source": "n126",
-      "target": "n018",
-      "weight": 1,
-      "rel": "object->subject"
-    },
-    {
-      "source": "n126",
-      "target": "n001",
-      "weight": 1,
-      "rel": "object->subject"
-    },
-    {
-      "source": "n127",
-      "target": "n004",
-      "weight": 1,
-      "rel": "object->subject"
-    },
-    {
-      "source": "n127",
+      "source": "n117",
       "target": "n020",
       "weight": 1,
       "rel": "object->subject"
     },
     {
-      "source": "n127",
-      "target": "n001",
+      "source": "n117",
+      "target": "n052",
       "weight": 1,
-      "rel": "object->subject"
+      "rel": "object->action"
     },
     {
-      "source": "n128",
-      "target": "n151",
+      "source": "n117",
+      "target": "n097",
+      "weight": 1,
+      "rel": "object->state"
+    },
+    {
+      "source": "n117",
+      "target": "n055",
+      "weight": 1,
+      "rel": "object->action"
+    },
+    {
+      "source": "n118",
+      "target": "n075",
+      "weight": 1,
+      "rel": "object->space"
+    },
+    {
+      "source": "n118",
+      "target": "n086",
+      "weight": 1,
+      "rel": "object->time"
+    },
+    {
+      "source": "n118",
+      "target": "n150",
       "weight": 1,
       "rel": "object->connector"
     },
     {
-      "source": "n128",
-      "target": "n015",
+      "source": "n118",
+      "target": "n093",
+      "weight": 1,
+      "rel": "object->state"
+    },
+    {
+      "source": "n118",
+      "target": "n055",
+      "weight": 1,
+      "rel": "object->action"
+    },
+    {
+      "source": "n118",
+      "target": "n104",
+      "weight": 1,
+      "rel": "object->state"
+    },
+    {
+      "source": "n119",
+      "target": "n006",
       "weight": 1,
       "rel": "object->subject"
     },
     {
-      "source": "n128",
-      "target": "n007",
+      "source": "n119",
+      "target": "n068",
+      "weight": 1,
+      "rel": "object->space"
+    },
+    {
+      "source": "n119",
+      "target": "n084",
+      "weight": 1,
+      "rel": "object->time"
+    },
+    {
+      "source": "n119",
+      "target": "n093",
+      "weight": 1,
+      "rel": "object->state"
+    },
+    {
+      "source": "n119",
+      "target": "n041",
+      "weight": 1,
+      "rel": "object->action"
+    },
+    {
+      "source": "n119",
+      "target": "n092",
+      "weight": 1,
+      "rel": "object->state"
+    },
+    {
+      "source": "n120",
+      "target": "n020",
       "weight": 1,
       "rel": "object->subject"
     },
     {
-      "source": "n129",
-      "target": "n153",
+      "source": "n120",
+      "target": "n064",
+      "weight": 1,
+      "rel": "object->space"
+    },
+    {
+      "source": "n120",
+      "target": "n076",
+      "weight": 1,
+      "rel": "object->time"
+    },
+    {
+      "source": "n120",
+      "target": "n051",
+      "weight": 1,
+      "rel": "object->action"
+    },
+    {
+      "source": "n120",
+      "target": "n094",
+      "weight": 1,
+      "rel": "object->state"
+    },
+    {
+      "source": "n120",
+      "target": "n041",
+      "weight": 1,
+      "rel": "object->action"
+    },
+    {
+      "source": "n121",
+      "target": "n080",
+      "weight": 1,
+      "rel": "object->time"
+    },
+    {
+      "source": "n121",
+      "target": "n144",
       "weight": 1,
       "rel": "object->connector"
     },
     {
-      "source": "n129",
+      "source": "n121",
       "target": "n009",
       "weight": 1,
       "rel": "object->subject"
     },
     {
-      "source": "n129",
-      "target": "n007",
+      "source": "n121",
+      "target": "n103",
+      "weight": 1,
+      "rel": "object->state"
+    },
+    {
+      "source": "n121",
+      "target": "n031",
+      "weight": 1,
+      "rel": "object->action"
+    },
+    {
+      "source": "n121",
+      "target": "n091",
+      "weight": 1,
+      "rel": "object->state"
+    },
+    {
+      "source": "n122",
+      "target": "n147",
+      "weight": 1,
+      "rel": "object->connector"
+    },
+    {
+      "source": "n122",
+      "target": "n018",
       "weight": 1,
       "rel": "object->subject"
+    },
+    {
+      "source": "n122",
+      "target": "n065",
+      "weight": 1,
+      "rel": "object->space"
+    },
+    {
+      "source": "n122",
+      "target": "n027",
+      "weight": 1,
+      "rel": "object->action"
+    },
+    {
+      "source": "n122",
+      "target": "n091",
+      "weight": 1,
+      "rel": "object->state"
+    },
+    {
+      "source": "n122",
+      "target": "n044",
+      "weight": 1,
+      "rel": "object->action"
+    },
+    {
+      "source": "n123",
+      "target": "n072",
+      "weight": 1,
+      "rel": "object->space"
+    },
+    {
+      "source": "n123",
+      "target": "n086",
+      "weight": 1,
+      "rel": "object->time"
+    },
+    {
+      "source": "n123",
+      "target": "n148",
+      "weight": 1,
+      "rel": "object->connector"
+    },
+    {
+      "source": "n123",
+      "target": "n040",
+      "weight": 1,
+      "rel": "object->action"
+    },
+    {
+      "source": "n123",
+      "target": "n112",
+      "weight": 1,
+      "rel": "object->state"
+    },
+    {
+      "source": "n123",
+      "target": "n106",
+      "weight": 1,
+      "rel": "object->state"
+    },
+    {
+      "source": "n124",
+      "target": "n087",
+      "weight": 1,
+      "rel": "object->time"
+    },
+    {
+      "source": "n124",
+      "target": "n144",
+      "weight": 1,
+      "rel": "object->connector"
+    },
+    {
+      "source": "n124",
+      "target": "n010",
+      "weight": 1,
+      "rel": "object->subject"
+    },
+    {
+      "source": "n124",
+      "target": "n099",
+      "weight": 1,
+      "rel": "object->state"
+    },
+    {
+      "source": "n124",
+      "target": "n044",
+      "weight": 1,
+      "rel": "object->action"
+    },
+    {
+      "source": "n124",
+      "target": "n102",
+      "weight": 1,
+      "rel": "object->state"
+    },
+    {
+      "source": "n125",
+      "target": "n017",
+      "weight": 1,
+      "rel": "object->subject"
+    },
+    {
+      "source": "n125",
+      "target": "n067",
+      "weight": 1,
+      "rel": "object->space"
+    },
+    {
+      "source": "n125",
+      "target": "n085",
+      "weight": 1,
+      "rel": "object->time"
+    },
+    {
+      "source": "n125",
+      "target": "n052",
+      "weight": 1,
+      "rel": "object->action"
+    },
+    {
+      "source": "n125",
+      "target": "n113",
+      "weight": 1,
+      "rel": "object->state"
+    },
+    {
+      "source": "n125",
+      "target": "n023",
+      "weight": 1,
+      "rel": "object->action"
+    },
+    {
+      "source": "n126",
+      "target": "n013",
+      "weight": 1,
+      "rel": "object->subject"
+    },
+    {
+      "source": "n126",
+      "target": "n062",
+      "weight": 1,
+      "rel": "object->space"
+    },
+    {
+      "source": "n126",
+      "target": "n087",
+      "weight": 1,
+      "rel": "object->time"
+    },
+    {
+      "source": "n126",
+      "target": "n052",
+      "weight": 1,
+      "rel": "object->action"
+    },
+    {
+      "source": "n126",
+      "target": "n115",
+      "weight": 1,
+      "rel": "object->state"
+    },
+    {
+      "source": "n126",
+      "target": "n045",
+      "weight": 1,
+      "rel": "object->action"
+    },
+    {
+      "source": "n127",
+      "target": "n148",
+      "weight": 1,
+      "rel": "object->connector"
+    },
+    {
+      "source": "n127",
+      "target": "n016",
+      "weight": 1,
+      "rel": "object->subject"
+    },
+    {
+      "source": "n127",
+      "target": "n068",
+      "weight": 1,
+      "rel": "object->space"
+    },
+    {
+      "source": "n127",
+      "target": "n105",
+      "weight": 1,
+      "rel": "object->state"
+    },
+    {
+      "source": "n127",
+      "target": "n043",
+      "weight": 1,
+      "rel": "object->action"
+    },
+    {
+      "source": "n127",
+      "target": "n097",
+      "weight": 1,
+      "rel": "object->state"
+    },
+    {
+      "source": "n128",
+      "target": "n079",
+      "weight": 1,
+      "rel": "object->time"
+    },
+    {
+      "source": "n128",
+      "target": "n149",
+      "weight": 1,
+      "rel": "object->connector"
+    },
+    {
+      "source": "n128",
+      "target": "n002",
+      "weight": 1,
+      "rel": "object->subject"
+    },
+    {
+      "source": "n128",
+      "target": "n097",
+      "weight": 1,
+      "rel": "object->state"
+    },
+    {
+      "source": "n128",
+      "target": "n036",
+      "weight": 1,
+      "rel": "object->action"
+    },
+    {
+      "source": "n128",
+      "target": "n091",
+      "weight": 1,
+      "rel": "object->state"
+    },
+    {
+      "source": "n129",
+      "target": "n008",
+      "weight": 1,
+      "rel": "object->subject"
+    },
+    {
+      "source": "n129",
+      "target": "n069",
+      "weight": 1,
+      "rel": "object->space"
+    },
+    {
+      "source": "n129",
+      "target": "n083",
+      "weight": 1,
+      "rel": "object->time"
+    },
+    {
+      "source": "n129",
+      "target": "n094",
+      "weight": 1,
+      "rel": "object->state"
+    },
+    {
+      "source": "n129",
+      "target": "n044",
+      "weight": 1,
+      "rel": "object->action"
+    },
+    {
+      "source": "n129",
+      "target": "n101",
+      "weight": 1,
+      "rel": "object->state"
+    },
+    {
+      "source": "n130",
+      "target": "n056",
+      "weight": 1,
+      "rel": "object->space"
+    },
+    {
+      "source": "n130",
+      "target": "n083",
+      "weight": 1,
+      "rel": "object->time"
     },
     {
       "source": "n130",
@@ -3111,143 +3350,275 @@
     },
     {
       "source": "n130",
-      "target": "n011",
+      "target": "n034",
       "weight": 1,
-      "rel": "object->subject"
+      "rel": "object->action"
     },
     {
       "source": "n130",
-      "target": "n012",
+      "target": "n103",
       "weight": 1,
-      "rel": "object->subject"
+      "rel": "object->state"
+    },
+    {
+      "source": "n130",
+      "target": "n027",
+      "weight": 1,
+      "rel": "object->action"
     },
     {
       "source": "n131",
-      "target": "n001",
+      "target": "n058",
       "weight": 1,
-      "rel": "object->subject"
+      "rel": "object->space"
     },
     {
       "source": "n131",
-      "target": "n012",
+      "target": "n078",
       "weight": 1,
-      "rel": "object->subject"
+      "rel": "object->time"
     },
     {
       "source": "n131",
-      "target": "n152",
+      "target": "n148",
+      "weight": 1,
+      "rel": "object->connector"
+    },
+    {
+      "source": "n131",
+      "target": "n105",
+      "weight": 1,
+      "rel": "object->state"
+    },
+    {
+      "source": "n131",
+      "target": "n054",
+      "weight": 1,
+      "rel": "object->action"
+    },
+    {
+      "source": "n131",
+      "target": "n099",
+      "weight": 1,
+      "rel": "object->state"
+    },
+    {
+      "source": "n132",
+      "target": "n143",
       "weight": 1,
       "rel": "object->connector"
     },
     {
       "source": "n132",
-      "target": "n016",
-      "weight": 1,
-      "rel": "object->subject"
-    },
-    {
-      "source": "n132",
-      "target": "n146",
-      "weight": 1,
-      "rel": "object->connector"
-    },
-    {
-      "source": "n132",
-      "target": "n017",
-      "weight": 1,
-      "rel": "object->subject"
-    },
-    {
-      "source": "n133",
-      "target": "n008",
-      "weight": 1,
-      "rel": "object->subject"
-    },
-    {
-      "source": "n133",
-      "target": "n004",
-      "weight": 1,
-      "rel": "object->subject"
-    },
-    {
-      "source": "n133",
-      "target": "n014",
-      "weight": 1,
-      "rel": "object->subject"
-    },
-    {
-      "source": "n134",
-      "target": "n153",
-      "weight": 1,
-      "rel": "object->connector"
-    },
-    {
-      "source": "n134",
-      "target": "n017",
-      "weight": 1,
-      "rel": "object->subject"
-    },
-    {
-      "source": "n134",
-      "target": "n008",
-      "weight": 1,
-      "rel": "object->subject"
-    },
-    {
-      "source": "n135",
-      "target": "n001",
-      "weight": 1,
-      "rel": "object->subject"
-    },
-    {
-      "source": "n135",
-      "target": "n013",
-      "weight": 1,
-      "rel": "object->subject"
-    },
-    {
-      "source": "n135",
-      "target": "n149",
-      "weight": 1,
-      "rel": "object->connector"
-    },
-    {
-      "source": "n136",
-      "target": "n014",
-      "weight": 1,
-      "rel": "object->subject"
-    },
-    {
-      "source": "n136",
-      "target": "n001",
-      "weight": 1,
-      "rel": "object->subject"
-    },
-    {
-      "source": "n136",
-      "target": "n008",
-      "weight": 1,
-      "rel": "object->subject"
-    },
-    {
-      "source": "n137",
-      "target": "n007",
-      "weight": 1,
-      "rel": "object->subject"
-    },
-    {
-      "source": "n137",
-      "target": "n020",
-      "weight": 1,
-      "rel": "object->subject"
-    },
-    {
-      "source": "n137",
       "target": "n003",
       "weight": 1,
       "rel": "object->subject"
     },
     {
+      "source": "n132",
+      "target": "n060",
+      "weight": 1,
+      "rel": "object->space"
+    },
+    {
+      "source": "n132",
+      "target": "n039",
+      "weight": 1,
+      "rel": "object->action"
+    },
+    {
+      "source": "n132",
+      "target": "n096",
+      "weight": 1,
+      "rel": "object->state"
+    },
+    {
+      "source": "n132",
+      "target": "n045",
+      "weight": 1,
+      "rel": "object->action"
+    },
+    {
+      "source": "n133",
+      "target": "n144",
+      "weight": 1,
+      "rel": "object->connector"
+    },
+    {
+      "source": "n133",
+      "target": "n008",
+      "weight": 1,
+      "rel": "object->subject"
+    },
+    {
+      "source": "n133",
+      "target": "n071",
+      "weight": 1,
+      "rel": "object->space"
+    },
+    {
+      "source": "n133",
+      "target": "n050",
+      "weight": 1,
+      "rel": "object->action"
+    },
+    {
+      "source": "n133",
+      "target": "n091",
+      "weight": 1,
+      "rel": "object->state"
+    },
+    {
+      "source": "n133",
+      "target": "n105",
+      "weight": 1,
+      "rel": "object->state"
+    },
+    {
+      "source": "n134",
+      "target": "n015",
+      "weight": 1,
+      "rel": "object->subject"
+    },
+    {
+      "source": "n134",
+      "target": "n057",
+      "weight": 1,
+      "rel": "object->space"
+    },
+    {
+      "source": "n134",
+      "target": "n082",
+      "weight": 1,
+      "rel": "object->time"
+    },
+    {
+      "source": "n134",
+      "target": "n096",
+      "weight": 1,
+      "rel": "object->state"
+    },
+    {
+      "source": "n134",
+      "target": "n028",
+      "weight": 1,
+      "rel": "object->action"
+    },
+    {
+      "source": "n134",
+      "target": "n095",
+      "weight": 1,
+      "rel": "object->state"
+    },
+    {
+      "source": "n135",
+      "target": "n015",
+      "weight": 1,
+      "rel": "object->subject"
+    },
+    {
+      "source": "n135",
+      "target": "n065",
+      "weight": 1,
+      "rel": "object->space"
+    },
+    {
+      "source": "n135",
+      "target": "n078",
+      "weight": 1,
+      "rel": "object->time"
+    },
+    {
+      "source": "n135",
+      "target": "n036",
+      "weight": 1,
+      "rel": "object->action"
+    },
+    {
+      "source": "n135",
+      "target": "n102",
+      "weight": 1,
+      "rel": "object->state"
+    },
+    {
+      "source": "n135",
+      "target": "n035",
+      "weight": 1,
+      "rel": "object->action"
+    },
+    {
+      "source": "n136",
+      "target": "n005",
+      "weight": 1,
+      "rel": "object->subject"
+    },
+    {
+      "source": "n136",
+      "target": "n075",
+      "weight": 1,
+      "rel": "object->space"
+    },
+    {
+      "source": "n136",
+      "target": "n078",
+      "weight": 1,
+      "rel": "object->time"
+    },
+    {
+      "source": "n136",
+      "target": "n054",
+      "weight": 1,
+      "rel": "object->action"
+    },
+    {
+      "source": "n136",
+      "target": "n113",
+      "weight": 1,
+      "rel": "object->state"
+    },
+    {
+      "source": "n136",
+      "target": "n042",
+      "weight": 1,
+      "rel": "object->action"
+    },
+    {
+      "source": "n137",
+      "target": "n060",
+      "weight": 1,
+      "rel": "object->space"
+    },
+    {
+      "source": "n137",
+      "target": "n090",
+      "weight": 1,
+      "rel": "object->time"
+    },
+    {
+      "source": "n137",
+      "target": "n142",
+      "weight": 1,
+      "rel": "object->connector"
+    },
+    {
+      "source": "n137",
+      "target": "n106",
+      "weight": 1,
+      "rel": "object->state"
+    },
+    {
+      "source": "n137",
+      "target": "n041",
+      "weight": 1,
+      "rel": "object->action"
+    },
+    {
+      "source": "n137",
+      "target": "n108",
+      "weight": 1,
+      "rel": "object->state"
+    },
+    {
       "source": "n138",
       "target": "n013",
       "weight": 1,
@@ -3255,15 +3626,33 @@
     },
     {
       "source": "n138",
-      "target": "n005",
+      "target": "n071",
       "weight": 1,
-      "rel": "object->subject"
+      "rel": "object->space"
     },
     {
       "source": "n138",
-      "target": "n154",
+      "target": "n082",
       "weight": 1,
-      "rel": "object->connector"
+      "rel": "object->time"
+    },
+    {
+      "source": "n138",
+      "target": "n096",
+      "weight": 1,
+      "rel": "object->state"
+    },
+    {
+      "source": "n138",
+      "target": "n031",
+      "weight": 1,
+      "rel": "object->action"
+    },
+    {
+      "source": "n138",
+      "target": "n110",
+      "weight": 1,
+      "rel": "object->state"
     },
     {
       "source": "n139",
@@ -3273,135 +3662,171 @@
     },
     {
       "source": "n139",
-      "target": "n155",
+      "target": "n070",
       "weight": 1,
-      "rel": "object->connector"
+      "rel": "object->space"
     },
     {
       "source": "n139",
-      "target": "n012",
+      "target": "n081",
+      "weight": 1,
+      "rel": "object->time"
+    },
+    {
+      "source": "n139",
+      "target": "n110",
+      "weight": 1,
+      "rel": "object->state"
+    },
+    {
+      "source": "n139",
+      "target": "n041",
+      "weight": 1,
+      "rel": "object->action"
+    },
+    {
+      "source": "n139",
+      "target": "n029",
+      "weight": 1,
+      "rel": "object->action"
+    },
+    {
+      "source": "n140",
+      "target": "n015",
       "weight": 1,
       "rel": "object->subject"
     },
     {
       "source": "n140",
-      "target": "n149",
+      "target": "n068",
       "weight": 1,
-      "rel": "object->connector"
+      "rel": "object->space"
     },
     {
       "source": "n140",
-      "target": "n150",
+      "target": "n077",
       "weight": 1,
-      "rel": "object->connector"
+      "rel": "object->time"
     },
     {
       "source": "n140",
-      "target": "n013",
+      "target": "n108",
       "weight": 1,
-      "rel": "object->subject"
+      "rel": "object->state"
+    },
+    {
+      "source": "n140",
+      "target": "n039",
+      "weight": 1,
+      "rel": "object->action"
+    },
+    {
+      "source": "n140",
+      "target": "n111",
+      "weight": 1,
+      "rel": "object->state"
     },
     {
       "source": "n141",
-      "target": "n154",
+      "target": "n001",
       "weight": 1,
-      "rel": "object->connector"
+      "rel": "connector->subject"
     },
     {
       "source": "n141",
-      "target": "n003",
+      "target": "n017",
       "weight": 1,
-      "rel": "object->subject"
+      "rel": "connector->subject"
     },
     {
       "source": "n141",
-      "target": "n002",
+      "target": "n016",
       "weight": 1,
-      "rel": "object->subject"
+      "rel": "connector->subject"
     },
     {
       "source": "n142",
-      "target": "n019",
+      "target": "n014",
       "weight": 1,
-      "rel": "object->subject"
+      "rel": "connector->subject"
     },
     {
       "source": "n142",
-      "target": "n013",
-      "weight": 1,
-      "rel": "object->subject"
-    },
-    {
-      "source": "n142",
-      "target": "n020",
-      "weight": 1,
-      "rel": "object->subject"
-    },
-    {
-      "source": "n143",
-      "target": "n019",
-      "weight": 1,
-      "rel": "object->subject"
-    },
-    {
-      "source": "n143",
-      "target": "n020",
-      "weight": 1,
-      "rel": "object->subject"
-    },
-    {
-      "source": "n143",
-      "target": "n153",
-      "weight": 1,
-      "rel": "object->connector"
-    },
-    {
-      "source": "n144",
-      "target": "n008",
-      "weight": 1,
-      "rel": "object->subject"
-    },
-    {
-      "source": "n144",
-      "target": "n004",
-      "weight": 1,
-      "rel": "object->subject"
-    },
-    {
-      "source": "n144",
-      "target": "n002",
-      "weight": 1,
-      "rel": "object->subject"
-    },
-    {
-      "source": "n145",
-      "target": "n011",
-      "weight": 1,
-      "rel": "object->subject"
-    },
-    {
-      "source": "n145",
-      "target": "n146",
-      "weight": 1,
-      "rel": "object->connector"
-    },
-    {
-      "source": "n145",
       "target": "n007",
       "weight": 1,
-      "rel": "object->subject"
+      "rel": "connector->subject"
+    },
+    {
+      "source": "n142",
+      "target": "n017",
+      "weight": 1,
+      "rel": "connector->subject"
+    },
+    {
+      "source": "n143",
+      "target": "n003",
+      "weight": 1,
+      "rel": "connector->subject"
+    },
+    {
+      "source": "n143",
+      "target": "n016",
+      "weight": 1,
+      "rel": "connector->subject"
+    },
+    {
+      "source": "n143",
+      "target": "n008",
+      "weight": 1,
+      "rel": "connector->subject"
+    },
+    {
+      "source": "n144",
+      "target": "n010",
+      "weight": 1,
+      "rel": "connector->subject"
+    },
+    {
+      "source": "n144",
+      "target": "n014",
+      "weight": 1,
+      "rel": "connector->subject"
+    },
+    {
+      "source": "n144",
+      "target": "n009",
+      "weight": 1,
+      "rel": "connector->subject"
+    },
+    {
+      "source": "n145",
+      "target": "n015",
+      "weight": 1,
+      "rel": "connector->subject"
+    },
+    {
+      "source": "n145",
+      "target": "n004",
+      "weight": 1,
+      "rel": "connector->subject"
+    },
+    {
+      "source": "n145",
+      "target": "n017",
+      "weight": 1,
+      "rel": "connector->subject"
     },
     {
       "source": "n146",
-      "target": "n142",
+      "target": "n003",
       "weight": 1,
-      "rel": "connector->object"
+      "rel": "connector->subject"
     },
     {
       "source": "n146",
-      "target": "n090",
+      "target": "n002",
       "weight": 1,
-      "rel": "connector->time"
+      "rel": "connector->subject"
     },
     {
       "source": "n146",
@@ -3411,165 +3836,75 @@
     },
     {
       "source": "n147",
-      "target": "n082",
+      "target": "n004",
       "weight": 1,
-      "rel": "connector->time"
+      "rel": "connector->subject"
     },
     {
       "source": "n147",
-      "target": "n096",
-      "weight": 1,
-      "rel": "connector->state"
-    },
-    {
-      "source": "n147",
-      "target": "n093",
-      "weight": 1,
-      "rel": "connector->time"
-    },
-    {
-      "source": "n148",
-      "target": "n019",
-      "weight": 1,
-      "rel": "connector->subject"
-    },
-    {
-      "source": "n148",
-      "target": "n143",
-      "weight": 1,
-      "rel": "connector->object"
-    },
-    {
-      "source": "n148",
-      "target": "n106",
-      "weight": 1,
-      "rel": "connector->state"
-    },
-    {
-      "source": "n149",
-      "target": "n089",
-      "weight": 1,
-      "rel": "connector->time"
-    },
-    {
-      "source": "n149",
-      "target": "n008",
-      "weight": 1,
-      "rel": "connector->subject"
-    },
-    {
-      "source": "n149",
-      "target": "n126",
-      "weight": 1,
-      "rel": "connector->object"
-    },
-    {
-      "source": "n150",
-      "target": "n048",
-      "weight": 1,
-      "rel": "connector->action"
-    },
-    {
-      "source": "n150",
-      "target": "n081",
-      "weight": 1,
-      "rel": "connector->time"
-    },
-    {
-      "source": "n150",
-      "target": "n115",
-      "weight": 1,
-      "rel": "connector->state"
-    },
-    {
-      "source": "n151",
-      "target": "n067",
-      "weight": 1,
-      "rel": "connector->space"
-    },
-    {
-      "source": "n151",
-      "target": "n076",
-      "weight": 1,
-      "rel": "connector->space"
-    },
-    {
-      "source": "n151",
-      "target": "n019",
-      "weight": 1,
-      "rel": "connector->subject"
-    },
-    {
-      "source": "n152",
-      "target": "n041",
-      "weight": 1,
-      "rel": "connector->action"
-    },
-    {
-      "source": "n152",
-      "target": "n103",
-      "weight": 1,
-      "rel": "connector->state"
-    },
-    {
-      "source": "n152",
-      "target": "n082",
-      "weight": 1,
-      "rel": "connector->time"
-    },
-    {
-      "source": "n153",
-      "target": "n126",
-      "weight": 1,
-      "rel": "connector->object"
-    },
-    {
-      "source": "n153",
-      "target": "n132",
-      "weight": 1,
-      "rel": "connector->object"
-    },
-    {
-      "source": "n153",
-      "target": "n062",
-      "weight": 1,
-      "rel": "connector->space"
-    },
-    {
-      "source": "n154",
-      "target": "n144",
-      "weight": 1,
-      "rel": "connector->object"
-    },
-    {
-      "source": "n154",
-      "target": "n108",
-      "weight": 1,
-      "rel": "connector->state"
-    },
-    {
-      "source": "n154",
-      "target": "n012",
-      "weight": 1,
-      "rel": "connector->subject"
-    },
-    {
-      "source": "n155",
-      "target": "n002",
-      "weight": 1,
-      "rel": "connector->subject"
-    },
-    {
-      "source": "n155",
       "target": "n009",
       "weight": 1,
       "rel": "connector->subject"
     },
     {
-      "source": "n155",
-      "target": "n126",
+      "source": "n147",
+      "target": "n017",
       "weight": 1,
-      "rel": "connector->object"
+      "rel": "connector->subject"
+    },
+    {
+      "source": "n148",
+      "target": "n019",
+      "weight": 1,
+      "rel": "connector->subject"
+    },
+    {
+      "source": "n148",
+      "target": "n015",
+      "weight": 1,
+      "rel": "connector->subject"
+    },
+    {
+      "source": "n148",
+      "target": "n006",
+      "weight": 1,
+      "rel": "connector->subject"
+    },
+    {
+      "source": "n149",
+      "target": "n018",
+      "weight": 1,
+      "rel": "connector->subject"
+    },
+    {
+      "source": "n149",
+      "target": "n016",
+      "weight": 1,
+      "rel": "connector->subject"
+    },
+    {
+      "source": "n149",
+      "target": "n014",
+      "weight": 1,
+      "rel": "connector->subject"
+    },
+    {
+      "source": "n150",
+      "target": "n009",
+      "weight": 1,
+      "rel": "connector->subject"
+    },
+    {
+      "source": "n150",
+      "target": "n006",
+      "weight": 1,
+      "rel": "connector->subject"
+    },
+    {
+      "source": "n150",
+      "target": "n004",
+      "weight": 1,
+      "rel": "connector->subject"
     }
   ]
 }
