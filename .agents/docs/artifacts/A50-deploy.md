@@ -31,8 +31,11 @@ No hostnames, users or keys here — those live on the server and in the owner's
   (a single field for HTTP and HTTPS). Don't edit nginx files by hand; Plesk regenerates them.
 - **AI:** Gemini with `GEMINI_MODEL=gemini-flash-lite-latest`. The default `gemini-flash-latest`
   answered 503 "high demand" on every try on launch day; flash-lite worked first time.
-- **Deploys:** the `DEPLOY_*` secrets are **not set yet**, so CI runs checks but skips the deploy.
-  Deploy by hand: `ssh <subscription user> 'bash ~/apps/TheCharlatan/scripts/deploy.sh ~/apps/TheCharlatan'`.
+- **Deploys:** automatic. The `DEPLOY_*` secrets are set (2026-09-30); every push to `master` deploys
+  after `check` passes, and Actions → CI → "Run workflow" on `master` redeploys without a commit.
+  The CI key is a dedicated ed25519 key authorized only for the subscription user
+  (comment `github-actions charlatans deploy` in its `authorized_keys`).
+  By hand, if ever needed: `bash ~/apps/TheCharlatan/scripts/deploy.sh ~/apps/TheCharlatan` on the server.
 - **SSH gotchas on this server:** root login by password is disabled (keys only) and Fail2Ban bans
   an IP after a couple of failed root logins. Use key-based access only.
 
@@ -117,6 +120,7 @@ Then add these **repository secrets** (GitHub → Settings → Secrets and varia
 | `DEPLOY_PORT` | optional, defaults to 22 |
 
 Until the secrets exist the job is skipped with a notice, so CI stays green.
+The deploy job also runs on a manual `workflow_dispatch` of `master`.
 To deploy by hand instead: `bash scripts/deploy.sh <app-dir>` on the server.
 
 ## Vercel previews

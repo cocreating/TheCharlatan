@@ -13,8 +13,8 @@ Newest first. One entry per decision: what was decided and why.
   instead of "unreachable" (Gemini and OpenAI-compatible providers).
 - **The repo stays public.** Checked: no hosts, users or keys in tracked files or history. Secrets live only
   in the server `.env` and (later) in GitHub Actions secrets. Nothing credential-like goes into `.agents/`.
-- **CI deploy still off:** `DEPLOY_*` secrets not set; deploys are manual with `scripts/deploy.sh` until the
-  owner adds them.
+- **CI deploy on:** `DEPLOY_*` secrets set; pushes to `master` (and manual runs of the workflow on `master`)
+  deploy to the VPS as the subscription user with a dedicated key. No more manual deploys.
 - **Stray copies now point to the canonical URL.** GitHub Pages: the API refuses to unpublish it
   ("not allowed"), so the `gh-pages` branch now holds only a redirect page (`index.html` + `404.html`).
   Vercel: `src/hooks.server.ts` answers 308 → canonical on the production deployment
