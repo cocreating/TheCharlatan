@@ -15,9 +15,11 @@ Newest first. One entry per decision: what was decided and why.
   in the server `.env` and (later) in GitHub Actions secrets. Nothing credential-like goes into `.agents/`.
 - **CI deploy still off:** `DEPLOY_*` secrets not set; deploys are manual with `scripts/deploy.sh` until the
   owner adds them.
-- **Open: stray copies.** GitHub Pages (`gh-pages` branch) and the Vercel production domain still serve old,
-  AI-less builds. Proposal: unpublish GitHub Pages and delete `gh-pages`; on Vercel, redirect the production
-  domain to the canonical URL and keep PR previews.
+- **Stray copies now point to the canonical URL.** GitHub Pages: the API refuses to unpublish it
+  ("not allowed"), so the `gh-pages` branch now holds only a redirect page (`index.html` + `404.html`).
+  Vercel: `src/hooks.server.ts` answers 308 → canonical on the production deployment
+  (`VERCEL_ENV=production` or host `the-charlatan.vercel.app`); PR previews still work.
+  The owner can still unpublish Pages from Settings → Pages if wanted.
 
 ## 2026-09-29
 

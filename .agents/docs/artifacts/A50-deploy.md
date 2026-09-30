@@ -126,13 +126,11 @@ When `VERCEL` is set, `svelte.config.js` switches to `@sveltejs/adapter-vercel` 
 serves from the domain root. Production stays on the VPS (`adapter-node`). Previews
 have no AI key, so SUMMON answers "AI is not configured" there.
 
-## Other public copies (to clean up)
+## Other public copies
 
-As of 2026-09-30 two older copies are still public and without AI:
+Both older copies now redirect to https://themostimportant.page/about/charlatans:
 
-- **https://cocreating.github.io/TheCharlatan/** — GitHub Pages, legacy build from the
-  `gh-pages` branch. The deploy was retired but the site was never unpublished.
-- **https://the-charlatan.vercel.app/** — the Vercel project's production domain, built from `master`.
-
-Canonical URL: https://themostimportant.page/about/charlatans. See `decisions.md` for what
-to do with each.
+- **https://cocreating.github.io/TheCharlatan/** — GitHub Pages (legacy, `gh-pages` branch). The branch
+  only contains a redirect page; the old build is in its git history.
+- **https://the-charlatan.vercel.app/** — Vercel's production domain. `src/hooks.server.ts` returns a 308
+  to the canonical URL when `VERCEL_ENV=production` (or on that hostname). PR previews are unaffected.
