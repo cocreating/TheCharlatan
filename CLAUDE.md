@@ -43,7 +43,7 @@ Run check, lint and test before every commit.
 | Playback loop | `src/lib/engine/loop.ts` |
 | Walker / rules / validation | `src/lib/engine/walker.ts`, `rules.ts`, `validateGraph.ts` |
 | Graph + canvas | `src/lib/viz/ForceGraph.svelte`, `render.ts`, `particles.ts` |
-| UI | `src/lib/ui/*.svelte`, page in `src/routes/+page.svelte` |
+| UI | `src/lib/ui/*.svelte`, page in `src/routes/+page.svelte`; all colours/fonts are tokens in `src/app.css` (canvas reads them via `loadThemeColors`) |
 | Graph from vocabulary | `src/lib/data/buildGraph.ts` (seed: `graph.seed.json`) |
 | AI theme → vocabulary | `src/routes/api/vocabulary/+server.ts`, `src/lib/server/vocabulary.ts`, providers in `src/lib/server/ai/` |
 | Oracle (ask → dice → number) | `src/lib/oracle/` (`oracle.svelte.ts` phases, `answer.ts` rules), `src/lib/ui/OraclePanel.svelte`; seeded PRNG in `src/lib/engine/random.ts` |

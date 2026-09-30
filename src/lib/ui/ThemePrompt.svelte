@@ -149,16 +149,26 @@
 </form>
 
 <style>
+  /* Panel heading */
+  label[for] {
+    color: var(--text);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+  }
+
   .theme-prompt {
     display: flex;
     flex-direction: column;
     gap: 0.4rem;
-    padding: 0.8rem;
-    background: rgb(0 0 0 / 30%);
-    backdrop-filter: blur(5px);
-    border: 1px solid #333;
-    font-size: 0.7rem;
-    color: #888;
+    padding: 0.9rem 1rem;
+    background: var(--surface);
+    backdrop-filter: var(--panel-blur);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    font-size: 0.8rem;
+    line-height: 1.45;
+    color: var(--text-dim);
   }
 
   .row {
@@ -177,16 +187,16 @@
     flex: 1;
     min-width: 0;
     padding: 0.5rem;
-    background: #000;
-    border: 1px solid #333;
+    background: rgb(0 0 0 / 45%);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius);
     color: var(--text);
     font-family: inherit;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
   }
 
   input:focus {
-    outline: none;
-    border-color: #777;
+    border-color: var(--text-faint);
   }
 
   ul {
@@ -198,9 +208,10 @@
     margin: 0;
     padding: 0;
     list-style: none;
-    background: #000;
-    border: 1px solid #555;
+    background: var(--surface-solid);
+    border: 1px solid var(--border-strong);
     border-top: none;
+    border-radius: 0 0 var(--radius) var(--radius);
     max-height: 14rem;
     overflow-y: auto;
   }
@@ -221,19 +232,13 @@
 
   li:hover,
   li.active {
-    background: #222;
-    color: var(--c-state);
+    background: var(--surface-hover);
+    color: var(--accent);
   }
 
   button {
-    min-width: 0;
-    padding: 0.5rem 0.8rem;
-    font-size: 0.7rem;
-  }
-
-  button:disabled {
-    opacity: 0.4;
-    cursor: default;
+    padding: 0.5rem 0.9rem;
+    font-size: 0.75rem;
   }
 
   p {
@@ -261,12 +266,13 @@
   .link {
     border: none;
     padding: 0;
-    color: #888;
+    color: var(--text-faint);
     text-decoration: underline;
+    text-underline-offset: 3px;
   }
 
-  .link:hover {
+  .link:hover:not(:disabled) {
     background: none;
-    color: #fff;
+    color: var(--text);
   }
 </style>

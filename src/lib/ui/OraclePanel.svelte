@@ -131,16 +131,26 @@
 </section>
 
 <style>
+  /* Panel heading */
+  label[for] {
+    color: var(--text);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+  }
+
   .oracle {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    padding: 0.8rem;
-    background: rgb(0 0 0 / 30%);
-    backdrop-filter: blur(5px);
-    border: 1px solid #333;
-    font-size: 0.7rem;
-    color: #888;
+    padding: 0.9rem 1rem;
+    background: var(--surface);
+    backdrop-filter: var(--panel-blur);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    font-size: 0.8rem;
+    line-height: 1.45;
+    color: var(--text-dim);
   }
 
   form {
@@ -157,16 +167,16 @@
     resize: vertical;
     min-height: 2.6rem;
     padding: 0.5rem;
-    background: #000;
-    border: 1px solid #333;
+    background: rgb(0 0 0 / 45%);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius);
     color: var(--text);
     font-family: inherit;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
   }
 
   textarea:focus {
-    outline: none;
-    border-color: #777;
+    border-color: var(--text-faint);
   }
 
   .row {
@@ -181,6 +191,7 @@
   }
 
   .keep {
+    accent-color: var(--accent);
     display: flex;
     align-items: center;
     gap: 0.4rem;
@@ -188,55 +199,52 @@
   }
 
   .note {
-    font-size: 0.65rem;
-    color: #666;
+    font-size: 0.72rem;
+    color: var(--text-faint);
   }
 
   button {
-    min-width: 0;
-    padding: 0.5rem 0.8rem;
-    font-size: 0.7rem;
-  }
-
-  button:disabled {
-    opacity: 0.4;
-    cursor: default;
+    padding: 0.5rem 0.9rem;
+    font-size: 0.75rem;
   }
 
   .link {
     align-self: flex-end;
     border: none;
     padding: 0;
-    color: #888;
+    color: var(--text-faint);
     text-decoration: underline;
+    text-underline-offset: 3px;
   }
 
-  .link:hover {
+  .link:hover:not(:disabled) {
     background: none;
-    color: #fff;
+    color: var(--text);
   }
 
   .asked {
     color: var(--text);
+    font-family: var(--font-story);
     font-style: italic;
-    font-size: 0.8rem;
+    font-size: 1.05rem;
   }
 
   .answer {
     color: var(--c-state);
-    font-size: 0.85rem;
+    font-family: var(--font-story);
+    font-size: 1.15rem;
     line-height: 1.5;
   }
 
   .prompt {
-    color: #fff;
+    color: var(--text);
     font-size: 0.9rem;
     letter-spacing: 0.05em;
   }
 
   .reveal {
     color: var(--text);
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     line-height: 1.5;
   }
 
@@ -244,14 +252,15 @@
     position: relative;
     display: flex;
     height: 0.8rem;
-    border: 1px solid #333;
+    border: 1px solid var(--border-strong);
+    border-radius: 2px;
     overflow: visible;
   }
 
   .segment {
     height: 100%;
-    opacity: 0.25;
-    border-right: 1px solid #000;
+    opacity: 0.3;
+    border-right: 1px solid var(--bg);
   }
 
   .segment.chosen {
@@ -264,7 +273,8 @@
     bottom: -0.3rem;
     width: 2px;
     margin-left: -1px;
-    background: #fff;
+    background: var(--text);
+    box-shadow: 0 0 6px var(--text);
   }
 
   .options {
@@ -279,7 +289,7 @@
   .options li {
     display: flex;
     gap: 0.6rem;
-    opacity: 0.45;
+    opacity: 0.6;
   }
 
   .options li.chosen {
@@ -288,13 +298,13 @@
 
   .options li.chosen .text::after {
     content: '  ←';
-    color: #fff;
+    color: var(--text);
   }
 
   .options .p {
     min-width: 2.5rem;
     text-align: right;
-    color: #aaa;
+    color: var(--text-dim);
   }
 
   .more {

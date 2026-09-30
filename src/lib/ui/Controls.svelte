@@ -4,193 +4,215 @@
   let show = $state(true);
 
   const shortVoiceName = (name: string) =>
-    name.replace('Google', '').replace('English', '').trim().substring(0, 10);
+    name.replace('Google', '').replace('English', '').trim().substring(0, 14);
 </script>
 
 <div class="controls-container" class:hidden={!show}>
-  <button type="button" class="controls-toggle" onclick={() => (show = !show)}>
-    {show ? '▼' : '▲'} CONTROLS
+  <button type="button" class="controls-toggle" aria-expanded={show} onclick={() => (show = !show)}>
+    {show ? '▾' : '▴'} CONTROLS
   </button>
 
-  <div class="controls-content">
-    <div id="controls-buttons" class="controls-wrapper">
-      <!-- The label reflects the current state: PLAY (lit) while the story runs. -->
-      <button type="button" class="btn-play" class:active={charlatan.isPlaying} onclick={charlatan.togglePlay} disabled={charlatan.mode === 'frozen'}>
-        {charlatan.isPlaying ? 'PLAY' : 'PAUSE'}
-      </button>
-      <button type="button" class="btn-reset" onclick={charlatan.reset} disabled={charlatan.mode !== 'free'}>RESET</button>
-    </div>
+  <div class="controls-clip">
+    <div class="controls-content">
+      <span class="status">SEQ {charlatan.history.length}</span>
 
-    <div id="controls-options" class="controls-wrapper">
-      <div class="speed-control">
-        <label class="toggle-label">
-          <input type="checkbox" bind:checked={charlatan.ttsEnabled} />
-          AUDIO
-        </label>
+      <div class="sliders">
+        <div class="slider">
+          <label for="flow-speed">Flow <output for="flow-speed">{charlatan.transitionSpeed.toFixed(1)}×</output></label>
+          <input id="flow-speed" type="range" min="0.5" max="3.0" step="0.1" bind:value={charlatan.transitionSpeed} />
+        </div>
+        <div class="slider">
+          <label for="voice-speed">Voice <output for="voice-speed">{charlatan.voiceSpeed.toFixed(1)}×</output></label>
+          <input id="voice-speed" type="range" min="0.5" max="3.0" step="0.1" bind:value={charlatan.voiceSpeed} />
+        </div>
+      </div>
 
+      <div class="group">
         {#if charlatan.ttsEnabled && charlatan.availableVoices.length > 0}
-          <select class="voice-select" bind:value={charlatan.voiceName}>
+          <select class="voice-select" aria-label="Voice" bind:value={charlatan.voiceName}>
             {#each charlatan.availableVoices as voice (voice)}
               <option value={voice}>{shortVoiceName(voice)}</option>
             {/each}
           </select>
         {/if}
-
-        <label class="toggle-label glitch" class:on={charlatan.glitchEnabled}>
-          <input type="checkbox" bind:checked={charlatan.glitchEnabled} />
+        <button
+          type="button"
+          class="btn-toggle btn-audio"
+          class:active={charlatan.ttsEnabled}
+          aria-pressed={charlatan.ttsEnabled}
+          onclick={() => (charlatan.ttsEnabled = !charlatan.ttsEnabled)}
+        >
+          AUDIO
+        </button>
+        <button
+          type="button"
+          class="btn-toggle btn-glitch"
+          class:active={charlatan.glitchEnabled}
+          aria-pressed={charlatan.glitchEnabled}
+          onclick={() => (charlatan.glitchEnabled = !charlatan.glitchEnabled)}
+        >
           GLITCH
-        </label>
+        </button>
+      </div>
+
+      <div class="group">
+        <button type="button" class="btn-reset" onclick={charlatan.reset} disabled={charlatan.mode !== 'free'}>RESET</button>
+        <!-- The label reflects the current state: PLAY (lit) while the story runs. -->
+        <button type="button" class="btn-play" class:active={charlatan.isPlaying} onclick={charlatan.togglePlay} disabled={charlatan.mode === 'frozen'}>
+          {charlatan.isPlaying ? '▶ PLAY' : '❚❚ PAUSE'}
+        </button>
       </div>
     </div>
-
-    <div id="controls-sliders" class="controls-wrapper">
-      <div class="sliders">
-        <div class="slider">
-          <label for="flow-speed">Flow Speed {charlatan.transitionSpeed.toFixed(1)}x</label>
-          <input id="flow-speed" type="range" min="0.5" max="3.0" step="0.1" bind:value={charlatan.transitionSpeed} />
-        </div>
-        <div class="slider">
-          <label for="voice-speed">Voice Speed {charlatan.voiceSpeed.toFixed(1)}x</label>
-          <input id="voice-speed" type="range" min="0.5" max="3.0" step="0.1" bind:value={charlatan.voiceSpeed} />
-        </div>
-      </div>
-    </div>
-
-    <span class="status">SEQ: {charlatan.history.length}</span>
   </div>
 </div>
 
 <style>
   .controls-container {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100vw;
-    height: 100px;
-    background: #000;
-    border-top: 1px solid #333;
-    display: flex;
-    justify-content: center;
+    position: relative;
     z-index: 50;
-    transition: transform 0.3s cubic-bezier(0.1, 0.7, 0.1, 1);
+    display: grid;
+    grid-template-rows: 1fr;
+    background: var(--surface-solid);
+    border-top: 1px solid var(--border);
+    transition: grid-template-rows 0.35s var(--ease-out);
   }
 
+  /* Collapses to zero height; the tab stays visible above the edge */
   .controls-container.hidden {
-    transform: translateY(100%);
+    grid-template-rows: 0fr;
+  }
+
+  .controls-clip {
+    min-height: 0;
+    overflow: hidden;
   }
 
   .controls-content {
-    width: 100%;
-    max-width: 1200px;
-    padding: 1rem;
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
+    justify-content: flex-end;
+    gap: 0.75rem 1.5rem;
+    padding: 0.8rem 1.25rem;
   }
 
   .controls-toggle {
     position: absolute;
-    top: -30px;
-    right: 20px;
-    min-width: 0;
-    background: #000;
-    border: 1px solid #333;
-    border-bottom: none;
-    padding: 5px 15px;
+    bottom: 100%;
+    right: 1.25rem;
+    padding: 0.3rem 0.8rem;
     font-size: 0.7rem;
-    letter-spacing: normal;
-    color: #888;
-    border-radius: 5px 5px 0 0;
+    letter-spacing: 0.05em;
+    color: var(--text-dim);
+    background: var(--surface-solid);
+    border-color: var(--border);
+    border-bottom: none;
+    border-radius: var(--radius) var(--radius) 0 0;
   }
 
-  .controls-toggle:hover {
-    background: #000;
-    border-color: #333;
-    color: #fff;
+  .controls-toggle:hover:not(:disabled) {
+    background: var(--surface-solid);
+    color: var(--text);
   }
 
-  .controls-wrapper {
-    display: flex;
-    gap: 1rem;
-    align-items: center;
-  }
-
-  .btn-play.active {
-    background: var(--c-state);
-    color: #000;
-    border-color: #fff;
-    box-shadow: 0 0 10px rgb(29 209 161 / 40%);
-  }
-
-  .btn-reset:active {
-    background: var(--c-action);
-    transform: translateY(2px) scale(0.95);
-    border-color: #fff;
-    color: #000;
-  }
-
-  .speed-control {
+  .group {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    font-size: 0.8rem;
-    margin-left: auto;
   }
 
-  .toggle-label {
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    margin: 0 1rem;
-    font-size: 0.8rem;
-    cursor: pointer;
+  .group button {
+    min-width: 7.5rem;
   }
 
-  .glitch {
-    color: #aaa;
+  .btn-toggle {
+    color: var(--text-dim);
   }
 
-  .glitch.on {
-    color: #ff3333;
+  .btn-play.active {
+    background: var(--accent);
+    color: #04140f;
+    border-color: var(--accent);
+    box-shadow: 0 0 14px rgb(61 219 176 / 40%);
+  }
+
+  .btn-audio.active {
+    color: var(--accent);
+    border-color: var(--accent);
+    background: rgb(61 219 176 / 10%);
+  }
+
+  .btn-glitch.active {
+    color: var(--danger);
+    border-color: var(--danger);
+    background: rgb(255 107 107 / 10%);
+    text-shadow:
+      1px 0 rgb(0 255 255 / 60%),
+      -1px 0 rgb(255 0 80 / 60%);
+  }
+
+  .btn-reset:active:not(:disabled) {
+    background: var(--danger);
+    border-color: var(--danger);
+    color: #000;
+    transform: translateY(1px) scale(0.97);
   }
 
   .voice-select {
-    max-width: 100px;
-    background: #111;
-    color: #aaa;
-    border: 1px solid #333;
-    font-size: 0.7rem;
+    max-width: 10rem;
+    padding: 0.5rem;
+    background: var(--surface-hover);
+    color: var(--text);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius);
+    font-size: 0.75rem;
   }
 
   .sliders {
     display: flex;
-    gap: 1rem;
+    gap: 1.25rem;
   }
 
   .slider {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    gap: 0.2rem;
+    font-size: 0.75rem;
+    color: var(--text-dim);
+  }
+
+  .slider output {
+    color: var(--text);
+  }
+
+  .slider input {
+    width: 8rem;
+    accent-color: var(--accent);
   }
 
   .status {
     font-size: 0.7rem;
-    color: #555;
-    width: 100%;
-    text-align: right;
-    margin-top: 0.5rem;
+    letter-spacing: 0.08em;
+    color: var(--text-faint);
   }
 
-  @media (max-width: 768px) {
-    .controls-container {
-      height: 200px;
-      flex-direction: column;
+  @media (max-width: 767px) {
+    .controls-content {
+      gap: 0.6rem 0.8rem;
+      padding: 0.7rem 0.75rem;
     }
 
-    .controls-content {
-      flex-direction: column;
-      width: auto;
+    .controls-toggle {
+      right: 0.75rem;
+    }
+
+    .group button {
+      min-width: 0;
+      padding: 0.5rem 0.75rem;
+    }
+
+    .status {
+      display: none;
     }
   }
 </style>
