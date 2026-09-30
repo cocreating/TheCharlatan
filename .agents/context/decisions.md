@@ -2,6 +2,21 @@
 
 Newest first. One entry per decision: what was decided and why.
 
+## 2026-09-30 — Stories in sentences (P03 phases 1 + 2)
+
+- **The walker speaks in sentences**: `[connector,] subject (action object | state) [space] [time].` The owner
+  found the stories too disconnected; the old type rules allowed chains that were never sentences and nothing
+  ever ended. `CONNECTION_RULES` now says what may follow each role; the walker only takes links that fit.
+- **`state` is now a predicate** ("falls silent"), not a bare adjective; connectors open a sentence with a comma.
+  Types keep their names so colours, legend and voice stay as they were.
+- **Coherence without AI.** An object can come back as the next sentence's subject (objects get a second set of
+  links), and the walker is offered the subject and object of the sentence just said as echoes (no link, no
+  penalty). Chosen over an AI narrator: free, deterministic, works on the seed and in previews, and the dice
+  still decide every word.
+- **Roles are derived, not stored** (`rolesOf`): old sessions and the dice replay need nothing new.
+- **`PROMPT_VERSION` v2.** Vocabularies cached with v1 no longer fit the grammar and are not served.
+- Next (P03 phase 3): the AI writes the vocabulary in scenes, links mostly within a scene.
+
 ## 2026-09-30 — Oracle folds on mobile
 
 - **On screens under 768px the oracle's question form starts folded** behind an ASK THE ORACLE toggle, so the

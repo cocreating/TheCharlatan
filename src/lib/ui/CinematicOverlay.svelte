@@ -2,11 +2,12 @@
   import { charlatan } from '$lib/engine/store.svelte';
 </script>
 
-{#if charlatan.activeNode}
-  {@const node = charlatan.activeNode}
+{#if charlatan.activePhrase}
+  {@const phrase = charlatan.activePhrase}
   <div class="overlay-container">
-    {#key node.id}
-      <div class="kinetic-text animate-{node.type}">{node.text}</div>
+    <!-- Keyed by position too: the same node can come back as the next word -->
+    {#key `${charlatan.story.length}-${phrase.id}`}
+      <div class="kinetic-text animate-{phrase.type}">{phrase.words}</div>
     {/key}
   </div>
 {/if}

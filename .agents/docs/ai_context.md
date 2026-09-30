@@ -6,8 +6,8 @@ This document provides a high-level mental model and technical "cheat sheet" for
 
 **The Charlatan** is a generative storyteller. Imagine a ghost navigating a library of words:
 1. **The Library (Graph)**: A network defined in `graph.seed.json`. Nodes are words/fragments with `types` (subject, action, space, time, state, object, connector). Links define who can follow whom.
-2. **The Ghost (Walker)**: An engine that moves from node to node. It doesn't just move randomly; it's smart about not repeating itself too soon.
-3. **The Voice (TTS)**: As the walker picks nodes, they are appended to a story and spoken aloud.
+2. **The Ghost (Walker)**: An engine that moves from node to node. It speaks in sentences (`[connector,] subject (action object | state) [space] [time].`), keeps coming back to the nouns of the sentence it just said, and avoids repeating itself too soon.
+3. **The Voice (TTS)**: As the walker picks nodes, they are appended to a story, punctuated (`grammar.ts`) and spoken aloud.
 4. **The Vision (Canvas)**: A D3-force simulation rendered on an HTML5 Canvas for performance.
 
 ---
@@ -22,10 +22,13 @@ A `CharlatanState` class built on Svelte 5 runes (`$state`, `$derived`), exporte
 - `story`: The accumulating list of text fragments.
 - **The Heartbeat (`step`)**: Called repeatedly by `startLoop` (`src/lib/engine/loop.ts`). It triggers the walker to find the next node and updates the state.
 
-### 2. Traversal Logic (`src/lib/engine/walker.ts`)
-The `selectNextNode` function implements:
+### 2. Traversal Logic (`src/lib/engine/walker.ts`, `grammar.ts`, `rules.ts`)
+`selectNextStep` (called by `step`) implements:
+- **Sentence grammar**: `CONNECTION_RULES` says what may follow each *role*. A role is the node's type, except an object that doesn't follow an action: that's a noun come back as a subject (`rolesOf`, derived from the sequence, never stored). Only links that fit the current role are candidates; if none fits, any link will do.
+- **Echoes**: when the next fragment may open a sentence, the subject and object of the sentence just said are offered too, without a link and without the history penalty (`echoesFor`, `ECHO_*_WEIGHT`).
 - **Weighted Selection**: Links can have a `weight` property.
 - **History Penalty**: A `RECENT_HISTORY_PENALTY_WINDOW` (default 20) tracks recent nodes. If a candidate node was visited recently, its weight is drastically reduced to encourage exploration.
+- **Saying it**: `phrase()` adds capitals, full stops, connector commas and "the" on a second mention; the story panel, overlay, voice and oracle answer all use it (`charlatan.phrases`).
 
 ### 3. Rendering Performance (`src/lib/viz/`)
 - **D3-Force**: Used for the physics simulation (calculating x/y positions).
@@ -38,8 +41,8 @@ The `selectNextNode` function implements:
 
 | To change... | Go to... |
 | :--- | :--- |
-| **Narrative content** | `src/lib/data/graph.seed.json` |
-| **Traversal "personality"** | `src/lib/engine/walker.ts` (weights and penalties) |
+| **Narrative content** | Seed vocabulary in `src/lib/data/builder.ts` (regenerates `graph.seed.json`); AI prompt in `src/lib/server/ai/prompt.ts` |
+| **Traversal "personality"** | `src/lib/engine/walker.ts` (weights and penalties), `grammar.ts` (echo weights), `rules.ts` (sentence shape) |
 | **Visual style** | Tokens in `src/app.css` (colours, fonts); canvas drawing in `src/lib/viz/render.ts` (reads the tokens via `loadThemeColors`), glitch in `ForceGraph.svelte`, particles in `particles.ts` |
 | **UI/Controls** | `src/lib/ui/Controls.svelte`; intro screen in `src/lib/ui/IntroScreen.svelte` |
 | **AI theme → vocabulary** | `src/lib/server/ai/` (prompt, providers), `src/lib/server/vocabulary.ts`, `src/routes/api/vocabulary/+server.ts` |

@@ -1,5 +1,6 @@
 import type { DiceStep, GraphData, Node, NodeType } from './types';
 import { rollAmong, selectNextStep } from './walker';
+import { canFollow, echoesFor, phrase } from './grammar';
 import { mulberry32, type Rng } from './random';
 import { isAnswerComplete } from '../oracle/answer';
 import seedDataRaw from '../data/graph.seed.json';
@@ -63,6 +64,10 @@ export class CharlatanState {
   // eslint-disable-next-line svelte/prefer-svelte-reactivity
   nodesById = $derived(new Map(this.graph.nodes.map(n => [n.id, n])));
   activeNode = $derived(this.activeNodeId ? this.nodesById.get(this.activeNodeId) ?? null : null);
+  /** The story as it is said and written: articles, capitals and punctuation. */
+  phrases = $derived(phrase(this.story));
+  /** The newest fragment, as the voice says it. */
+  activePhrase = $derived(this.phrases.at(-1) ?? null);
 
   constructor(graph: GraphData = seedData) {
     this.graph = graph;
@@ -112,7 +117,16 @@ export class CharlatanState {
       return;
     }
 
-    const roll = selectNextStep(this.activeNodeId, this.graph.links, this.history, this.rng);
+    // Only what fits the sentence so far, plus the nouns the story can come back to
+    const role = this.activePhrase?.role;
+    const fits = (id: string) => {
+      const type = this.nodesById.get(id)?.type;
+      return role === undefined || (type !== undefined && canFollow(role, type));
+    };
+    const roll = selectNextStep(this.activeNodeId, this.graph.links, this.history, this.rng, {
+      fits,
+      echoes: echoesFor(this.story),
+    });
     const nextNode = roll ? this.nodesById.get(roll.node) : undefined;
 
     if (roll && nextNode) {
@@ -180,7 +194,7 @@ export class CharlatanState {
 
     if (this.mode === 'answering' && roll) {
       this.trace = [...this.trace, roll];
-      this.answerDone = isAnswerComplete(this.story.map(s => s.type));
+      this.answerDone = isAnswerComplete(this.phrases.map(p => p.role));
     }
   }
 

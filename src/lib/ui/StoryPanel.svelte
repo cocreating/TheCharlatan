@@ -28,8 +28,8 @@
   {#if show}
     <div class="body" transition:slide={{ duration: 250 }}>
       <div class="story-panel" bind:this={panel}>
-        {#each charlatan.story as item, i (`${i}-${item.id}`)}
-          <span class="fragment type-{item.type}">{item.text}</span>
+        {#each charlatan.phrases as item, i (`${i}-${item.id}`)}
+          <span class="fragment type-{item.type}">{item.display}</span>
         {/each}
         <span class="cursor" aria-hidden="true"></span>
       </div>

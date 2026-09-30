@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { CharlatanState } from './store.svelte';
+import { canFollow } from './grammar';
 
 describe('CharlatanState', () => {
   it('the first step starts a story from a subject without stopping playback', () => {
@@ -20,6 +21,16 @@ describe('CharlatanState', () => {
     expect(s.story.map(i => i.id)).toEqual(s.history);
     const linked = s.graph.links.some(l => l.source === from && l.target === s.activeNodeId);
     expect(linked).toBe(true);
+  });
+
+  it('walks in sentences: every fragment fits the role before it', () => {
+    const s = new CharlatanState();
+    for (let i = 0; i < 300; i++) s.step();
+    const roles = s.phrases.map(p => p.role);
+    for (let i = 1; i < roles.length; i++) {
+      expect(canFollow(roles[i - 1], roles[i]), `${roles[i - 1]} -> ${roles[i]}`).toBe(true);
+    }
+    expect(s.phrases.filter(p => p.opens).length).toBeGreaterThan(20);
   });
 
   it('reset stops playback and restarts the story', () => {

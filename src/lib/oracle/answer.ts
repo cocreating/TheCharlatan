@@ -1,22 +1,18 @@
 import type { NodeType } from '$lib/engine/types';
+import { canEndSentence } from '$lib/engine/grammar';
 
 /** Fewest fragments in an oracle answer, and a hard cap so it always ends. */
 export const ANSWER_MIN_FRAGMENTS = 8;
 export const ANSWER_MAX_FRAGMENTS = 16;
 
-// Types that close a sentence well; an answer never ends on "and yet" or "the machine".
-const ENDING_TYPES: NodeType[] = ['object', 'space', 'time', 'state'];
-
-/** True once the answer is long enough and its last fragment can end a sentence. */
-export function isAnswerComplete(types: NodeType[]): boolean {
-  if (types.length >= ANSWER_MAX_FRAGMENTS) return true;
-  return types.length >= ANSWER_MIN_FRAGMENTS && ENDING_TYPES.includes(types[types.length - 1]);
-}
-
-/** The spoken answer as one line of text. */
-export function answerText(fragments: string[]): string {
-  const text = fragments.join(' ').trim();
-  return text ? text.charAt(0).toUpperCase() + text.slice(1) + '.' : '';
+/**
+ * True once the answer is long enough and its last fragment can end a sentence.
+ * Takes roles, not types: an object that came back as a subject can't end one.
+ */
+export function isAnswerComplete(roles: NodeType[]): boolean {
+  if (roles.length >= ANSWER_MAX_FRAGMENTS) return true;
+  const last = roles.at(-1);
+  return roles.length >= ANSWER_MIN_FRAGMENTS && last !== undefined && canEndSentence(last);
 }
 
 export interface RevealStats {

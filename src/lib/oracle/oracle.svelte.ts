@@ -1,7 +1,7 @@
 import { charlatan, type CharlatanState } from '$lib/engine/store.svelte';
 import { randomSeed } from '$lib/engine/random';
 import { speak, cancelSpeech } from '$lib/engine/audio';
-import { answerText } from './answer';
+import { storyText } from '$lib/engine/grammar';
 import { postSession, sendMeaning, type MeaningStats } from './api';
 
 /**
@@ -54,7 +54,7 @@ export class Oracle {
   finishAnswer = () => {
     if (this.phase !== 'answering') return;
     this.state.freeze();
-    this.answer = answerText(this.state.story.map(s => s.text));
+    this.answer = storyText(this.state.story);
     this.phase = 'asking';
 
     this.session = postSession({
@@ -111,9 +111,10 @@ export class Oracle {
       this.state.showRoll(i);
 
       const node = this.state.activeNode;
+      const words = this.state.activePhrase?.words ?? node?.text ?? '';
       const started = performance.now();
       if (this.state.ttsEnabled && node) {
-        await speak(node, this.state.voiceName, this.state.voiceSpeed * REPLAY_VOICE_FACTOR);
+        await speak({ ...node, text: words }, this.state.voiceName, this.state.voiceSpeed * REPLAY_VOICE_FACTOR);
       }
       const remaining = REPLAY_STEP_MS - (performance.now() - started);
       if (remaining > 0 && going()) await this.pause(remaining);
