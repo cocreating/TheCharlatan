@@ -58,4 +58,28 @@ describe('loadGraph', () => {
     expect(s.graph).toBe(seed);
     expect(s.theme).toBeNull();
   });
+
+  it('an oracle answer always completes, and ends early at a dead end instead of hanging', () => {
+    const s = new CharlatanState();
+    s.beginAnswer(7);
+    s.isPlaying = true;
+    for (let i = 0; i < 40 && s.isPlaying; i++) s.step();
+    expect(s.answerDone).toBe(true);
+    expect(s.isPlaying).toBe(false);
+
+    const dead = new CharlatanState({
+      meta: { title: 'dead end', version: '1' },
+      nodes: [
+        { id: 'a', text: 'a', type: 'subject' },
+        { id: 'b', text: 'b', type: 'object' },
+      ],
+      links: [{ source: 'a', target: 'b', weight: 1 }],
+    } as never);
+    dead.beginAnswer(1);
+    dead.isPlaying = true;
+    for (let i = 0; i < 5 && dead.isPlaying; i++) dead.step();
+    expect(dead.trace.map(t => t.node)).toEqual(['a', 'b']);
+    expect(dead.answerDone).toBe(true);
+    expect(dead.isPlaying).toBe(false);
+  });
 });

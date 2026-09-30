@@ -4,6 +4,11 @@ Newest first. One entry per decision: what was decided and why.
 
 ## 2026-09-30
 
+- **Speech can never hang playback.** In production the oracle stayed on "answering" with audio on: Chrome
+  sometimes fires neither `onend` nor `onerror` (unreferenced utterance collected, `speak()` right after
+  `cancel()`, a stalled remote voice), so `await speak()` never returned. `speak()` now keeps a reference to the
+  utterance and gives up after `(3000 + 150 ms/char) / rate`, cancelling the stuck queue. Also: the loop stops
+  right after a step that ends playback, and an oracle answer that hits a dead end ends there instead of waiting.
 - **P02 implemented (oracle + Supabase memory), PR to `master`.** Closing the WIP: `Oracle.respond` no longer
   compares `phase` after the replay; a run counter (bumped by close) and a `skipped` flag decide instead, so
   a STOP during the replay never gets overwritten by "revealed". The suggestion `<li>`s keep only a click

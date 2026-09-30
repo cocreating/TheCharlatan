@@ -6,6 +6,18 @@ export function getEnglishVoices(): SpeechSynthesisVoice[] {
     return voices.filter(v => v.lang.startsWith('en'));
 }
 
+// Chrome sometimes fires neither onend nor onerror: an utterance nothing references gets garbage
+// collected, speak() right after cancel() can be dropped, a remote voice can stall. Hold a reference
+// while it speaks, and stop waiting after a generous estimate so the playback loop never hangs.
+const inFlight = new Set<SpeechSynthesisUtterance>();
+const WATCHDOG_BASE_MS = 3000;
+const WATCHDOG_PER_CHAR_MS = 150;
+
+/** How long to wait for an utterance before giving up on it. */
+export function speechTimeoutMs(text: string, rate: number): number {
+    return (WATCHDOG_BASE_MS + text.length * WATCHDOG_PER_CHAR_MS) / rate;
+}
+
 export function speak(node: Node, voiceName: string | null = null, speedFactor: number = 1.0): Promise<void> {
     return new Promise((resolve) => {
         const text = node.text;
@@ -60,14 +72,25 @@ export function speak(node: Node, voiceName: string | null = null, speedFactor: 
              }
         }
 
-        utterance.onend = () => {
+        const done = () => {
+            if (!inFlight.delete(utterance)) return; // Already settled
+            clearTimeout(timer);
             resolve();
         };
 
+        utterance.onend = done;
+
         utterance.onerror = (e) => {
             console.warn("[Audio] Speech error or interrupted", e);
-            resolve();
+            done();
         };
+
+        inFlight.add(utterance);
+        const timer = setTimeout(() => {
+            console.warn("[Audio] Speech never finished; moving on", text);
+            window.speechSynthesis.cancel(); // Unstick the queue for the next utterance
+            done();
+        }, speechTimeoutMs(text, utterance.rate));
 
         window.speechSynthesis.speak(utterance);
     });

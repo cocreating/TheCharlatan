@@ -23,6 +23,7 @@ export function startLoop(state: CharlatanState): () => void {
     if (cancelled) return;
 
     state.step();
+    if (!state.isPlaying) return; // The step ended playback (dead end, or the oracle's answer is complete)
 
     // Glitch Chance!
     if (state.glitchEnabled && Math.random() < GLITCH_CHANCE) {
