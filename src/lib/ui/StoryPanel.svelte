@@ -1,8 +1,13 @@
 <script lang="ts">
+  import { slide } from 'svelte/transition';
   import { charlatan } from '$lib/engine/store.svelte';
+  import type { NodeType } from '$lib/engine/types';
+
+  const LEGEND: NodeType[] = ['subject', 'action', 'object', 'state', 'space', 'time', 'connector'];
 
   let panel = $state<HTMLDivElement>();
   let show = $state(true);
+  let showLegend = $state(false);
 
   // Keep the newest fragment in view
   $effect(() => {
@@ -11,101 +16,125 @@
   });
 </script>
 
-<div class="story-wrapper" class:hidden={!show}>
-  <button type="button" class="story-toggle" onclick={() => (show = !show)}>
-    {show ? 'HIDE TEXT' : 'SHOW TEXT'}
-  </button>
+<section class="story-wrapper" class:collapsed={!show} aria-label="Story">
+  <header>
+    <span class="title">STORY</span>
+    <span class="count">{charlatan.history.length} words</span>
+    <button type="button" class="toggle" aria-expanded={show} onclick={() => (show = !show)}>
+      {show ? 'HIDE' : 'SHOW'}
+    </button>
+  </header>
+
   {#if show}
-    <div class="story-panel" bind:this={panel}>
-      {#each charlatan.story as item, i (`${i}-${item.id}`)}
-        <span class="fragment type-{item.type}">{item.text}</span>
-      {/each}
-      <span class="cursor">_</span>
+    <div class="body" transition:slide={{ duration: 250 }}>
+      <div class="story-panel" bind:this={panel}>
+        {#each charlatan.story as item, i (`${i}-${item.id}`)}
+          <span class="fragment type-{item.type}">{item.text}</span>
+        {/each}
+        <span class="cursor" aria-hidden="true"></span>
+      </div>
+
+      <footer>
+        <button type="button" class="link" aria-expanded={showLegend} onclick={() => (showLegend = !showLegend)}>
+          {showLegend ? 'HIDE COLOURS' : 'WHAT DO THE COLOURS MEAN?'}
+        </button>
+        {#if showLegend}
+          <ul class="legend" transition:slide={{ duration: 200 }}>
+            {#each LEGEND as type (type)}
+              <li class="type-{type}"><span class="dot"></span>{type}</li>
+            {/each}
+          </ul>
+        {/if}
+      </footer>
     </div>
   {/if}
-</div>
+</section>
 
 <style>
   .story-wrapper {
     pointer-events: auto;
-    background: rgb(0 0 0 / 30%);
-    backdrop-filter: blur(5px);
-    border: 1px solid #333;
-    padding: 1rem;
-    max-width: 350px;
-    height: 600px;
     display: flex;
     flex-direction: column;
-    transition:
-      background 0.3s,
-      border 0.3s,
-      height 0.3s;
+    min-height: 0;
+    max-height: 100%;
+    background: var(--surface);
+    backdrop-filter: var(--panel-blur);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
   }
 
-  .story-wrapper.hidden {
-    background: transparent;
-    border-color: transparent;
-    backdrop-filter: none;
-    height: 0;
-    padding: 0 1rem;
+  .story-wrapper:not(.collapsed) {
+    height: min(40rem, 100%);
   }
 
-  .story-toggle {
-    position: absolute;
-    top: 0;
-    right: 0;
-    min-width: 0;
-    background: rgb(0 0 0 / 80%);
-    border: none;
-    color: #aaa;
-    padding: 5px 10px;
+  header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.6rem 0.6rem 0.6rem 1rem;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+  }
+
+  .collapsed header {
+    border-bottom-color: transparent;
+  }
+
+  .title {
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  .count {
+    color: var(--text-faint);
+    margin-right: auto;
+  }
+
+  .toggle {
+    padding: 0.3rem 0.7rem;
     font-size: 0.7rem;
-    letter-spacing: normal;
-    transition: color 0.2s;
+    border-color: var(--border);
+    color: var(--text-dim);
   }
 
-  .story-toggle:hover {
-    background: rgb(0 0 0 / 80%);
-    color: #fff;
+  .body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
   }
 
   .story-panel {
     flex: 1;
+    min-height: 0;
     overflow-y: auto;
-    margin-bottom: 2rem;
-    line-height: 1.8;
-    font-size: 1.1rem;
-    padding-right: 1rem;
-  }
-
-  .story-panel::-webkit-scrollbar {
-    width: 6px;
-  }
-
-  .story-panel::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  .story-panel::-webkit-scrollbar-thumb {
-    background: #333;
-    border-radius: 3px;
+    padding: 1rem 1.25rem;
+    font-family: var(--font-story);
+    font-size: 1.3rem;
+    font-weight: 400;
+    line-height: 1.6;
+    font-optical-sizing: auto;
+    color: var(--text);
   }
 
   .fragment {
-    margin-right: 0.4em;
+    margin-right: 0.3em;
     display: inline-block;
     opacity: 0;
-    animation: fade-in 0.8s ease forwards;
+    animation: fade-in 0.8s var(--ease-out) forwards;
   }
 
   @keyframes fade-in {
     from {
       opacity: 0;
-      transform: translateY(5px);
+      transform: translateY(6px);
+      filter: blur(3px);
     }
     to {
       opacity: 1;
       transform: translateY(0);
+      filter: blur(0);
     }
   }
 
@@ -119,12 +148,64 @@
 
   .cursor {
     display: inline-block;
-    animation: blink 1s infinite;
+    width: 0.5em;
+    height: 2px;
+    vertical-align: baseline;
+    background: var(--text-dim);
+    animation: blink 1s steps(1) infinite;
   }
 
   @keyframes blink {
     50% {
       opacity: 0;
+    }
+  }
+
+  footer {
+    padding: 0.5rem 1rem 0.7rem;
+    border-top: 1px solid var(--border);
+    font-size: 0.7rem;
+  }
+
+  .link {
+    border: none;
+    padding: 0.2rem 0;
+    font-size: 0.7rem;
+    font-weight: 400;
+    color: var(--text-faint);
+  }
+
+  .link:hover:not(:disabled) {
+    background: none;
+    color: var(--text);
+  }
+
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem 0.9rem;
+    margin: 0.5rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .legend li {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-style: normal;
+  }
+
+  .dot {
+    width: 0.55rem;
+    height: 0.55rem;
+    border-radius: 50%;
+    background: currentcolor;
+  }
+
+  @media (max-width: 767px) {
+    .story-panel {
+      font-size: 1.1rem;
     }
   }
 </style>

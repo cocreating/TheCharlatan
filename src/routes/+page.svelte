@@ -50,70 +50,80 @@
 </script>
 
 <div class="app-container">
-  <CinematicOverlay />
   <div class="viz-area">
     <ForceGraph />
+    <CinematicOverlay />
     <div class="left-column">
       <ThemePrompt />
       <OraclePanel />
     </div>
+    <aside class="sidebar">
+      <StoryPanel />
+    </aside>
   </div>
-  <aside class="sidebar">
-    <StoryPanel />
-  </aside>
   <Controls />
 </div>
 
 <style>
+  /* The graph fills everything above the controls; panels float over it */
   .app-container {
+    position: fixed;
+    inset: 0;
     display: flex;
     flex-direction: column;
-    height: 100vh;
-    width: 100vw;
   }
 
   .viz-area {
-    flex: 2;
     position: relative;
+    flex: 1;
+    min-height: 0;
     overflow: hidden;
   }
 
-  /* Theme and oracle float over the graph, top left */
+  /* Theme and oracle, top left */
   .left-column {
     position: absolute;
-    top: 1.5rem;
-    left: 1.5rem;
+    top: 1.25rem;
+    left: 1.25rem;
     z-index: 45;
     display: flex;
     flex-direction: column;
-    gap: 0.8rem;
-    width: min(360px, calc(100vw - 3rem));
-    max-height: calc(100% - 3rem);
+    gap: 0.75rem;
+    width: min(360px, calc(100% - 2.5rem));
+    max-height: calc(100% - 2.5rem);
     overflow-y: auto;
   }
 
-  /* The story panel floats over the graph, top right */
+  /* The story, right edge, full height */
   .sidebar {
     position: absolute;
-    top: 0;
-    right: 0;
+    top: 1.25rem;
+    right: 1.25rem;
+    bottom: 2.75rem; /* Clear of the controls tab */
     z-index: 40;
     display: flex;
     flex-direction: column;
-    max-width: 100%;
-    max-height: 80vh;
-    padding: 1.5rem;
-    pointer-events: none; /* Let clicks pass unless on panel */
+    width: 360px;
+    pointer-events: none; /* Clicks reach the graph except on the panel itself */
   }
 
-  @media (min-width: 768px) {
-    .app-container {
-      flex-direction: row;
+  /* Narrow screens: theme and oracle on top, the story docked at the bottom */
+  @media (max-width: 767px) {
+    .left-column {
+      top: 0.75rem;
+      left: 0.75rem;
+      width: calc(100% - 1.5rem);
+      max-height: 52%;
     }
 
     .sidebar {
-      max-width: 400px;
-      min-width: 320px;
+      top: auto;
+      left: 0.75rem;
+      right: 0.75rem;
+      bottom: 2.4rem;
+      width: auto;
+      height: 32%;
+      justify-content: flex-end; /* Collapsed, the story header sits at the bottom */
     }
   }
 </style>

@@ -2,6 +2,17 @@
 
 Newest first. One entry per decision: what was decided and why.
 
+## 2026-09-30 — Visual/UI pass
+
+- **One palette, as CSS tokens.** `src/app.css` holds every colour (surfaces, text levels, `--c-*` word types);
+  the canvas reads them at start-up (`loadThemeColors` in `render.ts`), so graph, story and overlay match.
+- **Fonts self-hosted via Fontsource** (IBM Plex Mono for the UI, Fraunces for story text and the overlay),
+  not Google Fonts, to avoid a third-party request.
+- **Controls:** AUDIO and GLITCH are toggle buttons (`aria-pressed`) like PLAY/RESET; the whole bar is
+  right-aligned and in the layout flow (the graph ends above it) instead of fixed on top of it.
+- **Mobile:** theme + oracle on top, story docked at the bottom. Reduced motion is respected (overlay, glitch
+  shake, CSS animations). Canvas renders at devicePixelRatio (capped at 2).
+
 ## 2026-09-30
 
 - **Speech can never hang playback.** In production the oracle stayed on "answering" with audio on: Chrome

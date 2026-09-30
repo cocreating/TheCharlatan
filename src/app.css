@@ -1,49 +1,129 @@
 /* Global tokens and base elements. Component styles live in each .svelte file. */
 
-:root {
-  --bg: #050505;
-  --text: #e0e0e0;
-  --border: #222;
+@import '@fontsource/ibm-plex-mono/400.css';
+@import '@fontsource/ibm-plex-mono/500.css';
+@import '@fontsource/ibm-plex-mono/400-italic.css';
+@import '@fontsource-variable/fraunces/index.css';
+@import '@fontsource-variable/fraunces/wght-italic.css';
 
-  /* Type Colors (Desaturated/Pastel for Art vibe) */
-  --c-subject: #e0e0e0;
+:root {
+  color-scheme: dark;
+
+  /* Surfaces: the canvas is the darkest layer, panels float above it */
+  --bg: #07070a;
+  --bg-glow: #15141c;
+  --surface: rgb(12 12 16 / 82%);
+  --surface-solid: #0c0c10;
+  --surface-hover: #1c1c24;
+  --border: #2c2c36;
+  --border-strong: #4a4a58;
+
+  /* Text: every level stays readable on --surface (WCAG AA or better) */
+  --text: #ecebe6;
+  --text-dim: #b4b3bd;
+  --text-faint: #8d8c98;
+  --accent: #3ddbb0;
+  --danger: #ff6b6b;
+  --focus: #9fd8ff;
+
+  /* Word types: the single palette for text, overlay and graph (render.ts reads these) */
+  --c-subject: #f2efe9;
   --c-action: #ff6b6b;
-  --c-space: #4d96ff;
-  --c-time: #feca57;
-  --c-state: #1dd1a1;
-  --c-object: #ff9ff3;
-  --c-connector: #888;
+  --c-space: #6ea8ff;
+  --c-time: #ffd166;
+  --c-state: #3ddbb0;
+  --c-object: #f78fe6;
+  --c-connector: #9d9ca8;
+
+  --font-ui: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+  --font-story: 'Fraunces Variable', Georgia, 'Times New Roman', serif;
+
+  --radius: 6px;
+  --panel-blur: blur(12px);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 body {
   margin: 0;
   background: var(--bg);
   color: var(--text);
-  font-family: 'Courier New', Courier, monospace; /* Minimalist/Raw data vibe */
+  font-family: var(--font-ui);
   overflow: hidden;
   -webkit-font-smoothing: antialiased;
+}
+
+/* Faint film grain over everything; purely decorative */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 button {
   font-family: inherit;
   font-size: 0.8rem;
-  letter-spacing: 0.1em;
+  font-weight: 500;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   background: transparent;
-  border: 1px solid var(--border);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
   color: var(--text);
-  padding: 0.6rem 1.2rem;
+  padding: 0.55rem 1rem;
   cursor: pointer;
-  transition: all 0.2s;
-  min-width: 10em;
+  transition:
+    background 0.2s,
+    border-color 0.2s,
+    color 0.2s,
+    box-shadow 0.2s;
 }
 
-button:hover {
-  background: #222;
-  border-color: #555;
+button:hover:not(:disabled) {
+  background: var(--surface-hover);
+  border-color: var(--text-faint);
 }
 
 button:disabled {
   opacity: 0.4;
   cursor: default;
+}
+
+input,
+textarea,
+select {
+  font-family: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+::placeholder {
+  color: var(--text-faint);
+  opacity: 1;
+}
+
+::selection {
+  background: rgb(61 219 176 / 35%);
+}
+
+/* Thin scrollbars inside panels */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-strong) transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
