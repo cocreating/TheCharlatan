@@ -6,6 +6,8 @@
     forceManyBody,
     forceCenter,
     forceCollide,
+    forceX,
+    forceY,
     type Simulation,
   } from 'd3-force';
   import { charlatan } from '$lib/engine/store.svelte';
@@ -17,6 +19,24 @@
   const HOVER_RADIUS = 15;
   const PARTICLE_STEPS_PER_FRAME = 2;
   const DICE_FADE_MS = 1800; // Unchosen branches fade over this long in the oracle replay
+  // Scenes gather around points on a ring (radius as a share of the smaller side); shared nodes float free
+  const SCENE_RING = 0.2;
+  const SCENE_PULL = 0.06;
+
+  /** Where each scene gathers: evenly around the centre. */
+  function sceneAnchor(scene: number, count: number, w: number, h: number) {
+    const angle = (2 * Math.PI * scene) / count - Math.PI / 2;
+    const r = count > 1 ? SCENE_RING * Math.min(w, h) : 0;
+    return { x: w / 2 + r * Math.cos(angle), y: h / 2 + r * Math.sin(angle) };
+  }
+
+  /** Pulls every node with a scene towards its anchor. */
+  function applySceneForces(sim: Simulation<Node, Link>, count: number, w: number, h: number) {
+    const strength = (d: Node) => (d.scene === undefined || count < 2 ? 0 : SCENE_PULL);
+    sim
+      .force('scene-x', forceX<Node>(d => sceneAnchor(d.scene ?? 0, count, w, h).x).strength(strength))
+      .force('scene-y', forceY<Node>(d => sceneAnchor(d.scene ?? 0, count, w, h).y).strength(strength));
+  }
 
   let canvas: HTMLCanvasElement;
   let width = $state(800);
@@ -44,6 +64,8 @@
         .force('center', forceCenter(width / 2, height / 2))
         .force('collide', forceCollide(8)),
     );
+    const scenes = charlatan.graph.meta.scenes?.length ?? 0;
+    untrack(() => applySceneForces(sim, scenes, width, height));
 
     simulation = sim;
     simLinks = links;
@@ -55,6 +77,7 @@
     const [w, h] = [width, height];
     untrack(() => {
       simulation?.force('center', forceCenter(w / 2, h / 2));
+      if (simulation) applySceneForces(simulation, charlatan.graph.meta.scenes?.length ?? 0, w, h);
       simulation?.alpha(0.3).restart();
     });
   });
@@ -194,7 +217,10 @@
   ></canvas>
   {#if hoveredNode}
     <div class="tooltip" style:left="{tooltipPos.x + 10}px" style:top="{tooltipPos.y + 10}px">
-      <span class="tooltip-type">{hoveredNode.type}</span>
+      <span class="tooltip-type">
+        {hoveredNode.type}{#if hoveredNode.scene !== undefined && charlatan.graph.meta.scenes?.[hoveredNode.scene]}
+          · {charlatan.graph.meta.scenes[hoveredNode.scene]}{/if}
+      </span>
       {hoveredNode.text}
     </div>
   {/if}

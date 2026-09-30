@@ -96,6 +96,18 @@ describe('walk rules', () => {
     ]);
   });
 
+  it('scales link weights by affinity, but not echoes', () => {
+    const candidates = weighNextNodes('a', fan, [], {
+      affinity: id => (id === 'c' ? 0.25 : 1),
+      echoes: [{ id: 'z', weight: 0.25 }],
+    });
+    expect(candidates).toEqual([
+      { id: 'b', p: 2 / 3 },
+      { id: 'c', p: 1 / 6 },
+      { id: 'z', p: 1 / 6 },
+    ]);
+  });
+
   it('an echo keeps the walk going from a node without links', () => {
     expect(selectNextStep('c', links, [], () => 0.5, { echoes: [{ id: 'a', weight: 1 }] })?.node).toBe('a');
   });

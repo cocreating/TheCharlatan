@@ -5,6 +5,9 @@ import { mulberry32, type Rng } from './random';
 import { isAnswerComplete } from '../oracle/answer';
 import seedDataRaw from '../data/graph.seed.json';
 
+// Weight of a link that leaves the scene the story is in (one that stays weighs 1)
+const SCENE_DRIFT = 0.25;
+
 // Cast JSON to GraphData to ensure types match (especially if JSON import is loose)
 const seedData = seedDataRaw as unknown as GraphData;
 
@@ -68,6 +71,14 @@ export class CharlatanState {
   phrases = $derived(phrase(this.story));
   /** The newest fragment, as the voice says it. */
   activePhrase = $derived(this.phrases.at(-1) ?? null);
+  /** The scene the story is in: that of its latest fragment that has one. */
+  currentScene = $derived.by(() => {
+    for (let i = this.story.length - 1; i >= 0; i--) {
+      const scene = this.nodesById.get(this.story[i].id)?.scene;
+      if (scene !== undefined) return scene;
+    }
+    return undefined;
+  });
 
   constructor(graph: GraphData = seedData) {
     this.graph = graph;
@@ -123,9 +134,16 @@ export class CharlatanState {
       const type = this.nodesById.get(id)?.type;
       return role === undefined || (type !== undefined && canFollow(role, type));
     };
+    // ...and it lingers in the scene the story is in, drifting to another now and then
+    const scene = this.currentScene;
+    const affinity = (id: string) => {
+      const target = this.nodesById.get(id)?.scene;
+      return scene === undefined || target === undefined || target === scene ? 1 : SCENE_DRIFT;
+    };
     const roll = selectNextStep(this.activeNodeId, this.graph.links, this.history, this.rng, {
       fits,
       echoes: echoesFor(this.story),
+      affinity,
     });
     const nextNode = roll ? this.nodesById.get(roll.node) : undefined;
 

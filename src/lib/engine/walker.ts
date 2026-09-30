@@ -16,11 +16,14 @@ export interface WalkRules {
   fits?: (targetId: string) => boolean;
   /** Nodes offered without a link and without the history penalty (see echoesFor). */
   echoes?: Echo[];
+  /** Multiplies a link's weight by how well its target fits where the story is (e.g. its scene). */
+  affinity?: (targetId: string) => number;
 }
 
 /**
  * The walker's options from `currentNodeId`, each with its final probability:
- * link weight, times PENALTY_FACTOR for every recent visit, plus any echoes, normalized.
+ * link weight, times PENALTY_FACTOR for every recent visit and the affinity, plus any
+ * echoes, normalized.
  */
 export function weighNextNodes(
   currentNodeId: string,
@@ -40,8 +43,8 @@ export function weighNextNodes(
   for (const link of fitting.length > 0 ? fitting : outgoing) {
     const id = endId(link.target);
     const recentVisits = recent.filter(v => v === id).length;
-    // weight = base_weight * (PENALTY_FACTOR ^ recentVisits)
-    offer(id, (link.weight || 1) * Math.pow(PENALTY_FACTOR, recentVisits));
+    // weight = base_weight * (PENALTY_FACTOR ^ recentVisits) * affinity
+    offer(id, (link.weight || 1) * Math.pow(PENALTY_FACTOR, recentVisits) * (rules.affinity?.(id) ?? 1));
   }
   for (const echo of rules.echoes ?? []) offer(echo.id, echo.weight);
 

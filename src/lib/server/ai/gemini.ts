@@ -1,4 +1,4 @@
-import { NODE_TYPES } from '$lib/data/buildGraph';
+import { SCENE_TYPES } from '$lib/engine/rules';
 import { SYSTEM_PROMPT, userMessage } from './prompt';
 import { AIProviderError, parseJson, type VocabularyProvider } from './types';
 
@@ -7,10 +7,21 @@ const API_BASE = 'https://generativelanguage.googleapis.com/v1beta';
 export const DEFAULT_GEMINI_MODEL = 'gemini-flash-latest';
 
 // Gemini's responseSchema uses the OpenAPI subset (uppercase types, no additionalProperties)
+const STRINGS = { type: 'ARRAY', items: { type: 'STRING' } };
 const RESPONSE_SCHEMA = {
   type: 'OBJECT',
-  properties: Object.fromEntries(NODE_TYPES.map(t => [t, { type: 'ARRAY', items: { type: 'STRING' } }])),
-  required: NODE_TYPES,
+  properties: {
+    scenes: {
+      type: 'ARRAY',
+      items: {
+        type: 'OBJECT',
+        properties: { name: { type: 'STRING' }, ...Object.fromEntries(SCENE_TYPES.map(t => [t, STRINGS])) },
+        required: ['name', ...SCENE_TYPES],
+      },
+    },
+    connector: STRINGS,
+  },
+  required: ['scenes', 'connector'],
 };
 
 interface GeminiResponse {
