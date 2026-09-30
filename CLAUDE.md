@@ -53,6 +53,9 @@ Run check, lint and test before every commit.
 - Provider picked from env: `GEMINI_API_KEY` (default, free tier), OpenAI-compatible (`OPENAI_BASE_URL`/`OPENAI_API_KEY`/`OPENAI_MODEL`), or `ANTHROPIC_API_KEY`. `AI_PROVIDER` forces one.
 - Per-IP rate limit `RATE_LIMIT_PER_HOUR` (default 20).
 - Roadmap: `.agents/docs/proposals/P01-svelte-migration-and-ai.md` (next: A2 streamed narrator, A3 oracle).
+- **Next up: `.agents/docs/proposals/P02-oracle-and-memory.md`** — "Ask the oracle" + "Show the dice", with
+  sessions and cached AI vocabularies (plus theme autocomplete) in Supabase project TMI. The database is
+  already created (`supabase/migrations/20260930_charlatan_oracle.sql`); the app code is pending.
 
 ## Deploy
 
