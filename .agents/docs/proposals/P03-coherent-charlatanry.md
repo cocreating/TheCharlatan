@@ -1,6 +1,6 @@
 # P03 — Coherent charlatanry: stories that hold together
 
-> Status: **phases 1 + 2 implemented** on branch `claude/lucid-planck-hikkqf` (not merged yet) · check, lint and test green · phases 3 and 4 proposed · Date: 2026-09-30
+> Status: **phases 1 + 2 merged and live** (PR #9) · **phase 3 implemented** on branch `claude/lucid-planck-hikkqf` · phase 4 proposed · Date: 2026-09-30
 
 ## 0. The problem
 
@@ -34,7 +34,7 @@ who is doing what, and what it is about.
    (Vercel previews), a new loop/TTS rhythm, and it clashes with the oracle's reveal ("There was nothing there
    to find") unless the raw words stay visible.
 
-**Decision:** 1 + 2 now (free, deterministic, works with the seed graph, locally and in previews, and keeps the
+**Decision:** 1 + 2 first (free, deterministic, works with the seed graph, locally and in previews, and keeps the
 concept: *the dice choose, the grammar only makes it speakable*). 3 next as a prompt change. 4 later, if ever, as
 an optional "charlatan's voice" mode.
 
@@ -135,14 +135,37 @@ Still dreamlike, but it can be followed.
 - A manual jump (clicking a node) can break the grammar for a fragment; the walk recovers on the next step.
 - Speech could not be tested headless (as in P02); the breath before a sentence is 600 ms at 1× flow.
 
-## 4. Phase 3 — scenes (proposed)
+## 4. Phase 3 — scenes (implemented)
 
-- Prompt v3: the AI returns the vocabulary grouped into 3–5 scenes (each with its own subjects, objects, places,
-  states), all fitting the theme. Structured output keeps it robust.
-- `buildGraph` links mostly within a scene (e.g. 80%) and bridges between scenes for the rest. The walker lingers
-  in a scene and drifts to another; the force layout shows the scenes as clusters.
-- The seed vocabulary gets rewritten in scenes too.
-- Open: store the scene on each node (`Node.scene?: number`) to colour or label clusters?
+### 4.1 Design
+
+- **Vocabulary in scenes.** A vocabulary is now `{ scenes: [{ name, subject, action, object, state, space, time }], connector }`:
+  4 scenes (`SCENE_COUNT`), each a small world inside the theme with its own characters, things, places, moods and
+  moments (`SCENE_COUNTS`: 5 subjects, 8 actions, 6 objects, 6 states, 6 places, 4 times), plus 10 shared
+  connectors. Every node keeps its scene (`Node.scene`); the names go in `graph.meta.scenes`.
+- **Links stay home.** `buildGraph` picks each link inside the source's scene 85% of the time (`SCENE_LOYALTY`);
+  the rest may bridge to any scene. A connector has no scene and gets 3 links into *every* scene, so a new
+  sentence can stay where the story is.
+- **The walker lingers.** A link that leaves the scene the story is in (`currentScene`, the scene of its latest
+  fragment) weighs 0.25 (`SCENE_DRIFT`, applied through the walker's new `affinity` rule); echoes are unaffected.
+  The dice show the result like any other weight.
+- **Prompt v3** asks for the scene shape, with short scene names. `sanitizeVocabulary` dedupes across the whole
+  vocabulary, keeps up to 4 scenes, drops empty ones, and wants at least 2 scenes and 5 fragments per type in
+  total. `PROMPT_VERSION` → `v3`.
+- **Seed** regrouped into 4 scenes: *the machine*, *the hall of mirrors*, *the drowned archive*, *the edge of the
+  void* (a few new places and times to fill them).
+- **Graph:** a weak force pulls each scene towards its own point on a ring around the centre, so the scenes show as
+  lobes with the shared connectors in the middle. The tooltip names the scene.
+
+### 4.2 Result
+
+Measured over 300 walks of 80 steps on the seed: 90% of steps stay in the scene (78% before the connector links
+and the drift weight), and a visit to a scene lasts 8.7 fragments, about 2.5 sentences. Thin vocabularies (down
+to 2 scenes, 1 fragment per type in some scenes) never built an invalid graph in 4,000 tries.
+
+> A sudden pattern grows luminous. Later, a faceless witness burns bright. The faceless witness reveals a trace.
+> The faceless witness reflects a prism beneath the surface. Elsewhere, the geometric shadow shatters a duplicate
+> again and again. The duplicate obscures the lens.
 
 ## 5. Phase 4 — narrator (proposed, low priority)
 

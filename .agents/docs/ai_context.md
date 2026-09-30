@@ -25,6 +25,7 @@ A `CharlatanState` class built on Svelte 5 runes (`$state`, `$derived`), exporte
 ### 2. Traversal Logic (`src/lib/engine/walker.ts`, `grammar.ts`, `rules.ts`)
 `selectNextStep` (called by `step`) implements:
 - **Sentence grammar**: `CONNECTION_RULES` says what may follow each *role*. A role is the node's type, except an object that doesn't follow an action: that's a noun come back as a subject (`rolesOf`, derived from the sequence, never stored). Only links that fit the current role are candidates; if none fits, any link will do.
+- **Scenes**: vocabularies come in scenes; links leaving the story's current scene weigh 0.25 (`SCENE_DRIFT` in the store, via the walker's `affinity` rule), so the story lingers and drifts.
 - **Echoes**: when the next fragment may open a sentence, the subject and object of the sentence just said are offered too, without a link and without the history penalty (`echoesFor`, `ECHO_*_WEIGHT`).
 - **Weighted Selection**: Links can have a `weight` property.
 - **History Penalty**: A `RECENT_HISTORY_PENALTY_WINDOW` (default 20) tracks recent nodes. If a candidate node was visited recently, its weight is drastically reduced to encourage exploration.

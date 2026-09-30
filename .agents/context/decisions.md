@@ -2,6 +2,16 @@
 
 Newest first. One entry per decision: what was decided and why.
 
+## 2026-09-30 — Vocabularies in scenes (P03 phase 3)
+
+- **A vocabulary is 4 scenes plus shared connectors.** Each scene is a small world inside the theme; nodes keep
+  their scene. Links stay inside their scene 85% of the time; connectors link into every scene.
+- **The walker lingers**: links that leave the story's current scene weigh 0.25. Before this, the scene changed
+  about once per sentence; now a scene lasts about 2.5 sentences and still drifts.
+- **Scenes show in the graph** as lobes (a weak force towards a point per scene); not coloured, since colour
+  already means the word type.
+- **`PROMPT_VERSION` v3**: the answer shape changed, so v2 vocabularies are no longer served.
+
 ## 2026-09-30 — Stories in sentences (P03 phases 1 + 2)
 
 - **The walker speaks in sentences**: `[connector,] subject (action object | state) [space] [time].` The owner

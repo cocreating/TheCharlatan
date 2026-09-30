@@ -5,6 +5,8 @@ export interface Node {
   id: string;
   type: NodeType;
   text: string;
+  /** The scene it belongs to (index into `meta.scenes`); none for shared fragments like connectors. */
+  scene?: number;
   // d3-force mutable properties
   x?: number;
   y?: number;
@@ -38,6 +40,8 @@ export interface GraphData {
   meta: {
     version: number;
     seed: number | string;
+    /** Scene names, when the vocabulary came in scenes. */
+    scenes?: string[];
   };
   nodes: Node[];
   links: Link[];

@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { NODE_TYPES } from '$lib/data/buildGraph';
+import { SCENE_TYPES } from '$lib/engine/rules';
 import { AIProviderError } from '$lib/server/ai/types';
 
 const env = vi.hoisted(() => ({ GEMINI_API_KEY: 'test-key', RATE_LIMIT_PER_HOUR: '2' }) as Record<string, string | undefined>);
@@ -23,7 +23,11 @@ vi.mock('$lib/server/vocabularyCache', async importOriginal => ({
 
 const { POST } = await import('./+server');
 
-const vocabulary = Object.fromEntries(NODE_TYPES.map(t => [t, Array.from({ length: 10 }, (_, i) => `${t} ${i}`)]));
+const ten = (prefix: string) => Array.from({ length: 10 }, (_, i) => `${prefix} ${i}`);
+const vocabulary = {
+  scenes: [0, 1, 2, 3].map(s => ({ name: `scene ${s}`, ...Object.fromEntries(SCENE_TYPES.map(t => [t, ten(`${t} ${s}`)])) })),
+  connector: ten('connector'),
+};
 
 async function call(body: unknown, ip = '10.0.0.1') {
   const request = new Request('http://localhost/api/vocabulary', { method: 'POST', body: JSON.stringify(body) });
@@ -49,7 +53,8 @@ describe('POST /api/vocabulary', () => {
     expect(res.status).toBe(200);
     const body = await res.json();
     expect(body.theme).toBe('noir rain');
-    expect(body.graph.nodes.length).toBe(70);
+    expect(body.graph.nodes.length).toBe(150); // 4 scenes of 35 (capped per type) + 10 connectors
+    expect(body.graph.meta.scenes).toHaveLength(4);
     expect(provider).toHaveBeenCalledWith('noir rain');
   });
 

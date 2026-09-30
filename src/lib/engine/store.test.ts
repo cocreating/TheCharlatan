@@ -33,6 +33,19 @@ describe('CharlatanState', () => {
     expect(s.phrases.filter(p => p.opens).length).toBeGreaterThan(20);
   });
 
+  it('lingers in a scene, drifting now and then', () => {
+    const s = new CharlatanState();
+    const scenes: number[] = [];
+    for (let i = 0; i < 400; i++) {
+      s.step();
+      if (s.activeNode?.scene !== undefined) scenes.push(s.activeNode.scene);
+    }
+    expect(s.currentScene).toBe(scenes.at(-1));
+    const stays = scenes.slice(1).filter((scene, i) => scene === scenes[i]).length;
+    expect(stays / (scenes.length - 1)).toBeGreaterThan(0.75);
+    expect(new Set(scenes).size).toBeGreaterThan(1);
+  });
+
   it('reset stops playback and restarts the story', () => {
     const s = new CharlatanState();
     s.step();

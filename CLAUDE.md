@@ -44,7 +44,7 @@ Run check, lint and test before every commit.
 | Walker / rules / validation | `src/lib/engine/walker.ts`, `rules.ts`, `validateGraph.ts`; sentence grammar, echoes and punctuation in `grammar.ts` (P03, spec in `.agents/docs/artifacts/A20-walker-spec.md`) |
 | Graph + canvas | `src/lib/viz/ForceGraph.svelte`, `render.ts`, `particles.ts` |
 | UI | `src/lib/ui/*.svelte` (intro dialog: `IntroScreen.svelte`), page in `src/routes/+page.svelte`; spec in `.agents/docs/artifacts/A40-ui-spec.md`; all colours/fonts are tokens in `src/app.css` (canvas reads them via `loadThemeColors`) |
-| Graph from vocabulary | `src/lib/data/buildGraph.ts` (seed vocabulary in `builder.ts` → `graph.seed.json`) |
+| Graph from vocabulary | `src/lib/data/buildGraph.ts` — vocabularies come in scenes (`SCENE_*` in `rules.ts`); seed vocabulary in `builder.ts` → `graph.seed.json` |
 | AI theme → vocabulary | `src/routes/api/vocabulary/+server.ts`, `src/lib/server/vocabulary.ts`, providers in `src/lib/server/ai/` |
 | Oracle (ask → dice → number) | `src/lib/oracle/` (`oracle.svelte.ts` phases, `answer.ts` rules), `src/lib/ui/OraclePanel.svelte`; seeded PRNG in `src/lib/engine/random.ts` |
 | Memory (Supabase) | `src/lib/server/db.ts`, `vocabularyCache.ts`, `sessions.ts`; routes `api/themes/suggest`, `api/sessions`; `normalizeTheme` in `src/lib/themes.ts` |
@@ -57,7 +57,7 @@ Run check, lint and test before every commit.
 - AI vocabularies are cached per theme in Supabase (up to 3 variants); bump `PROMPT_VERSION` in
   `src/lib/server/ai/prompt.ts` when the prompt changes.
 - Roadmap: `.agents/docs/proposals/P01-svelte-migration-and-ai.md`; story coherence in `P03-coherent-charlatanry.md`
-  (phases 1 + 2 done; next: phase 3, vocabulary in scenes).
+  (phases 1–3 done: sentence grammar, echoes, vocabularies in scenes; phase 4, an AI narrator, is optional).
 
 ## Memory (Supabase)
 

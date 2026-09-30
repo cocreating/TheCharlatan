@@ -28,12 +28,22 @@ export const ROLES: Record<NodeType, NodeType[]> = {
   connector: ['connector'],
 };
 
-export const NODE_COUNTS: Record<NodeType, number> = {
-  subject: 20,
-  action: 35,
-  space: 25,
-  time: 15,
-  state: 25,
-  object: 25,
-  connector: 10
+/** The types a scene holds; connectors are shared by every scene. */
+export type SceneType = Exclude<NodeType, 'connector'>;
+export const SCENE_TYPES: SceneType[] = ['subject', 'action', 'space', 'time', 'state', 'object'];
+
+/** Scenes in a vocabulary: small worlds inside one theme. */
+export const SCENE_COUNT = 4;
+export const MIN_SCENES = 2;
+
+/** Fragments per scene, by type. */
+export const SCENE_COUNTS: Record<SceneType, number> = {
+  subject: 5,
+  action: 8,
+  space: 6,
+  time: 4,
+  state: 6,
+  object: 6,
 };
+
+export const CONNECTOR_COUNT = 10;
