@@ -21,6 +21,11 @@ Newest first. One entry per decision: what was decided and why.
   (`VERCEL_ENV=production` or host `the-charlatan.vercel.app`); PR previews still work.
   The owner can still unpublish Pages from Settings → Pages if wanted.
 
+- **Dependabot alerts: 24 stale alerts dismissed as "inaccurate".** All were dev dependencies from the old
+  React lockfile; the current `package-lock.json` already has patched versions (`npm audit`: 0). The repo's
+  dependency graph API answered 404, so Dependabot hadn't rescanned. If alerts reappear, check `npm audit`
+  first; a real one gets fixed with `npm audit fix` + tests, not dismissed.
+
 ## 2026-09-29
 
 - **Agent files live in `.agents/`** (docs in `.agents/docs/`, working memory in `.agents/context/`). The owner's convention for all projects.
