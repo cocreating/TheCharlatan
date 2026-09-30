@@ -30,7 +30,7 @@ export function openAICompatibleProvider(baseUrl: string, apiKey: string, model:
 
     if (!response.ok) {
       const detail = await response.text().catch(() => '');
-      throw new AIProviderError(`openai-compatible ${response.status}: ${detail.slice(0, 300)}`, response.status === 429);
+      throw new AIProviderError(`openai-compatible ${response.status}: ${detail.slice(0, 300)}`, response.status === 429 || response.status === 503);
     }
 
     const choice = ((await response.json()) as ChatCompletion).choices?.[0];

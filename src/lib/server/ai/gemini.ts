@@ -38,7 +38,7 @@ export function geminiProvider(apiKey: string, model = DEFAULT_GEMINI_MODEL): Vo
 
     if (!response.ok) {
       const detail = await response.text().catch(() => '');
-      throw new AIProviderError(`gemini ${response.status}: ${detail.slice(0, 300)}`, response.status === 429);
+      throw new AIProviderError(`gemini ${response.status}: ${detail.slice(0, 300)}`, response.status === 429 || response.status === 503);
     }
 
     const data = (await response.json()) as GeminiResponse;

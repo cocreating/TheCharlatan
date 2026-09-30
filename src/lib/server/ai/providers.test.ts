@@ -42,8 +42,11 @@ describe('geminiProvider', () => {
     expect(body.contents[0].parts[0].text).toBe('Theme: noir');
   });
 
-  it('flags quota errors as busy and blocked prompts with a public message', async () => {
+  it('flags quota and overload errors as busy and blocked prompts with a public message', async () => {
     fetchMock.mockResolvedValueOnce(jsonResponse({ error: { message: 'quota' } }, 429));
+    await expect(geminiProvider('KEY')('x')).rejects.toMatchObject({ busy: true });
+
+    fetchMock.mockResolvedValueOnce(jsonResponse({ error: { message: 'high demand', status: 'UNAVAILABLE' } }, 503));
     await expect(geminiProvider('KEY')('x')).rejects.toMatchObject({ busy: true });
 
     fetchMock.mockResolvedValueOnce(jsonResponse({ promptFeedback: { blockReason: 'SAFETY' } }));

@@ -11,6 +11,31 @@ alive by pm2. Pushes to `master` deploy automatically over SSH (see below).
 with `BASE_PATH` (e.g. `BASE_PATH='' npm run build` to serve from a domain root).
 In dev the app lives at `http://localhost:5173/about/charlatans`.
 
+## Production setup (as deployed on 2026-09-30)
+
+What is actually running, so the next session doesn't have to rediscover it.
+No hostnames, users or keys here — those live on the server and in the owner's `~/.ssh/config`.
+
+- **Server:** the Plesk VPS that also hosts themostimportant.page.
+- **User:** the app runs as the **Plesk subscription user of themostimportant.page**, not root.
+  The clone is at `~/apps/TheCharlatan` in that user's home (`/var/www/vhosts/themostimportant.page`).
+- **Node:** Plesk only ships Node ≤ 21, so Node 22 is installed with **nvm** in that home
+  (`nvm alias default 22`). pm2 is installed globally inside that nvm Node.
+  `scripts/deploy.sh` sources `~/.nvm/nvm.sh`, so non-interactive SSH finds both.
+- **pm2:** process `charlatans` (`npm start`), list saved with `pm2 save`. Reboots are covered by a
+  systemd unit `pm2-<subscription user>`, registered once as root with
+  `pm2 startup systemd -u <user> --hp /var/www/vhosts/themostimportant.page`
+  (run with the full path to that user's nvm `pm2`).
+- **nginx:** the `location /about/charlatans` block from section 3 is pasted in Plesk →
+  themostimportant.page → Apache & nginx Settings → **Additional nginx directives**
+  (a single field for HTTP and HTTPS). Don't edit nginx files by hand; Plesk regenerates them.
+- **AI:** Gemini with `GEMINI_MODEL=gemini-flash-lite-latest`. The default `gemini-flash-latest`
+  answered 503 "high demand" on every try on launch day; flash-lite worked first time.
+- **Deploys:** the `DEPLOY_*` secrets are **not set yet**, so CI runs checks but skips the deploy.
+  Deploy by hand: `ssh <subscription user> 'bash ~/apps/TheCharlatan/scripts/deploy.sh ~/apps/TheCharlatan'`.
+- **SSH gotchas on this server:** root login by password is disabled (keys only) and Fail2Ban bans
+  an IP after a couple of failed root logins. Use key-based access only.
+
 ## 1. One-time server setup
 
 Requirements: Node ≥ 22.9, git, pm2 (`npm install -g pm2`).
@@ -23,6 +48,7 @@ cp .env.example .env        # then fill in GEMINI_API_KEY (or another provider)
 chmod 600 .env
 bash scripts/deploy.sh ~/apps/TheCharlatan   # install, build, pm2 start
 pm2 startup                 # follow its instructions so pm2 survives reboots
+                            # (needs root; see "Production setup" below)
 ```
 
 If the repository is private, give the server read access (a GitHub deploy key or
@@ -44,7 +70,8 @@ See `.env.example`:
 | `RATE_LIMIT_PER_HOUR` | Theme generations per IP per hour (default 20) |
 
 Keys are read only on the server (`$env/dynamic/private`) and never reach the browser.
-Free tiers have their own daily quotas; when one runs out the app answers "The oracle is busy".
+Free tiers have their own daily quotas; when one runs out (429) or the model is overloaded
+(503) the app answers "The oracle is busy".
 For a paid provider, also set a monthly spend limit in its console.
 
 ## 3. Reverse proxy (nginx)
@@ -98,3 +125,14 @@ The repo is also connected to a Vercel project, which builds a preview for every
 When `VERCEL` is set, `svelte.config.js` switches to `@sveltejs/adapter-vercel` and
 serves from the domain root. Production stays on the VPS (`adapter-node`). Previews
 have no AI key, so SUMMON answers "AI is not configured" there.
+
+## Other public copies (to clean up)
+
+As of 2026-09-30 two older copies are still public and without AI:
+
+- **https://cocreating.github.io/TheCharlatan/** — GitHub Pages, legacy build from the
+  `gh-pages` branch. The deploy was retired but the site was never unpublished.
+- **https://the-charlatan.vercel.app/** — the Vercel project's production domain, built from `master`.
+
+Canonical URL: https://themostimportant.page/about/charlatans. See `decisions.md` for what
+to do with each.
