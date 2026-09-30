@@ -40,8 +40,8 @@ The `selectNextNode` function implements:
 | :--- | :--- |
 | **Narrative content** | `src/lib/data/graph.seed.json` |
 | **Traversal "personality"** | `src/lib/engine/walker.ts` (weights and penalties) |
-| **Visual style** | `src/lib/viz/render.ts` (colors, glitch, particles) |
-| **UI/Controls** | `src/lib/ui/Controls.svelte` |
+| **Visual style** | Tokens in `src/app.css` (colours, fonts); canvas drawing in `src/lib/viz/render.ts` (reads the tokens via `loadThemeColors`), glitch in `ForceGraph.svelte`, particles in `particles.ts` |
+| **UI/Controls** | `src/lib/ui/Controls.svelte`; intro screen in `src/lib/ui/IntroScreen.svelte` |
 | **AI theme → vocabulary** | `src/lib/server/ai/` (prompt, providers), `src/lib/server/vocabulary.ts`, `src/routes/api/vocabulary/+server.ts` |
 | **Main Loop / Sync** | `src/lib/engine/loop.ts`, `src/lib/engine/store.svelte.ts` |
 

@@ -13,7 +13,8 @@ The project visualizes a force-directed graph where each node represents a word 
     - **Text-to-Speech (TTS)**: The narrative is voiced in real-time with adjustable speed and pitch.
     - **Ambient Audio Layer**: A procedural audio engine that generates soundscapes based on the graph's state.
     - **Visual Glitch Effects**: Intentional visual artifacts that trigger based on narrative "intensity" or state changes.
-- **Interactive Controls**: Users can pause/play, adjust transition and voice speeds, toggle TTS, and manually "jump" to specific nodes by clicking them in the graph.
+- **Intro Screen**: The piece opens with a title card; visitors begin with sound or in silence.
+- **Interactive Controls**: Users can pause/play, adjust transition and voice speeds, toggle AUDIO (TTS) and GLITCH, and manually "jump" to specific nodes by clicking them in the graph.
 
 ## Project Structure
 - **Visualization**: A high-performance HTML5 Canvas renderer for the D3 graph, including a custom particle system for "scent" trails.

@@ -26,7 +26,7 @@ The engine is the heart of the application, responsible for the narrative logic 
 - **Particles (`particles.ts`)**: A lightweight particle engine that emits visual "scent" trails from active nodes.
 
 ### 3. UI (`src/lib/ui/`)
-`Controls.svelte`, `StoryPanel.svelte` and `CinematicOverlay.svelte` bind directly to the store (`bind:checked={charlatan.ttsEnabled}` etc.).
+`Controls.svelte`, `StoryPanel.svelte` and `CinematicOverlay.svelte` read and write the store directly (AUDIO and GLITCH are toggle buttons flipping `charlatan.ttsEnabled` / `glitchEnabled`). `IntroScreen.svelte` is a modal `<dialog>` that starts playback (with or without sound) on the first click, which also unlocks speech and Web Audio. Styling is token-based: all colours and fonts live in `src/app.css` and the canvas reads them via `loadThemeColors()` (see A40 / A30).
 
 ### 4. AI: themed vocabulary (`src/routes/api/vocabulary/`, `src/lib/server/`)
 `ThemePrompt.svelte` posts a theme to `POST /api/vocabulary`. The endpoint rate-limits per client IP (`rateLimit.ts`), asks the configured AI provider (`src/lib/server/ai/`: Gemini by default, any OpenAI-compatible API, or Claude; shared prompt in `prompt.ts`, JSON output with one string array per node type), sanitizes the fragments (`vocabulary.ts`), builds a graph with `buildGraph` and checks it with `validateGraph`. The client swaps it in with `charlatan.loadGraph()`; ORIGINAL restores the seed. API keys live only in the server's `.env`.
