@@ -3,7 +3,7 @@
 ## Layout
 - **Full-bleed graph** above an in-flow controls bar; panels float over the graph.
 - **Desktop**: Theme + Oracle top left, Story on the right edge (full height), controls bar at the bottom.
-- **Mobile (< 768px)**: Theme + Oracle on top, Story docked at the bottom, controls wrap onto two rows.
+- **Mobile (< 768px)**: Theme + Oracle (folded) on top, Story docked at the bottom, controls wrap onto two rows.
 - **Intro**: a modal dialog opens the piece (see below); the page behind is inert until it closes.
 
 ## Components
@@ -12,7 +12,8 @@
   The click is the user gesture browsers require before speech and Web Audio. Shown on every load.
 - **ForceGraph**: Interactive canvas. Click to jump. Hover for tooltip (type + text).
 - **CinematicOverlay**: the current word, large, animated per type (serif, type colour).
-- **ThemePrompt** / **OraclePanel**: see P01 / P02.
+- **ThemePrompt** / **OraclePanel**: see P01 / P02. On mobile the oracle's idle form starts folded behind an
+  ASK THE ORACLE toggle (`aria-expanded`; opening it focuses the question); the other phases always show.
 - **StoryPanel**: header (STORY, word count, HIDE/SHOW), auto-scrolling fragments coloured by type,
   collapsible colour legend ("What do the colours mean?").
 - **Controls** (right-aligned, in this order): `SEQ n` · Flow / Voice speed sliders (0.5×–3×) ·
