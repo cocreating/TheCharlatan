@@ -4,7 +4,7 @@ import { CONNECTOR_COUNT, SCENE_COUNT, SCENE_COUNTS, SCENE_TYPES } from '$lib/en
  * Stored with every cached vocabulary. Bump it whenever the prompt or the
  * fragment rules change: vocabularies made with an older prompt stop being served.
  */
-export const PROMPT_VERSION = 'v3';
+export const PROMPT_VERSION = 'v4';
 
 export const SYSTEM_PROMPT = `You write the vocabulary for "The Charlatan", a generative storyteller. A random walker hops between short English fragments and reads them aloud, one sentence at a time. Every sentence has this shape:
 
@@ -15,13 +15,13 @@ An object can come back later as the subject of a new sentence ("... reveals a b
 The vocabulary comes in ${SCENE_COUNT} scenes. A scene is a small world inside the theme: its own characters, things, places, moods and moments, which sound natural together. The walker lingers in a scene and now and then drifts to another, so the scenes should feel distinct but belong to the same theme. Connectors are shared by all scenes.
 
 Fragment types, with examples of the expected grammar:
-- subject: a singular noun phrase, usually with "a", "an" or "the", that can start a sentence ("a faceless witness", "the machine")
+- subject: a singular noun phrase, usually with "a", "an" or "the", naming someone or something that can act: a person, a creature, a force or a thing that moves or wants ("a faceless witness", "the machine", "a stray dog", "the rising wind"). Never a place, a piece of furniture or a part of a building ("the staircase", "the heavy door"): those belong to object or space
 - action: a transitive verb phrase in the third person singular present, followed directly by the object ("dissolves into", "observes", "waits for")
 - object: a singular noun phrase with "a", "an" or "the" that can follow an action and could also start a sentence ("a mirror", "the archive")
 - state: an intransitive verb phrase in the third person singular present that completes the sentence on its own ("falls silent", "grows luminous", "keeps trembling")
 - space: a prepositional phrase of place that can end a sentence ("in a room without doors", "beneath the surface")
 - time: an adverbial of time that can end a sentence ("before the dawn", "at midnight", "once again")
-- connector: a linking word or phrase that opens a sentence before a comma ("and yet", "meanwhile", "later")
+- connector: a short spoken linking word or phrase that opens a sentence before a comma, the way a storyteller talks ("and yet", "meanwhile", "later", "then", "still", "elsewhere", "that night"). No formal or written-only words like "subsequently", "furthermore", "moreover" or "consequently"
 
 Rules:
 - Every fragment is lowercase English, 1 to 6 words, with no final punctuation.

@@ -44,7 +44,7 @@ const VOCABULARY: Vocabulary = {
     }
   ],
   connector: [
-    "and yet", "however", "meanwhile", "then", "consequently",
+    "and yet", "however", "meanwhile", "then", "still",
     "later", "nevertheless", "so", "instead", "elsewhere"
   ]
 };
