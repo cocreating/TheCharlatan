@@ -2,6 +2,15 @@
 
 Newest first. One entry per decision: what was decided and why.
 
+## 2026-09-30 — Prompt v4: subjects that act, spoken connectors
+
+- **Tested prompt v3 live** (theme "zz scene test lighthouse keeper", hidden from suggestions with `listed = false`):
+  Gemini follows the scene schema. But some subjects were places or furniture ("the spiral staircase touches…")
+  and some connectors were formal ("subsequently", "furthermore").
+- **v4** asks for subjects that can act (a person, creature, force or moving thing; never a place, furniture or
+  part of a building) and for short spoken connectors, naming the formal ones to avoid. The seed swaps
+  "consequently" for "still". `PROMPT_VERSION` → `v4`.
+
 ## 2026-09-30 — Vocabularies in scenes (P03 phase 3)
 
 - **A vocabulary is 4 scenes plus shared connectors.** Each scene is a small world inside the theme; nodes keep
