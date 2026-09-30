@@ -118,6 +118,8 @@
       />
       <ul id="theme-suggestions" role="listbox" aria-label="Themes already summoned" hidden={!listOpen}>
         {#each suggestions as s, i (s.key)}
+          <!-- Keyboard lives on the input (combobox + aria-activedescendant); the click is for pointers. -->
+          <!-- svelte-ignore a11y_click_events_have_key_events -->
           <li
             id="theme-option-{i}"
             role="option"

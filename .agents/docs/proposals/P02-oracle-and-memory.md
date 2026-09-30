@@ -1,6 +1,6 @@
 # P02 — El oráculo que se desenmascara + memoria en Supabase
 
-> Estado: **código escrito en la rama `p02-oracle` (WIP)** · falta cerrar check/tests/docs, ver §6 · Supabase TMI listo y variables puestas en el VPS · Fecha: 2026-09-30
+> Estado: **implementada** en la rama `p02-oracle` (PR a `master`, pendiente de merge) · check, lint y test en verde · Supabase TMI listo y variables puestas en el VPS · Fecha: 2026-09-30
 
 ## 0. Decisiones tomadas
 
@@ -110,8 +110,8 @@ el futuro se muestran preguntas de otros, hará falta moderación previa.
 
 ## 6. Estado de la implementación (relevo, 2026-09-30)
 
-Código escrito en local (Mac) y subido como WIP a la rama `p02-oracle`. **No** pasa aún
-`npm run check`; tests nuevos sin escribir. No hacer merge a `master` hasta cerrar la lista de abajo.
+Código escrito en local (Mac) y subido como WIP a la rama `p02-oracle`; cerrado en la nube el mismo día
+(ver «Pendiente», todo resuelto). El merge a `master` despliega (CI).
 
 ### Hecho
 | Pieza | Archivos |
@@ -131,22 +131,23 @@ Código escrito en local (Mac) y subido como WIP a la rama `p02-oracle`. **No** 
 | Dados en el canvas: ramas con grosor ∝ p, las no elegidas se desvanecen | `src/lib/viz/render.ts` (`drawDice`), `ForceGraph.svelte` |
 | Dependencia `@supabase/supabase-js` | `package.json` |
 
-### Pendiente
-1. **Error de tipos** en `oracle.svelte.ts` (`respond`): tras `await this.replay()` TS estrecha `phase` a `'asking'` y marca
-   `this.phase === 'replaying'` como imposible. Arreglar sin trucos (p. ej. `replay()` devuelve si terminó o fue cancelado).
-2. **Aviso a11y** en los `<li role="option">` de `ThemePrompt`: el teclado se gestiona en el input (patrón
-   `aria-activedescendant`); justificar con `<!-- svelte-ignore a11y_click_events_have_key_events -->` o equivalente.
-3. **Lint**: en local solo fallaba `dist/` (resto ignorado por git del antiguo build de React); añadir `dist` a
-   `globalIgnores` en `eslint.config.js` igualmente.
-4. **Tests**: correr los existentes (store/walker/vocabulary pueden necesitar ajustes) y añadir: `normalizeTheme`,
-   reproducibilidad del walker con semilla y `rollAmong`, `isAnswerComplete`/`answerText`/`revealLines`,
-   `parseSessionInput`, `nextVariant`, `/api/vocabulary` con caché mockeada (`$lib/server/db` + `vocabularyCache`):
-   hit sin IA, `cachedOnly`, fallback con IA ocupada y con rate limit, guardado de variante nueva.
-5. **Probar en el navegador** (`npm run dev`): flujo completo del oráculo con y sin TTS, SKIP, STOP, autocompletado
-   con teclado. Sin variables de Supabase en local: todo debe funcionar sin guardar.
-6. **Docs**: `.env.example` (`SUPABASE_URL`, `SUPABASE_SECRET_KEY`), `CLAUDE.md` (mapa + estado), entrada en
-   `.agents/context/decisions.md`, y esta propuesta a «implementada».
-7. PR a `master` con check, lint y test en verde. El merge despliega (CI).
+### Pendiente (cerrado 2026-09-30)
+1. ✅ **Error de tipos** en `oracle.svelte.ts`: `respond` ya no compara `phase` tras el replay. `replay(run)` recibe el
+   turno; `close()` sube el contador `run` y `skip()` solo marca `skipped`. Si el turno sigue vigente al acabar,
+   pasa a `revealed`; si se cerró, no toca nada.
+2. ✅ **Aviso a11y** en `ThemePrompt`: `svelte-ignore a11y_click_events_have_key_events` con comentario (el teclado va en
+   el input, patrón `aria-activedescendant`).
+3. ✅ **Lint**: `dist` en `globalIgnores`.
+4. ✅ **Tests** (71 en total): `themes.test.ts`, walker (`weighNextNodes`, `rollAmong`, reproducibilidad con semilla),
+   `oracle/answer.test.ts`, `server/sessions.test.ts` (`parseSessionInput`), `server/vocabularyCache.test.ts`
+   (`nextVariant`), y `/api/vocabulary` con `$lib/server/db` y `vocabularyCache` mockeados (hit sin IA, sin clave,
+   variante nueva, tema lleno, `cachedOnly`, guardado y fallo al guardar, fallback con IA ocupada y con rate limit,
+   fallo de lectura).
+5. ✅ **Navegador** (Chromium headless, sin Supabase): flujo completo con SKIP, STOP a mitad de respuesta, replay
+   completo sin SKIP, autocompletado sin romper nada. `POST /api/sessions` responde 503 sin Supabase y el cliente
+   sigue (sin porcentaje). **TTS no se pudo probar en headless**: revisar con voz en un navegador real tras el deploy.
+6. ✅ **Docs**: `.env.example`, `CLAUDE.md`, `decisions.md` y esta propuesta.
+7. ✅ PR a `master` abierto con check, lint y test en verde. No se ha hecho merge.
 
 ### Servidor
 `SUPABASE_URL` y `SUPABASE_SECRET_KEY` (clave `sb_secret_…` propia de Charlatans) ya están en el `.env` del VPS;

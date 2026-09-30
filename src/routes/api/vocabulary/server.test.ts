@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { NODE_TYPES } from '$lib/data/buildGraph';
 import { AIProviderError } from '$lib/server/ai/types';
 
@@ -9,6 +9,16 @@ const provider = vi.hoisted(() => vi.fn());
 vi.mock('$lib/server/ai', async importOriginal => ({
   ...(await importOriginal<typeof import('$lib/server/ai')>()),
   resolveProvider: (e: Record<string, string | undefined>) => (e.GEMINI_API_KEY ? provider : null),
+}));
+
+// Supabase: off unless a test turns it on; the cache functions are mocked, nextVariant stays real
+const db = vi.hoisted(() => ({ on: false }));
+vi.mock('$lib/server/db', () => ({ getDb: () => (db.on ? {} : null) }));
+
+const cache = vi.hoisted(() => ({ findVariants: vi.fn(), recordHit: vi.fn(), saveVariant: vi.fn() }));
+vi.mock('$lib/server/vocabularyCache', async importOriginal => ({
+  ...(await importOriginal<typeof import('$lib/server/vocabularyCache')>()),
+  ...cache,
 }));
 
 const { POST } = await import('./+server');
@@ -31,6 +41,7 @@ describe('POST /api/vocabulary', () => {
   beforeEach(() => {
     provider.mockReset().mockResolvedValue(vocabulary);
     env.GEMINI_API_KEY = 'test-key';
+    db.on = false;
   });
 
   it('returns a valid themed graph', async () => {
@@ -69,5 +80,120 @@ describe('POST /api/vocabulary', () => {
     expect(limited.status).toBe(429);
     expect(Number(limited.headers.get('retry-after'))).toBeGreaterThan(0);
     expect(provider).toHaveBeenCalledTimes(2);
+  });
+});
+
+describe('POST /api/vocabulary with the Supabase cache', () => {
+  const stored = (variant: number) => ({
+    id: `00000000-0000-4000-8000-00000000000${variant}`,
+    variant,
+    theme: 'Noir Rain',
+    graph: { meta: { stored: variant }, nodes: [], links: [] },
+  });
+
+  beforeEach(() => {
+    provider.mockReset().mockResolvedValue(vocabulary);
+    env.GEMINI_API_KEY = 'test-key';
+    db.on = true;
+    cache.findVariants.mockReset().mockResolvedValue([]);
+    cache.recordHit.mockReset().mockResolvedValue(undefined);
+    cache.saveVariant.mockReset().mockResolvedValue('00000000-0000-4000-8000-0000000000aa');
+  });
+
+  // The endpoint's first Math.random() decides whether a known theme gets a new variant;
+  // later calls (picking a variant, buildGraph) stay random
+  const newVariantRoll = (wins: boolean) => vi.spyOn(Math, 'random').mockReturnValueOnce(wins ? 0.1 : 0.99);
+
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
+
+  it('looks up the normalized theme and serves a stored variant without the AI', async () => {
+    newVariantRoll(false);
+    cache.findVariants.mockResolvedValue([stored(1)]);
+    const res = await call({ theme: '  NOIR  rain ' }, 'hit');
+    expect(res.status).toBe(200);
+    expect(await res.json()).toMatchObject({ vocabularyId: stored(1).id, graph: stored(1).graph, cached: true });
+    expect(cache.findVariants).toHaveBeenCalledWith({}, expect.objectContaining({ themeKey: 'noir rain', lang: 'en' }));
+    expect(cache.recordHit).toHaveBeenCalledWith({}, stored(1).id);
+    expect(provider).not.toHaveBeenCalled();
+  });
+
+  it('serves stored themes even without an AI key', async () => {
+    env.GEMINI_API_KEY = undefined;
+    newVariantRoll(true);
+    cache.findVariants.mockResolvedValue([stored(1)]);
+    expect((await call({ theme: 'noir rain' }, 'nokey-hit')).status).toBe(200);
+  });
+
+  it('sometimes writes a new variant while the theme has room', async () => {
+    newVariantRoll(true);
+    cache.findVariants.mockResolvedValue([stored(1)]);
+    const res = await call({ theme: 'noir rain' }, 'grow');
+    expect(await res.json()).toMatchObject({ vocabularyId: '00000000-0000-4000-8000-0000000000aa' });
+    expect(provider).toHaveBeenCalledOnce();
+    expect(cache.saveVariant).toHaveBeenCalledWith({}, expect.objectContaining({ themeKey: 'noir rain', variant: 2 }));
+  });
+
+  it('never generates for a full theme', async () => {
+    newVariantRoll(true);
+    cache.findVariants.mockResolvedValue([stored(1), stored(2), stored(3)]);
+    expect((await call({ theme: 'noir rain' }, 'full')).status).toBe(200);
+    expect(provider).not.toHaveBeenCalled();
+  });
+
+  it('cachedOnly never generates when something is stored', async () => {
+    newVariantRoll(true);
+    cache.findVariants.mockResolvedValue([stored(1)]);
+    expect(await (await call({ theme: 'noir rain', cachedOnly: true }, 'picked')).json()).toMatchObject({ cached: true });
+    expect(provider).not.toHaveBeenCalled();
+  });
+
+  it('generates and saves variant 1 for a new theme', async () => {
+    const res = await call({ theme: 'Noir Rain' }, 'new');
+    expect(res.status).toBe(200);
+    expect(await res.json()).toMatchObject({ theme: 'Noir Rain', vocabularyId: '00000000-0000-4000-8000-0000000000aa' });
+    expect(cache.saveVariant).toHaveBeenCalledWith(
+      {},
+      expect.objectContaining({ themeKey: 'noir rain', theme: 'Noir Rain', variant: 1, provider: 'gemini' }),
+    );
+  });
+
+  it('still answers when saving fails', async () => {
+    cache.saveVariant.mockRejectedValue(new Error('db down'));
+    vi.spyOn(console, 'error').mockImplementation(() => {});
+    const res = await call({ theme: 'noir rain' }, 'savefail');
+    expect(res.status).toBe(200);
+    expect(await res.json()).toMatchObject({ vocabularyId: null });
+  });
+
+  it('falls back to a stored variant when the AI is busy', async () => {
+    newVariantRoll(true);
+    vi.spyOn(console, 'error').mockImplementation(() => {});
+    cache.findVariants.mockResolvedValue([stored(1)]);
+    provider.mockRejectedValueOnce(new AIProviderError('gemini 503', true));
+    const res = await call({ theme: 'noir rain' }, 'aibusy');
+    expect(res.status).toBe(200);
+    expect(await res.json()).toMatchObject({ vocabularyId: stored(1).id, cached: true });
+  });
+
+  it('falls back to a stored variant when rate-limited, without calling the AI', async () => {
+    expect((await call({ theme: 'a' }, 'limited')).status).toBe(200);
+    expect((await call({ theme: 'b' }, 'limited')).status).toBe(200);
+    provider.mockClear();
+
+    newVariantRoll(true);
+    cache.findVariants.mockResolvedValue([stored(1)]);
+    const res = await call({ theme: 'noir rain' }, 'limited');
+    expect(res.status).toBe(200);
+    expect(await res.json()).toMatchObject({ cached: true });
+    expect(provider).not.toHaveBeenCalled();
+  });
+
+  it('works as before when the lookup fails', async () => {
+    cache.findVariants.mockRejectedValue(new Error('db down'));
+    vi.spyOn(console, 'error').mockImplementation(() => {});
+    expect((await call({ theme: 'noir rain' }, 'lookupfail')).status).toBe(200);
+    expect(provider).toHaveBeenCalledOnce();
   });
 });

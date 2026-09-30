@@ -29,7 +29,8 @@ export class Oracle {
   private seed = 0;
   private keepQuestion = true;
   private session: Promise<string | null> = Promise.resolve(null);
-  private run = 0; // Bumped to cancel a replay in progress
+  private run = 0; // Bumped by close(): anything still awaiting from an older run lets go
+  private skipped = false; // SKIP ends the current replay but keeps its run
   private wake: (() => void) | null = null; // Ends the current replay pause early
 
   constructor(private state: CharlatanState) {}
@@ -69,17 +70,20 @@ export class Oracle {
   respond = async (felt: boolean) => {
     if (this.phase !== 'asking') return;
     this.felt = felt;
+    const run = ++this.run;
     const stats = this.session.then(id => (id ? sendMeaning(id, felt) : null));
 
-    await this.replay();
-    this.stats = await stats;
-    if (this.phase === 'replaying') this.phase = 'revealed';
+    await this.replay(run);
+    const result = await stats;
+    if (run !== this.run) return; // Closed meanwhile
+    this.stats = result;
+    this.phase = 'revealed';
   };
 
   /** Jump to the end of the replay. */
   skip = () => {
     if (this.phase !== 'replaying') return;
-    this.run++;
+    this.skipped = true;
     this.wake?.();
     cancelSpeech();
     this.showWholeAnswer();
@@ -94,13 +98,15 @@ export class Oracle {
     this.phase = 'idle';
   };
 
-  private async replay() {
-    const run = ++this.run;
+  /** Replays the recorded answer until it ends, is skipped or the oracle is closed. */
+  private async replay(run: number) {
+    this.skipped = false;
     this.phase = 'replaying';
     const steps = this.state.trace;
+    const going = () => run === this.run && !this.skipped;
 
     for (let i = 0; i < steps.length; i++) {
-      if (run !== this.run) return;
+      if (!going()) break;
       this.rollIndex = i;
       this.state.showRoll(i);
 
@@ -110,7 +116,7 @@ export class Oracle {
         await speak(node, this.state.voiceName, this.state.voiceSpeed * REPLAY_VOICE_FACTOR);
       }
       const remaining = REPLAY_STEP_MS - (performance.now() - started);
-      if (remaining > 0 && run === this.run) await this.pause(remaining);
+      if (remaining > 0 && going()) await this.pause(remaining);
     }
 
     if (run === this.run) this.showWholeAnswer();
