@@ -120,6 +120,8 @@ export class CharlatanState {
     } else {
       // Dead end? Should not happen with constraints.
       console.warn('Dead end reached!');
+      // An oracle answer ends here rather than waiting forever for a word that can't come
+      if (this.mode === 'answering' && this.trace.length > 0) this.answerDone = true;
       this.isPlaying = false;
     }
   };
