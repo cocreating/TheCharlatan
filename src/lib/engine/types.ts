@@ -20,6 +20,20 @@ export interface Link {
   rel?: string;
 }
 
+/** One option the walker had, with its final probability (after the history penalty). */
+export interface DiceCandidate {
+  id: string;
+  p: number;
+}
+
+/** One roll of the dice: the node that came out, what else could have, and the roll. */
+export interface DiceStep {
+  node: string;
+  candidates: DiceCandidate[];
+  /** Uniform draw in [0, 1): the chosen candidate is the first whose cumulative p reaches it. */
+  roll: number;
+}
+
 export interface GraphData {
   meta: {
     version: number;

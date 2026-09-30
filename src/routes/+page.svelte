@@ -9,6 +9,7 @@
   import Controls from '$lib/ui/Controls.svelte';
   import CinematicOverlay from '$lib/ui/CinematicOverlay.svelte';
   import ThemePrompt from '$lib/ui/ThemePrompt.svelte';
+  import OraclePanel from '$lib/ui/OraclePanel.svelte';
 
   const PREFERRED_VOICE = 'Google UK English Female';
 
@@ -52,7 +53,10 @@
   <CinematicOverlay />
   <div class="viz-area">
     <ForceGraph />
-    <ThemePrompt />
+    <div class="left-column">
+      <ThemePrompt />
+      <OraclePanel />
+    </div>
   </div>
   <aside class="sidebar">
     <StoryPanel />
@@ -72,6 +76,20 @@
     flex: 2;
     position: relative;
     overflow: hidden;
+  }
+
+  /* Theme and oracle float over the graph, top left */
+  .left-column {
+    position: absolute;
+    top: 1.5rem;
+    left: 1.5rem;
+    z-index: 45;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    width: min(360px, calc(100vw - 3rem));
+    max-height: calc(100% - 3rem);
+    overflow-y: auto;
   }
 
   /* The story panel floats over the graph, top right */

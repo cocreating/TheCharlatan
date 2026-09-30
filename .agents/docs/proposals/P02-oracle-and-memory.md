@@ -1,6 +1,6 @@
 # P02 — El oráculo que se desenmascara + memoria en Supabase
 
-> Estado: **propuesta aprobada · base de datos creada** (Supabase TMI) · código pendiente · Fecha: 2026-09-30
+> Estado: **código escrito en la rama `p02-oracle` (WIP)** · falta cerrar check/tests/docs, ver §6 · Supabase TMI listo y variables puestas en el VPS · Fecha: 2026-09-30
 
 ## 0. Decisiones tomadas
 
@@ -107,3 +107,53 @@ el futuro se muestran preguntas de otros, hará falta moderación previa.
   grafo compartido; el charlatán aprende a decir lo que la gente quiere oír.
 - **Máscaras**: gurú, político, CEO, astrólogo diciendo exactamente lo mismo.
 - **Enlace a una sesión** (`/s/[id]`) para volver a ver una respuesta.
+
+## 6. Estado de la implementación (relevo, 2026-09-30)
+
+Código escrito en local (Mac) y subido como WIP a la rama `p02-oracle`. **No** pasa aún
+`npm run check`; tests nuevos sin escribir. No hacer merge a `master` hasta cerrar la lista de abajo.
+
+### Hecho
+| Pieza | Archivos |
+|---|---|
+| PRNG con semilla (mulberry32) | `src/lib/engine/random.ts` |
+| Walker con dados: `weighNextNodes`, `rollAmong`, `selectNextStep` (firma de `selectNextNode` intacta) | `src/lib/engine/walker.ts`, tipos `DiceCandidate`/`DiceStep` en `types.ts` |
+| Store: `mode` (`free`/`answering`/`frozen`), `trace`, `answerDone`, `dice`, `vocabularyId`; `beginAnswer`, `freeze`, `showRoll`, `endOracle`. En modo oracle se ignoran reset, saltos y cambio de grafo | `src/lib/engine/store.svelte.ts` |
+| Reglas de la respuesta (8–16 fragmentos, termina en object/space/time/state), `answerText`, `revealLines` | `src/lib/oracle/answer.ts` |
+| Orquestación del oráculo (fases `idle → answering → asking → replaying → revealed`, replay cancelable) | `src/lib/oracle/oracle.svelte.ts`, cliente HTTP en `src/lib/oracle/api.ts` |
+| `normalizeTheme` compartido | `src/lib/themes.ts` |
+| Cliente Supabase (null sin variables) | `src/lib/server/db.ts` |
+| Caché de vocabularios (`findVariants`, `nextVariant`, `saveVariant`, `recordHit`, `suggestThemes`) | `src/lib/server/vocabularyCache.ts` |
+| `describeProvider` (provider/model a guardar); `PROMPT_VERSION = 'v1'` | `src/lib/server/ai/index.ts`, `prompt.ts` |
+| `POST /api/vocabulary`: caché primero, hasta 3 variantes (30 % de probabilidad de nueva), `cachedOnly`, fallback a caché si la IA falla o hay rate limit; devuelve `vocabularyId` | `src/routes/api/vocabulary/+server.ts` |
+| `GET /api/themes/suggest`, `POST /api/sessions`, `PATCH /api/sessions/[id]` + validación | `src/routes/api/...`, `src/lib/server/sessions.ts` |
+| UI: autocompletado (combobox) en `ThemePrompt`; `OraclePanel` (pregunta, aviso + casilla, Yes/No, dados con barra y lista, porcentaje); columna izquierda en la página; Controls desactivados según `mode` | `src/lib/ui/*.svelte`, `src/routes/+page.svelte`, `src/app.css` |
+| Dados en el canvas: ramas con grosor ∝ p, las no elegidas se desvanecen | `src/lib/viz/render.ts` (`drawDice`), `ForceGraph.svelte` |
+| Dependencia `@supabase/supabase-js` | `package.json` |
+
+### Pendiente
+1. **Error de tipos** en `oracle.svelte.ts` (`respond`): tras `await this.replay()` TS estrecha `phase` a `'asking'` y marca
+   `this.phase === 'replaying'` como imposible. Arreglar sin trucos (p. ej. `replay()` devuelve si terminó o fue cancelado).
+2. **Aviso a11y** en los `<li role="option">` de `ThemePrompt`: el teclado se gestiona en el input (patrón
+   `aria-activedescendant`); justificar con `<!-- svelte-ignore a11y_click_events_have_key_events -->` o equivalente.
+3. **Lint**: en local solo fallaba `dist/` (resto ignorado por git del antiguo build de React); añadir `dist` a
+   `globalIgnores` en `eslint.config.js` igualmente.
+4. **Tests**: correr los existentes (store/walker/vocabulary pueden necesitar ajustes) y añadir: `normalizeTheme`,
+   reproducibilidad del walker con semilla y `rollAmong`, `isAnswerComplete`/`answerText`/`revealLines`,
+   `parseSessionInput`, `nextVariant`, `/api/vocabulary` con caché mockeada (`$lib/server/db` + `vocabularyCache`):
+   hit sin IA, `cachedOnly`, fallback con IA ocupada y con rate limit, guardado de variante nueva.
+5. **Probar en el navegador** (`npm run dev`): flujo completo del oráculo con y sin TTS, SKIP, STOP, autocompletado
+   con teclado. Sin variables de Supabase en local: todo debe funcionar sin guardar.
+6. **Docs**: `.env.example` (`SUPABASE_URL`, `SUPABASE_SECRET_KEY`), `CLAUDE.md` (mapa + estado), entrada en
+   `.agents/context/decisions.md`, y esta propuesta a «implementada».
+7. PR a `master` con check, lint y test en verde. El merge despliega (CI).
+
+### Servidor
+`SUPABASE_URL` y `SUPABASE_SECRET_KEY` (clave `sb_secret_…` propia de Charlatans) ya están en el `.env` del VPS;
+verificado el 2026-09-30 que la clave lee `charlatan_meaning_stats` y `charlatan_vocabularies`. El proceso pm2 las
+cogerá en el `pm2 reload` del próximo deploy.
+
+### Nota de entorno
+En la shell de Desktop Commander del Mac, `NODE_ENV=production`: `npm install` quita las devDependencies.
+Usar `env -u NODE_ENV npm install`.
+

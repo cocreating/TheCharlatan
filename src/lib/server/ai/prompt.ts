@@ -1,6 +1,12 @@
 import { NODE_COUNTS } from '$lib/engine/rules';
 import { NODE_TYPES } from '$lib/data/buildGraph';
 
+/**
+ * Stored with every cached vocabulary. Bump it whenever the prompt or the
+ * fragment rules change: vocabularies made with an older prompt stop being served.
+ */
+export const PROMPT_VERSION = 'v1';
+
 export const SYSTEM_PROMPT = `You write the vocabulary for "The Charlatan", a generative storyteller. A random walker hops between short English fragments and reads them aloud in sequence, so any valid chain must sound like an eerie, poetic sentence. Transitions follow these rules:
 subject → action | state
 action → space | object | time | state

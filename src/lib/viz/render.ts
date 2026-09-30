@@ -1,4 +1,4 @@
-import type { Node, Link, NodeType } from '../engine/types';
+import type { DiceCandidate, Node, Link, NodeType } from '../engine/types';
 
 export const COLORS: Record<NodeType, string> = {
   subject: '#ffffff',
@@ -11,6 +11,18 @@ export const COLORS: Record<NodeType, string> = {
 };
 
 const TRAIL_LENGTH = 10; // Number of recent steps to highlight
+const MAX_DICE_LABELS = 8; // Past this many options (the opening roll), only the chosen one is labelled
+const GHOST_MIN_ALPHA = 0.12; // Unchosen branches fade down to this
+
+/** One roll of the dice drawn over the graph during the oracle's replay. */
+export interface DiceOverlay {
+  /** The node the walker was on (null for the opening roll). */
+  from: string | null;
+  candidates: DiceCandidate[];
+  chosen: string;
+  /** 0 when the roll appears, 1 once the unchosen branches have faded. */
+  fade: number;
+}
 
 export function drawGraph(
   ctx: CanvasRenderingContext2D,
@@ -19,7 +31,8 @@ export function drawGraph(
   nodes: Node[],
   links: Link[],
   activeNodeId: string | null,
-  history: string[]
+  history: string[],
+  dice: DiceOverlay | null = null
 ) {
   ctx.clearRect(0, 0, width, height);
 
@@ -105,4 +118,46 @@ export function drawGraph(
         ctx.fillText(node.text, node.x! + 12, node.y! + 4);
     }
   });
+
+  if (dice) drawDice(ctx, nodes, dice);
+}
+
+/** Every option the walker had: thickness = probability; the unchosen fade away like ghost branches. */
+function drawDice(ctx: CanvasRenderingContext2D, nodes: Node[], dice: DiceOverlay) {
+  const byId = new Map(nodes.map(n => [n.id, n]));
+  const from = dice.from ? byId.get(dice.from) : undefined;
+  const ghost = GHOST_MIN_ALPHA + (1 - GHOST_MIN_ALPHA) * Math.max(0, 1 - dice.fade);
+  const labelAll = dice.candidates.length <= MAX_DICE_LABELS;
+
+  ctx.save();
+  ctx.font = '11px monospace';
+  for (const c of dice.candidates) {
+    const node = byId.get(c.id);
+    if (node?.x === undefined || node.y === undefined) continue;
+    const chosen = c.id === dice.chosen;
+    const color = chosen ? '#ffffff' : COLORS[node.type] || '#fff';
+    ctx.globalAlpha = chosen ? 1 : ghost;
+    ctx.strokeStyle = color;
+    ctx.fillStyle = color;
+
+    if (from?.x !== undefined && from.y !== undefined) {
+      ctx.setLineDash(chosen ? [] : [4, 4]);
+      ctx.lineWidth = 1 + 7 * c.p;
+      ctx.beginPath();
+      ctx.moveTo(from.x, from.y);
+      ctx.lineTo(node.x, node.y);
+      ctx.stroke();
+    }
+
+    ctx.setLineDash([]);
+    ctx.lineWidth = chosen ? 2 : 1;
+    ctx.beginPath();
+    ctx.arc(node.x, node.y, 6 + 12 * c.p, 0, 2 * Math.PI);
+    ctx.stroke();
+
+    if (chosen || labelAll) {
+      ctx.fillText(`${node.text} ${Math.round(c.p * 100)}%`, node.x + 14, node.y - 10);
+    }
+  }
+  ctx.restore();
 }

@@ -15,10 +15,10 @@
   <div class="controls-content">
     <div id="controls-buttons" class="controls-wrapper">
       <!-- The label reflects the current state: PLAY (lit) while the story runs. -->
-      <button type="button" class="btn-play" class:active={charlatan.isPlaying} onclick={charlatan.togglePlay}>
+      <button type="button" class="btn-play" class:active={charlatan.isPlaying} onclick={charlatan.togglePlay} disabled={charlatan.mode === 'frozen'}>
         {charlatan.isPlaying ? 'PLAY' : 'PAUSE'}
       </button>
-      <button type="button" class="btn-reset" onclick={charlatan.reset}>RESET</button>
+      <button type="button" class="btn-reset" onclick={charlatan.reset} disabled={charlatan.mode !== 'free'}>RESET</button>
     </div>
 
     <div id="controls-options" class="controls-wrapper">
