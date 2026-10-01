@@ -118,3 +118,44 @@ export async function meaningStats(db: SupabaseClient): Promise<MeaningStats> {
     pct: row?.pct === null || row?.pct === undefined ? null : Number(row.pct),
   };
 }
+
+/** Another visitor's consultation, as shown after the reveal: nothing but the words. */
+export interface Echo {
+  question: string;
+  answer: string;
+  feltMeaning: boolean;
+}
+
+const ECHO_POOL = 30; // Picked at random from this many of the latest
+
+/**
+ * A few other questions people asked, with the answer each got and whether it spoke to them.
+ * Only sessions that kept their question, got a reaction and are listed (not hidden by moderation).
+ */
+export async function recentEchoes(db: SupabaseClient, exclude: string | null, count = 3): Promise<Echo[]> {
+  let query = db
+    .from('charlatan_sessions')
+    .select('question, answer, felt_meaning')
+    .eq('listed', true)
+    .not('question', 'is', null)
+    .not('felt_meaning', 'is', null)
+    .order('created_at', { ascending: false })
+    .limit(ECHO_POOL);
+  if (exclude) query = query.neq('id', exclude);
+
+  const { data, error } = await query;
+  if (error) throw new Error(`recentEchoes: ${error.message}`);
+  const pool = (data ?? []) as { question: string; answer: string; felt_meaning: boolean }[];
+  return shuffle(pool)
+    .slice(0, count)
+    .map(r => ({ question: r.question, answer: r.answer, feltMeaning: r.felt_meaning }));
+}
+
+function shuffle<T>(items: T[], rng = Math.random): T[] {
+  const out = [...items];
+  for (let i = out.length - 1; i > 0; i--) {
+    const j = Math.floor(rng() * (i + 1));
+    [out[i], out[j]] = [out[j], out[i]];
+  }
+  return out;
+}

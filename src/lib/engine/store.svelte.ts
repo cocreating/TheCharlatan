@@ -89,17 +89,18 @@ export class CharlatanState {
     this.isPlaying = !this.isPlaying;
   };
 
-  /** Stop playback and start a new story from a random subject. */
+  /** Start a new story from a random subject. Playback keeps going (or stays paused). */
   reset = () => {
     if (this.mode !== 'free') return;
-    this.isPlaying = false;
     this.start();
   };
 
-  /** Swap in a new graph (e.g. AI-generated) and start an empty story on it. */
+  /**
+   * Swap in a new graph (e.g. AI-generated) and start an empty story on it.
+   * Playback keeps going: the next step opens the new story, so a summoned theme is heard at once.
+   */
   loadGraph = (graph: GraphData, theme: string | null = null, vocabularyId: string | null = null) => {
     if (this.mode !== 'free') return;
-    this.isPlaying = false;
     this.graph = graph;
     this.theme = theme;
     this.vocabularyId = vocabularyId;
@@ -150,11 +151,15 @@ export class CharlatanState {
     if (roll && nextNode) {
       this.visit(nextNode, roll);
     } else {
-      // Dead end? Should not happen with constraints.
-      console.warn('Dead end reached!');
-      // An oracle answer ends here rather than waiting forever for a word that can't come
-      if (this.mode === 'answering' && this.trace.length > 0) this.answerDone = true;
-      this.isPlaying = false;
+      // Dead end: nothing fits the sentence (rare, a vocabulary with a gap).
+      if (this.mode === 'answering') {
+        // An oracle answer ends here rather than waiting forever for a word that can't come
+        if (this.trace.length > 0) this.answerDone = true;
+        this.isPlaying = false;
+      } else {
+        // Free playback never stalls in silence: the charlatan simply starts another story
+        this.start();
+      }
     }
   };
 

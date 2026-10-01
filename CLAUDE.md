@@ -46,7 +46,7 @@ Run check, lint and test before every commit.
 | UI | `src/lib/ui/*.svelte` (intro dialog: `IntroScreen.svelte`), page in `src/routes/+page.svelte`; spec in `.agents/docs/artifacts/A40-ui-spec.md`; all colours/fonts are tokens in `src/app.css` (canvas reads them via `loadThemeColors`) |
 | Graph from vocabulary | `src/lib/data/buildGraph.ts` — vocabularies come in scenes (`SCENE_*` in `rules.ts`); seed vocabulary in `builder.ts` → `graph.seed.json` |
 | AI theme → vocabulary | `src/routes/api/vocabulary/+server.ts`, `src/lib/server/vocabulary.ts`, providers in `src/lib/server/ai/` |
-| Oracle (ask → dice → number) | `src/lib/oracle/` (`oracle.svelte.ts` phases, `answer.ts` rules), `src/lib/ui/OraclePanel.svelte`; seeded PRNG in `src/lib/engine/random.ts` |
+| Oracle (ask → reading → dice → number → others asked) | `src/lib/oracle/` (`oracle.svelte.ts` phases, `answer.ts` rules), `src/lib/ui/OraclePanel.svelte`; seeded PRNG in `src/lib/engine/random.ts`; echoes from `api/sessions/echoes` |
 | Memory (Supabase) | `src/lib/server/db.ts`, `vocabularyCache.ts`, `sessions.ts`; routes `api/themes/suggest`, `api/sessions`; `normalizeTheme` in `src/lib/themes.ts` |
 
 ## AI
@@ -63,7 +63,8 @@ Run check, lint and test before every commit.
 
 - P02 (`.agents/docs/proposals/P02-oracle-and-memory.md`) is implemented: "Ask the oracle" + "Show the dice",
   sessions, cached AI vocabularies and theme autocomplete in Supabase project TMI (`charlatan_*` tables,
-  schema in `supabase/migrations/20260930_charlatan_oracle.sql`).
+  schema in `supabase/migrations/20260930_charlatan_oracle.sql` + `20261001_charlatan_sessions_listed.sql`).
+- `charlatan_sessions.listed = false` hides a session (moderation) from the "Others asked" echoes and the running number.
 - Server only, with `SUPABASE_URL` + `SUPABASE_SECRET_KEY`. Without them everything works and nothing is stored.
 - No IP or identifying data in sessions; the visitor can opt out of storing the question text.
 

@@ -46,14 +46,45 @@ describe('CharlatanState', () => {
     expect(new Set(scenes).size).toBeGreaterThan(1);
   });
 
-  it('reset stops playback and restarts the story', () => {
+  it('reset restarts the story without stopping playback', () => {
     const s = new CharlatanState();
     s.step();
     s.step();
     s.isPlaying = true;
     s.reset();
+    expect(s.isPlaying).toBe(true);
+    expect(s.history).toHaveLength(1);
+  });
+
+  it('reset leaves a paused story paused', () => {
+    const s = new CharlatanState();
+    s.step();
+    s.reset();
     expect(s.isPlaying).toBe(false);
     expect(s.history).toHaveLength(1);
+  });
+
+  it('loading a graph keeps playing: the next step opens the new story', () => {
+    const s = new CharlatanState();
+    s.step();
+    s.isPlaying = true;
+    const graph = s.graph;
+    s.loadGraph({ ...graph, nodes: [...graph.nodes] }, 'a theme');
+    expect(s.isPlaying).toBe(true);
+    expect(s.story).toHaveLength(0);
+    s.step();
+    expect(s.activeNode?.type).toBe('subject');
+  });
+
+  it('a dead end in free playback starts a new story instead of stopping', () => {
+    const s = new CharlatanState();
+    s.step();
+    s.isPlaying = true;
+    s.graph = { ...s.graph, links: [] }; // Nothing leads anywhere
+    s.step();
+    expect(s.isPlaying).toBe(true);
+    expect(s.history).toHaveLength(1);
+    expect(s.activeNode?.type).toBe('subject');
   });
 
   it('manualJump moves to any node', () => {
@@ -66,7 +97,7 @@ describe('CharlatanState', () => {
 });
 
 describe('loadGraph', () => {
-  it('swaps the graph, stops playback and clears the story', () => {
+  it('swaps the graph and clears the story, without stopping playback', () => {
     const s = new CharlatanState();
     const seed = s.graph;
     s.step();
@@ -75,7 +106,7 @@ describe('loadGraph', () => {
     s.loadGraph(graph, 'x');
     expect(s.graph).toBe(graph);
     expect(s.theme).toBe('x');
-    expect(s.isPlaying).toBe(false);
+    expect(s.isPlaying).toBe(true);
     expect(s.story).toEqual([]);
     expect(s.activeNode).toBeNull();
     s.restoreSeed();

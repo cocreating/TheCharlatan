@@ -44,3 +44,22 @@ export async function sendMeaning(sessionId: string, feltMeaning: boolean): Prom
     return null;
   }
 }
+
+export interface Echo {
+  question: string;
+  answer: string;
+  feltMeaning: boolean;
+}
+
+/** A few questions other visitors asked, with their answers; [] when there are none or on error. */
+export async function fetchEchoes(excludeSessionId: string | null): Promise<Echo[]> {
+  try {
+    const query = excludeSessionId ? `?exclude=${encodeURIComponent(excludeSessionId)}` : '';
+    const response = await fetch(`${base}/api/sessions/echoes${query}`);
+    if (!response.ok) return [];
+    const body = await response.json();
+    return Array.isArray(body?.echoes) ? (body.echoes as Echo[]) : [];
+  } catch {
+    return [];
+  }
+}

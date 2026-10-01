@@ -2,16 +2,18 @@ import { charlatan, type CharlatanState } from '$lib/engine/store.svelte';
 import { randomSeed } from '$lib/engine/random';
 import { speak, cancelSpeech } from '$lib/engine/audio';
 import { storyText } from '$lib/engine/grammar';
-import { postSession, sendMeaning, type MeaningStats } from './api';
+import { fetchEchoes, postSession, sendMeaning, type Echo, type MeaningStats } from './api';
+import { MAX_INTERPRETATION_LENGTH } from './answer';
 
 /**
  * - idle: the question box
  * - answering: the charlatan walks (seeded, recorded) and speaks
  * - asking: "Did it speak to you?"
+ * - reflecting: (after YES) "What did it tell you?" — the visitor's own reading, never stored
  * - replaying: the same answer again, slowly, with the dice showing
  * - revealed: the number
  */
-export type OraclePhase = 'idle' | 'answering' | 'asking' | 'replaying' | 'revealed';
+export type OraclePhase = 'idle' | 'answering' | 'asking' | 'reflecting' | 'replaying' | 'revealed';
 
 /** Time each roll stays on screen in the replay (longer if the voice takes longer). */
 export const REPLAY_STEP_MS = 2600;
@@ -25,10 +27,17 @@ export class Oracle {
   stats = $state<MeaningStats | null>(null);
   /** Index of the roll on screen during the replay. */
   rollIndex = $state(0);
+  /** What the visitor heard in the answer, in their words. Stays in the browser. */
+  heard = $state('');
+  /** The answer the same question got last time, when it is asked again. */
+  previousAnswer = $state<string | null>(null);
+  /** What other people asked, shown after the reveal. */
+  echoes = $state.raw<Echo[]>([]);
 
   private seed = 0;
   private keepQuestion = true;
   private session: Promise<string | null> = Promise.resolve(null);
+  private statsRequest: Promise<MeaningStats | null> = Promise.resolve(null);
   private run = 0; // Bumped by close(): anything still awaiting from an older run lets go
   private skipped = false; // SKIP ends the current replay but keeps its run
   private wake: (() => void) | null = null; // Ends the current replay pause early
@@ -43,6 +52,8 @@ export class Oracle {
     this.answer = '';
     this.felt = null;
     this.stats = null;
+    this.heard = '';
+    this.echoes = [];
     this.seed = randomSeed();
 
     this.state.beginAnswer(this.seed);
@@ -66,19 +77,44 @@ export class Oracle {
     });
   };
 
-  /** Step 2: "Did it speak to you?" → show the dice → the number. */
-  respond = async (felt: boolean) => {
+  /** Step 2: "Did it speak to you?" — YES asks what it said first; NO goes straight to the dice. */
+  respond = (felt: boolean) => {
     if (this.phase !== 'asking') return;
     this.felt = felt;
+    this.stats = null;
+    this.statsRequest = this.session.then(id => (id ? sendMeaning(id, felt) : null));
+    if (felt) this.phase = 'reflecting';
+    else void this.revealDice();
+  };
+
+  /** Step 2b: the visitor says (or skips saying) what they heard → the dice. */
+  reflect = (heard: string) => {
+    if (this.phase !== 'reflecting') return;
+    this.heard = heard.replace(/\s+/g, ' ').trim().slice(0, MAX_INTERPRETATION_LENGTH);
+    void this.revealDice();
+  };
+
+  /** The same question again: a new roll of the dice, with the last answer kept for comparison. */
+  askAgainSame = () => {
+    if (this.phase !== 'revealed') return;
+    const { question, keepQuestion, answer } = this;
+    this.close();
+    this.ask(question, keepQuestion);
+    this.previousAnswer = answer;
+  };
+
+  /** Step 3: show the dice → the number, and what others asked. */
+  private async revealDice() {
     const run = ++this.run;
-    const stats = this.session.then(id => (id ? sendMeaning(id, felt) : null));
+    const echoes = this.session.then(id => fetchEchoes(id));
 
     await this.replay(run);
-    const result = await stats;
+    const [stats, others] = await Promise.all([this.statsRequest, echoes]);
     if (run !== this.run) return; // Closed meanwhile
-    this.stats = result;
+    this.stats = stats;
+    this.echoes = others;
     this.phase = 'revealed';
-  };
+  }
 
   /** Jump to the end of the replay. */
   skip = () => {
@@ -95,6 +131,7 @@ export class Oracle {
     this.wake?.();
     cancelSpeech();
     this.state.endOracle();
+    this.previousAnswer = null;
     this.phase = 'idle';
   };
 

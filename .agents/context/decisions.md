@@ -2,6 +2,25 @@
 
 Newest first. One entry per decision: what was decided and why.
 
+## 2026-10-01 — Interaction flow: playback never stalls; the oracle asks for a reading
+
+- **Reset, summoning a theme and ORIGINAL no longer stop playback.** Before, the story went blank and still after
+  SUMMON until the visitor found the play button. Now the next step opens the new story; a paused story stays paused.
+- **Dead ends in free playback start a new story** instead of stopping in silence (the oracle still ends its answer there).
+- **The PLAY/PAUSE label still shows the current state** (decision of 2026-01-28 kept).
+- **Oracle, after YES: "What did it tell you?"** An optional line in the visitor's words, shown back after the dice
+  ("You heard: …. The dice only rolled numbers."). Never sent to the server.
+- **ASK THE SAME AGAIN**: the same question, a new seed; the previous answer is shown beside the new one, so the
+  confident answer visibly changes. ASK AGAIN became ASK SOMETHING ELSE.
+- **"Others asked"** after the reveal: up to 3 questions picked at random from the latest 30 that kept their words
+  and got a reaction (`GET api/sessions/echoes`). Visitors already agree their question is "kept as part of the piece".
+- **Moderation: `charlatan_sessions.listed`** (default true; migration `charlatan_sessions_listed`). `listed = false`
+  hides a session from the echoes and from the running number. The agent's own test session of 2026-10-01 was hidden this way.
+- **Small samples get counts, not percentages**: below `MIN_SAMPLE_FOR_PCT` (30) answers, "7 of the 8 people … so far".
+- **The oracle panel beckons** (a soft glow, three times) once the free story has spoken a few sentences, until the
+  visitor touches it. Respects `prefers-reduced-motion`.
+- **Story panel fades older lines** under its header instead of cutting them (mobile showed half a line).
+
 ## 2026-09-30 — Prompt v4: subjects that act, spoken connectors
 
 - **Tested prompt v3 live** (theme "zz scene test lighthouse keeper", hidden from suggestions with `listed = false`):

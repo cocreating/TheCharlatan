@@ -2,7 +2,7 @@
   import { tick, untrack } from 'svelte';
   import { charlatan } from '$lib/engine/store.svelte';
   import { oracle } from '$lib/oracle/oracle.svelte';
-  import { revealLines } from '$lib/oracle/answer';
+  import { MAX_INTERPRETATION_LENGTH, revealLines } from '$lib/oracle/answer';
 
   const MAX_QUESTION_LENGTH = 500;
   const MAX_LISTED = 6;
@@ -12,8 +12,29 @@
   // Narrow screens only (CSS): the idle form starts folded so the graph stays visible
   let folded = $state(true);
   let textarea = $state<HTMLTextAreaElement>();
+  let heard = $state('');
+  let heardBox = $state<HTMLTextAreaElement>();
+
+  // "What did it tell you?": the box is ready to type in as soon as it appears
+  $effect(() => {
+    if (oracle.phase === 'reflecting') {
+      heard = '';
+      tick().then(() => heardBox?.focus());
+    }
+  });
+
+  // Once the story has found its voice, the oracle beckons, until the visitor notices it
+  const BECKON_AFTER_SENTENCES = 2;
+  let noticed = $state(false);
+  const beckon = $derived(
+    !noticed &&
+      oracle.phase === 'idle' &&
+      charlatan.mode === 'free' &&
+      charlatan.phrases.filter(p => p.opens).length > BECKON_AFTER_SENTENCES,
+  );
 
   function toggleFold() {
+    noticed = true;
     folded = !folded;
     if (!folded) tick().then(() => textarea?.focus());
   }
@@ -58,10 +79,22 @@
     question = '';
   }
 
+  function reflect(e: SubmitEvent) {
+    e.preventDefault();
+    oracle.reflect(heard);
+  }
+
+  function onHeardKeydown(e: KeyboardEvent) {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      oracle.reflect(heard);
+    }
+  }
+
   const pct = (p: number) => `${Math.round(p * 100)}%`;
 </script>
 
-<section class="oracle" aria-live="polite">
+<section class="oracle" class:beckon aria-live="polite" onfocusin={() => (noticed = true)}>
   {#if oracle.phase === 'idle'}
     <button type="button" class="fold" aria-expanded={!folded} aria-controls="oracle-form" onclick={toggleFold}>
       ASK THE ORACLE <span class="chevron" aria-hidden="true">▾</span>
@@ -100,11 +133,34 @@
       </div>
     {:else if oracle.phase === 'asking'}
       <p class="answer">{oracle.answer}</p>
+      {#if oracle.previousAnswer}
+        <p class="note">A moment ago, the same question got:</p>
+        <p class="answer previous">{oracle.previousAnswer}</p>
+      {/if}
       <p class="prompt">Did it speak to you?</p>
       <div class="row choices">
         <button type="button" onclick={() => oracle.respond(true)}>YES</button>
         <button type="button" onclick={() => oracle.respond(false)}>NO</button>
       </div>
+    {:else if oracle.phase === 'reflecting'}
+      <p class="answer">{oracle.answer}</p>
+      <form class="reflect" onsubmit={reflect}>
+        <label for="oracle-heard" class="prompt">What did it tell you?</label>
+        <textarea
+          bind:this={heardBox}
+          id="oracle-heard"
+          rows="2"
+          maxlength={MAX_INTERPRETATION_LENGTH}
+          placeholder="In your own words…"
+          bind:value={heard}
+          onkeydown={onHeardKeydown}
+        ></textarea>
+        <p class="note">Only you will see this. It is not kept.</p>
+        <div class="row">
+          <button type="button" class="link" onclick={() => oracle.reflect('')}>I'D RATHER NOT SAY</button>
+          <button type="submit" disabled={!heard.trim()}>CONTINUE</button>
+        </div>
+      </form>
     {:else if oracle.phase === 'replaying'}
       <p class="prompt">Now, the dice.</p>
       {#if roll}
@@ -134,17 +190,34 @@
       {/if}
       <button type="button" class="link" onclick={oracle.skip}>SKIP</button>
     {:else if oracle.phase === 'revealed'}
-      {#each revealLines(oracle.felt, oracle.stats) as line, i (i)}
+      {#each revealLines(oracle.felt, oracle.stats, oracle.heard) as line, i (i)}
         <p class="reveal">{line}</p>
       {/each}
-      <button type="button" onclick={askAgain}>ASK AGAIN</button>
+      {#if oracle.echoes.length > 0}
+        <div class="echoes">
+          <p class="note">Others asked:</p>
+          <ul>
+            {#each oracle.echoes as echo, i (i)}
+              <li>
+                <p class="echo-question">“{echo.question}”</p>
+                <p class="echo-answer">{echo.answer}</p>
+                <p class="note">{echo.feltMeaning ? 'It spoke to them.' : 'It meant nothing to them.'}</p>
+              </li>
+            {/each}
+          </ul>
+        </div>
+      {/if}
+      <div class="row again">
+        <button type="button" onclick={oracle.askAgainSame}>ASK THE SAME AGAIN</button>
+        <button type="button" onclick={askAgain}>ASK SOMETHING ELSE</button>
+      </div>
     {/if}
   {/if}
 </section>
 
 <style>
   /* Panel heading */
-  label[for] {
+  #oracle-form > label[for] {
     color: var(--text);
     font-size: 0.75rem;
     font-weight: 500;
@@ -183,12 +256,35 @@
       transform: rotate(180deg);
     }
 
-    form label[for] {
+    #oracle-form > label[for] {
       display: none;
     }
 
     form.folded {
       display: none;
+    }
+  }
+
+  .oracle.beckon {
+    animation: beckon 2.4s var(--ease-out) 3;
+  }
+
+  @keyframes beckon {
+    0%,
+    100% {
+      border-color: var(--border);
+      box-shadow: none;
+    }
+    40% {
+      border-color: var(--accent);
+      box-shadow: 0 0 18px -4px var(--accent);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .oracle.beckon {
+      animation: none;
+      border-color: var(--accent);
     }
   }
 
@@ -293,6 +389,55 @@
     color: var(--text);
     font-size: 0.9rem;
     letter-spacing: 0.05em;
+  }
+
+  .answer.previous {
+    color: var(--text-dim);
+    font-size: 1rem;
+  }
+
+  .reflect {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .reflect .row {
+    justify-content: space-between;
+  }
+
+  .reflect .link {
+    align-self: center;
+  }
+
+  .echoes ul {
+    margin: 0.3rem 0 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .echoes li {
+    padding-left: 0.7rem;
+    border-left: 1px solid var(--border-strong);
+  }
+
+  .echo-question {
+    color: var(--text);
+    font-family: var(--font-story);
+    font-style: italic;
+  }
+
+  .echo-answer {
+    font-family: var(--font-story);
+    color: var(--text-dim);
+  }
+
+  .again {
+    flex-wrap: wrap;
+    justify-content: flex-start;
   }
 
   .reveal {

@@ -118,6 +118,12 @@
     color: var(--text);
   }
 
+  /* Older lines fade out under the header as the story scrolls, instead of being cut */
+  .story-panel {
+    mask-image: linear-gradient(to bottom, transparent 0, #000 1.8rem);
+    padding-top: 1.4rem;
+  }
+
   .fragment {
     margin-right: 0.3em;
     display: inline-block;

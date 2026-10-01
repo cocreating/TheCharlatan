@@ -17,24 +17,45 @@ export function isAnswerComplete(roles: NodeType[]): boolean {
 
 export interface RevealStats {
   answered: number;
+  feltMeaning: number;
   pct: number | null;
 }
 
-/** The closing lines after the dice: the real number when there is one. */
-export function revealLines(felt: boolean | null, stats: RevealStats | null): string[] {
+/** Below this many answers a percentage means little ("100% of 7"): plain counts instead. */
+export const MIN_SAMPLE_FOR_PCT = 30;
+
+/** Longest interpretation the visitor can write (it is never stored). */
+export const MAX_INTERPRETATION_LENGTH = 200;
+
+/**
+ * The closing lines after the dice: the real number when there is one, and the
+ * visitor's own reading of the answer (if they wrote one) set against the dice.
+ */
+export function revealLines(felt: boolean | null, stats: RevealStats | null, heard = ''): string[] {
   const lines: string[] = [];
-  if (stats && stats.pct !== null && stats.answered > 0) {
-    const people = `${stats.answered} ${stats.answered === 1 ? 'person' : 'people'}`;
+  if (stats && stats.answered > 0) {
+    const people = `${stats.answered} ${stats.answered === 1 ? 'person' : 'people'} who asked`;
+    const share =
+      stats.answered >= MIN_SAMPLE_FOR_PCT && stats.pct !== null
+        ? `${stats.pct}% of the ${people}`
+        : `${stats.feltMeaning} of the ${people} so far`;
     lines.push(
       felt
-        ? `${stats.pct}% of the ${people} who asked felt a random answer was meant for them. So did you.`
-        : `You didn't. But ${stats.pct}% of the ${people} who asked did.`,
+        ? `${share} felt a random answer was meant for them. So did you.`
+        : `You didn't. But ${share} did.`,
     );
   }
-  lines.push(
-    felt
-      ? 'Every word was a roll of the dice. The meaning was yours.'
-      : 'Every word was a roll of the dice. There was nothing there to find.',
-  );
+
+  const reading = heard.trim();
+  if (felt && reading) {
+    lines.push(`You heard: “${reading}”.`);
+    lines.push('The dice only rolled numbers. The meaning was yours.');
+  } else {
+    lines.push(
+      felt
+        ? 'Every word was a roll of the dice. The meaning was yours.'
+        : 'Every word was a roll of the dice. There was nothing there to find.',
+    );
+  }
   return lines;
 }
