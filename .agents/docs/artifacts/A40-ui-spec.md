@@ -17,8 +17,8 @@
 - **StoryPanel**: header (STORY, word count, HIDE/SHOW), auto-scrolling fragments coloured by type,
   collapsible colour legend ("What do the colours mean?").
 - **Controls** (right-aligned, in this order): `SEQ n` · Flow / Voice speed sliders (0.5×–3×) ·
-  voice select (when AUDIO is on) · AUDIO and GLITCH toggle buttons (`aria-pressed`) · RESET · PLAY/PAUSE.
-  The PLAY/PAUSE label shows the current state. The bar collapses behind a CONTROLS tab.
+  voice select (when AUDIO is on) · AUDIO and GLITCH toggle buttons (`aria-pressed`) · RESET · PLAYING/PAUSED.
+  The play button shows the current state: PLAYING (lit) or PAUSED. The bar collapses behind a CONTROLS tab.
 
 ## Styling
 - **Tokens only**: every colour, font and radius is a CSS custom property in `src/app.css`

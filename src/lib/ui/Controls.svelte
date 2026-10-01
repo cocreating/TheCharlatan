@@ -57,9 +57,16 @@
 
       <div class="group">
         <button type="button" class="btn-reset" onclick={charlatan.reset} disabled={charlatan.mode !== 'free'}>RESET</button>
-        <!-- The label reflects the current state: PLAY (lit) while the story runs. -->
-        <button type="button" class="btn-play" class:active={charlatan.isPlaying} onclick={charlatan.togglePlay} disabled={charlatan.mode === 'frozen'}>
-          {charlatan.isPlaying ? '▶ PLAY' : '❚❚ PAUSE'}
+        <!-- The label is the state, worded so it can't be read as an action: PLAYING (lit) or PAUSED. -->
+        <button
+          type="button"
+          class="btn-play"
+          class:active={charlatan.isPlaying}
+          aria-label={charlatan.isPlaying ? 'Playing. Pause' : 'Paused. Play'}
+          onclick={charlatan.togglePlay}
+          disabled={charlatan.mode === 'frozen'}
+        >
+          {charlatan.isPlaying ? '▶ PLAYING' : '❚❚ PAUSED'}
         </button>
       </div>
     </div>

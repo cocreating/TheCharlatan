@@ -7,7 +7,8 @@ Newest first. One entry per decision: what was decided and why.
 - **Reset, summoning a theme and ORIGINAL no longer stop playback.** Before, the story went blank and still after
   SUMMON until the visitor found the play button. Now the next step opens the new story; a paused story stays paused.
 - **Dead ends in free playback start a new story** instead of stopping in silence (the oracle still ends its answer there).
-- **The PLAY/PAUSE label still shows the current state** (decision of 2026-01-28 kept).
+- **The play button reads PLAYING / PAUSED** (owner's call): still the current state, as decided on 2026-01-28,
+  but worded so it can't be mistaken for the action. Lit while playing; `aria-label` names state and action.
 - **Oracle, after YES: "What did it tell you?"** An optional line in the visitor's words, shown back after the dice
   ("You heard: …. The dice only rolled numbers."). Never sent to the server.
 - **ASK THE SAME AGAIN**: the same question, a new seed; the previous answer is shown beside the new one, so the
@@ -122,4 +123,4 @@ Newest first. One entry per decision: what was decided and why.
 - **Deploys: GitHub Actions → SSH → `scripts/deploy.sh`.** Agents can't SSH from the cloud sandbox (port 22 blocked), so the deploy runs from CI with `DEPLOY_*` repo secrets. GitHub Pages deploy was retired (the site itself was left published; see 2026-09-30).
 - **Vercel previews kept for PRs** (`adapter-vercel` when `VERCEL=1`), served from the preview domain root, without an AI key.
 - **App language: English only** for now. The owner writes in Spanish; agents answer in Spanish.
-- **Framework: React → SvelteKit + Svelte 5 runes, native CSS only** (no Tailwind, no inline styles). The PLAY/PAUSE label intentionally shows the current state (commit 76d7ba5).
+- **Framework: React → SvelteKit + Svelte 5 runes, native CSS only** (no Tailwind, no inline styles). The PLAY/PAUSE label shows the current state (commit 76d7ba5); since 2026-10-01 it reads PLAYING/PAUSED.
