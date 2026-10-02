@@ -65,4 +65,27 @@ describe('revealLines', () => {
       'Every word was a roll of the dice. There was nothing there to find.',
     ]);
   });
+
+  it('names the mask after the number and before the closing line, for those who felt it', () => {
+    const lines = revealLines(true, { answered: 1, feltMeaning: 1, pct: 100 }, '', 'a rainy harbour');
+    expect(lines).toHaveLength(3);
+    expect(lines[1]).toBe(
+      'It answered you wearing “a rainy harbour”. Another mask, other words: would they have spoken to you too?',
+    );
+    expect(lines[2]).toBe('Every word was a roll of the dice. The meaning was yours.');
+  });
+
+  it('names the mask for those who felt nothing', () => {
+    expect(revealLines(false, null, '', 'a rainy harbour')).toEqual([
+      'It answered you wearing “a rainy harbour”. Another mask would have rolled other words, with the same dice.',
+      'Every word was a roll of the dice. There was nothing there to find.',
+    ]);
+  });
+
+  it('says nothing of a mask when there was none', () => {
+    const plain = revealLines(true, null, 'keep going');
+    expect(revealLines(true, null, 'keep going', null)).toEqual(plain);
+    expect(revealLines(true, null, 'keep going', '  ')).toEqual(plain);
+    expect(plain.some(line => line.includes('mask'))).toBe(false);
+  });
 });

@@ -33,6 +33,8 @@ export class Oracle {
   previousAnswer = $state<string | null>(null);
   /** What other people asked, shown after the reveal. */
   echoes = $state.raw<Echo[]>([]);
+  /** The theme the charlatan wore when it answered; null = the original vocabulary. */
+  mask = $state<string | null>(null);
 
   private seed = 0;
   private keepQuestion = true;
@@ -54,6 +56,7 @@ export class Oracle {
     this.stats = null;
     this.heard = '';
     this.echoes = [];
+    this.mask = this.state.theme;
     this.seed = randomSeed();
 
     this.state.beginAnswer(this.seed);

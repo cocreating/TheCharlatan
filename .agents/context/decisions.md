@@ -2,6 +2,20 @@
 
 Newest first. One entry per decision: what was decided and why.
 
+## 2026-10-02 — The theme is the charlatan's mask
+
+- **The two text boxes now tell one story.** The theme box was a separate toy next to the oracle; it becomes the mask
+  the charlatan wears to answer you. Label "WHO WILL ANSWER YOU?", placeholder "a fortune-teller in a rainy harbour
+  town", current theme shown as Wearing “…”, ORIGINAL renamed NO MASK (still `restoreSeed`). Intro hint: "Give it a
+  mask, then ask the oracle a question." The vocabulary API's 400 asks for a mask too.
+- **The reveal names the mask.** `Oracle.mask` keeps the theme worn when the question was asked (null = original
+  vocabulary); `revealLines` adds, after the number and before the closing lines, "It answered you wearing “…”." with
+  "Another mask, other words: would they have spoken to you too?" (felt) or "Another mask would have rolled other
+  words, with the same dice." (not felt). No mask, no line.
+- **Parked: the strong version.** Derive the vocabulary from the question itself, answer half the sessions with an
+  unrelated theme instead, and have the reveal compare both percentages. It would make the point with data, but costs
+  more AI calls and needs a `vocab_source` column and separate stats.
+
 ## 2026-10-01 — Interaction flow: playback never stalls; the oracle asks for a reading
 
 - **Reset, summoning a theme and ORIGINAL no longer stop playback.** Before, the story went blank and still after

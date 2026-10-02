@@ -45,7 +45,7 @@ const logError = (where: string) => (e: unknown) => {
 export const POST: RequestHandler = async ({ request, getClientAddress }) => {
   const body = await request.json().catch(() => null);
   const theme = cleanTheme(body?.theme);
-  if (!theme) error(400, `Give the charlatan a theme (1-${MAX_THEME_LENGTH} characters)`);
+  if (!theme) error(400, `Give the charlatan a mask (1-${MAX_THEME_LENGTH} characters)`);
   const cachedOnly = body?.cachedOnly === true;
 
   const provider = resolveProvider(env);

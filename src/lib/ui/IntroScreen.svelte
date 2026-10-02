@@ -36,7 +36,7 @@
         <button type="button" class="primary" onclick={() => begin(true)}>BEGIN WITH SOUND</button>
         <button type="button" onclick={() => begin(false)}>BEGIN IN SILENCE</button>
       </div>
-      <p class="hint">Give it a theme, or ask the oracle a question.</p>
+      <p class="hint">Give it a mask, then ask the oracle a question.</p>
     </div>
   </dialog>
 {/if}

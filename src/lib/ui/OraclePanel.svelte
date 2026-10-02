@@ -190,7 +190,7 @@
       {/if}
       <button type="button" class="link" onclick={oracle.skip}>SKIP</button>
     {:else if oracle.phase === 'revealed'}
-      {#each revealLines(oracle.felt, oracle.stats, oracle.heard) as line, i (i)}
+      {#each revealLines(oracle.felt, oracle.stats, oracle.heard, oracle.mask) as line, i (i)}
         <p class="reveal">{line}</p>
       {/each}
       {#if oracle.echoes.length > 0}

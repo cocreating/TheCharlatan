@@ -29,9 +29,15 @@ export const MAX_INTERPRETATION_LENGTH = 200;
 
 /**
  * The closing lines after the dice: the real number when there is one, and the
- * visitor's own reading of the answer (if they wrote one) set against the dice.
+ * visitor's own reading of the answer (if they wrote one) set against the dice,
+ * and the mask (theme) the charlatan wore to answer, if any.
  */
-export function revealLines(felt: boolean | null, stats: RevealStats | null, heard = ''): string[] {
+export function revealLines(
+  felt: boolean | null,
+  stats: RevealStats | null,
+  heard = '',
+  mask: string | null = null,
+): string[] {
   const lines: string[] = [];
   if (stats && stats.answered > 0) {
     const people = `${stats.answered} ${stats.answered === 1 ? 'person' : 'people'} who asked`;
@@ -43,6 +49,15 @@ export function revealLines(felt: boolean | null, stats: RevealStats | null, hea
       felt
         ? `${share} felt a random answer was meant for them. So did you.`
         : `You didn't. But ${share} did.`,
+    );
+  }
+
+  const worn = mask?.trim();
+  if (worn) {
+    lines.push(
+      felt
+        ? `It answered you wearing “${worn}”. Another mask, other words: would they have spoken to you too?`
+        : `It answered you wearing “${worn}”. Another mask would have rolled other words, with the same dice.`,
     );
   }
 

@@ -96,14 +96,14 @@
 </script>
 
 <form class="theme-prompt" onsubmit={onSubmit}>
-  <label for="theme-input">THEME</label>
+  <label for="theme-input">WHO WILL ANSWER YOU?</label>
   <div class="row">
     <div class="field">
       <input
         id="theme-input"
         type="text"
         maxlength="200"
-        placeholder="noir rain over a harbour city"
+        placeholder="a fortune-teller in a rainy harbour town"
         autocomplete="off"
         role="combobox"
         aria-autocomplete="list"
@@ -116,7 +116,7 @@
         onblur={closeList}
         disabled={loading || locked}
       />
-      <ul id="theme-suggestions" role="listbox" aria-label="Themes already summoned" hidden={!listOpen}>
+      <ul id="theme-suggestions" role="listbox" aria-label="Masks already summoned" hidden={!listOpen}>
         {#each suggestions as s, i (s.key)}
           <!-- Keyboard lives on the input (combobox + aria-activedescendant); the click is for pointers. -->
           <!-- svelte-ignore a11y_click_events_have_key_events -->
@@ -142,8 +142,8 @@
     <p class="error" role="alert">{errorMessage}</p>
   {:else if charlatan.theme}
     <p class="current">
-      <span class="current-theme">“{charlatan.theme}”</span>
-      <button type="button" class="link" onclick={charlatan.restoreSeed} disabled={locked}>ORIGINAL</button>
+      <span class="current-theme">Wearing “{charlatan.theme}”</span>
+      <button type="button" class="link" onclick={charlatan.restoreSeed} disabled={locked}>NO MASK</button>
     </p>
   {/if}
 </form>
